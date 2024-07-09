@@ -67,7 +67,7 @@ exports.addProduct = async (req, res) => {
             return res.json({status:409,message:'already exist'})
         }
 
-        const addproduct = await PRODUCTS_DB({ ...req.body, Status: 'available', Product_img_url: `http://localhost:3000/uploads/images/${image.filename}` ,uploaded_at:'Latest'})
+        const addproduct = await PRODUCTS_DB({ ...req.body, Status: 'available', Product_img_url: `${process.env.SERVER_URL}/uploads/images/${image.filename}` ,uploaded_at:'Latest'})
         await addproduct.save()
 
         // console.log('sucess')
@@ -95,7 +95,7 @@ exports.addColor = async (req, res) => {
             {
               $push: {
                 Colors: {
-                  img_url: `http://localhost:3000/uploads/images/${image_name}`,
+                  img_url: `${process.env.SERVER_URL}/uploads/images/${image_name}`,
                   color: req.body.color,
                   hexcode: req.body.hexcode
                 }
