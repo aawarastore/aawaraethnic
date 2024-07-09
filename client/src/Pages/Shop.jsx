@@ -80,7 +80,7 @@ const Shop = () => {
 
                     
                     {
-                        [1,2,3,4,5,6,7,8,9,10].map(m=>{
+                        [1,2,3,4].map(m=>{
                             return <CardsContainer key={m} />
                         })
                     }
