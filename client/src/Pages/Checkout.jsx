@@ -78,7 +78,7 @@ const Checkout = () => {
   const checkOtp = async ({ otp }) => {
     try {
       console.log(otp)
-      const response = await fetch(`${pimport.meta.env.VITE_SERVER_URL}/user/checkotp`, {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/checkotp`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
