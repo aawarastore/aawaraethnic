@@ -15,7 +15,7 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
       // const productColor = productsdata.Color
       // const productSize = productsdata.Size
       const product_item_id = productsdata.product_id+'-'+productsdata.Size+'-'+productsdata.Color
-      const response = await fetch('http://localhost:3000/user/updateCart', {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/updateCart`, {
         method: 'POST',
         headers: {
           'Content-type': 'Application/json',
@@ -35,8 +35,7 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
    const encodedColor = encodeURIComponent(productid); // Example color hex code
 
     // const url = `http://localhost:3000/user/deleteCartItem/${productid}-${size}-${encodedColor}`
-    const url = `http://localhost:3000/user/deleteCartItem/${encodedColor}`
-    console.log(url)
+    const url = `${import.meta.env.VITE_SERVER_URL}/user/deleteCartItem/${encodedColor}`
     try {
       const response = await fetch(url,{
         method:'DELETE',
