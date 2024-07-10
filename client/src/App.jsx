@@ -14,6 +14,10 @@ import Shop from './Pages/Shop';
 import Cart from './Pages/Cart';
 import BuyProduct from './Pages/BuyProduct';
 import Checkout from './Pages/Checkout';
+import PrivacyPolicy from './Pages/PrivacyPolicy';
+import ShippinPolicy from './Pages/ShippinPolicy';
+import ExchangePolicy from './Pages/ExchangePolicy';
+import Cancelation from './Pages/Cancelation';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +57,23 @@ const router = createBrowserRouter([
     path:'/checkout',
     element:<Checkout />
   },
+  {
+    path:'/privacypolicy',
+    element:<PrivacyPolicy />
+  },
+  {
+    path:'/shippingpolicy',
+    element:<ShippinPolicy />
+  },
+  {
+    path:'/exchangepolicy',
+    element:<ExchangePolicy />
+  },
+  {
+    path:'/cancelationpolicy',
+    element:<Cancelation />
+  },
+  
   
 
 ])

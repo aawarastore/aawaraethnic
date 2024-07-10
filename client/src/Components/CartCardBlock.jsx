@@ -15,7 +15,7 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
       // const productColor = productsdata.Color
       // const productSize = productsdata.Size
       const product_item_id = productsdata.product_id+'-'+productsdata.Size+'-'+productsdata.Color
-      const response = await fetch('http://localhost:3000/user/updateCart', {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/updateCart`, {
         method: 'POST',
         headers: {
           'Content-type': 'Application/json',
@@ -34,8 +34,7 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
     // console.log(color)
    const encodedColor = encodeURIComponent(productid); // Example color hex code
 
-    // const url = `http://localhost:3000/user/deleteCartItem/${productid}-${size}-${encodedColor}`
-    const url = `http://localhost:3000/user/deleteCartItem/${encodedColor}`
+    const url = `${import.meta.env.VITE_SERVER_URL}/user/deleteCartItem/${encodedColor}`
     console.log(url)
     try {
       const response = await fetch(url,{
@@ -88,8 +87,8 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
       </div>
 
       <div className='w-full border lg:hidden block'>
-        <div className='w-full flex justify-end pr-5 py-2 bg-red-100'>
-          <MdOutlineCancel onClick={()=>deleteItem(productsdata.product_id)} className='text-stone-500' />
+        <div className='w-full flex justify-end  pr-5 py-2 bg-red-100'>
+          <MdOutlineCancel onClick={()=>deleteItem(productsdata.product_id)} className='text-stone-500 scale-[1.4]' />
         </div>
         <div className='w-full flex justify-center items-center py-4'>
           <div className='h-[180px] w-[120px] '><img className='w-full h-full' src={productsdata.product_img_url} alt="" /></div>

@@ -17,7 +17,6 @@ const Shop = () => {
 
     const filterProducts = async (e)=>{
         const val = e.target.value
-        console.log(val)
 
         if(val === 'All') return setFilteredItems(allItems)
         if(val === 'Latest'){
@@ -66,7 +65,6 @@ const Shop = () => {
                     </div>
                 </div>
 
-                <div className='py-3 px-5 '>Categories /Filter/ etc</div>
                 <div className='w-full h-10'></div>
 
                 <div className='productContainer w-screen flex flex-wrap justify-evenly  ss:justify-start  gap-y-5 ss:gap-6  ss:px-14 my-4'>
@@ -80,7 +78,7 @@ const Shop = () => {
 
                     
                     {
-                        [1,2,3,4,5,6,7,8,9,10].map(m=>{
+                        [1,2,3,4].map(m=>{
                             return <CardsContainer key={m} />
                         })
                     }

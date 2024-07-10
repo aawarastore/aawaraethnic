@@ -78,7 +78,7 @@ const Checkout = () => {
   const checkOtp = async ({ otp }) => {
     try {
       console.log(otp)
-      const response = await fetch(`${pimport.meta.env.VITE_SERVER_URL}/user/checkotp`, {
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/checkotp`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -147,7 +147,7 @@ const Checkout = () => {
         <div className='lg:w-[50%] w-full'>
           <ToastContainer />
 
-          <div className='px-16 pb-10'>
+          <div className='ss:px-16 px-5 pb-10'>
             <div className='mb-5'>
               <Formik
                 initialValues={initialValues2}
@@ -232,7 +232,7 @@ const Checkout = () => {
 
           </div>
           {otpPortal && (
-            <div className='absolute left-1/2 top-1/2 md:w-[40vw] -translate-x-1/2 -translate-y-1/2 px-3 py-2 border bg-white z-[99]'>
+            <div className='absolute left-1/2 top-1/2 md:w-[40vw] w-[60vw] -translate-x-1/2 -translate-y-1/2 px-3 py-4 border bg-white z-[99]'>
               <div className='w-full text-center'>OTP VERIFICATION</div>
               <Formik initialValues={{ otp: '' }} onSubmit={checkOtp}>
                 <Form>
@@ -251,7 +251,7 @@ const Checkout = () => {
         </div>
 
         <div className='lg:w-[30%] w-full '>
-          <div className='lg:px-2 px-[60px]'>
+          <div className='lg:px-2 px-5 ss:px-[60px]'>
             <div className='pl-2 text-[22px] font-[500] border-b pb-2'>Order Summary</div>
 
             {cartItems.map((pro) => (

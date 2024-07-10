@@ -9,10 +9,12 @@ const Footer = () => {
       {/* <div className='subtextLines mb-8 w-1/2'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut, quasi! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, eius?</div> */}
         <div className='flex gap-4  ss:text-[15px] text-[12px] '>
         {/* <div className='flex gap-4'> */}
-          <div className='hover:underline transition-all'>Contact Us</div>
-          <div className='hover:underline transition-all'>Privacy Policy</div>
-          <div className='hover:underline transition-all'>Shipping Policy</div>
-          <div className='hover:underline transition-all'>Support</div>
+          <Link to={'/'}><div className='hover:underline transition-all'>Contact Us</div></Link>
+          <Link to={'/privacypolicy'}><div className='hover:underline transition-all'>Privacy Policy</div></Link>
+          <Link to={'/shippingpolicy'}><div className='hover:underline transition-all'>Shipping Policy</div></Link>
+          <Link to={'/exchangepolicy'}><div className='hover:underline transition-all'>Exchange Policy</div></Link>
+          <Link to={'/cancelationpolicy'}><div className='hover:underline transition-all'>Cancelation Policy</div></Link>
+         
         {/* </div> */}
 
         {/* <div className='hover:underline transition-all'>

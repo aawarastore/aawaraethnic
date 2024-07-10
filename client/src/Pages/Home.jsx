@@ -52,8 +52,11 @@ const Home = () => {
                         </div>
                         <div className='flex md:w-[95vw] w-full gap-y-6 flex-wrap justify-evenly my-4'>
                             {
-                                [1, 2, 3, 4, 5, 6, 7, 8].map(card => {
-                                    return <CardsContainer key={card} />
+                                // [1, 2, 3, 4, 5, 6, 7, 8].map(card => {
+                                //     return <CardsContainer key={card} />
+                                // })
+                                itemsData.slice(0,4).filter(item=>item.uploaded_at== 'Latest').map(item=>{
+                                    return <Cards key={item.PRODUCT_id} productsdata={item} />
                                 })
                             }
                         </div>

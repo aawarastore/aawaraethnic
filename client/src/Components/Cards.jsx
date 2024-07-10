@@ -5,6 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
+import { FaBagShopping } from "react-icons/fa6";
+
 const Cards = ({productsdata}) => {
     // console.log(productsdata)
 
@@ -14,7 +16,7 @@ const Cards = ({productsdata}) => {
 
     const addtoCart = async(productid,size,productimg)=>{
       try {
-        const response = await fetch('http://localhost:3000/user/addtoCart',{
+        const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/addtoCart`,{
           method:'POST',
           headers:{
             'Content-type':'Application/json',
@@ -39,7 +41,7 @@ const Cards = ({productsdata}) => {
 
   return (
     <>
-      <div className='f:w-[300px] s:w-[270px] sl:w-[220px] ss:w-[190px] w-[160px]  flex justify-center items-center flex-col'>
+      <div className='f:w-[300px]  s:w-[270px] sl:w-[220px] ss:w-[190px] w-[160px]  flex justify-center items-center flex-col'>
         {/* img==  330/250 */}
         <ToastContainer />
 
@@ -66,7 +68,7 @@ const Cards = ({productsdata}) => {
               {/* <div  className='bg-yellow-700 text-center text-white px-2 text-[18px] py-1 w-[48%] cursor-pointer' onClick={()=>{isLoggedIn ? addtoCart(productsdata.PRODUCT_id,size,productsdata.Product_img_url) : notify()}}>Cart+</div> */}
               {/* <div  className='bg-white border text-center text-yellow-700 px-2 text-[18px] py-1 w-[48%] cursor-pointer' onClick={()=>buyProduct() } >Buy </div> */}
               <div  className='bg-black border text-center text-white rounded-e-full px-2 text-[18px] py-[6px] w-[79%] cursor-pointer' onClick={()=>buyProduct(productsdata.PRODUCT_id) } >Buy </div>
-              <div  className='bg-white text-center  text-black border border-black rounded-full px-2 text-[13px] py-3 w-[18%] cursor-pointer' onClick={()=>{isLoggedIn ? addtoCart(productsdata.PRODUCT_id,size,productsdata.Product_img_url) : notify()}}>Cart</div>
+              <div  className='bg-white text-center  text-black border border-black rounded-[14px] px-2 text-[10px] ss:text-[13px] py-3 w-[18%] cursor-pointer' onClick={()=>{isLoggedIn ? addtoCart(productsdata.PRODUCT_id,size,productsdata.Product_img_url) : notify()}}><FaBagShopping /></div>
 
             </div>
         </div>
