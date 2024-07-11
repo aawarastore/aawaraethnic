@@ -13,7 +13,7 @@ const Header = () => {
 
 
   const {isLoggedIn,setLoggedIn,totalCartItems} = useContext(UserContextApi)
-  const [profileCard, setProfileCard] = useState(false)
+  // const [profileCard, setProfileCard] = useState(false)
 
   const logout =async ()=>{
     localStorage.removeItem('token')

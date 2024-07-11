@@ -40,23 +40,6 @@ export const UserContextProvider = ({ children }) => {
         }
     }
 
-    const [totalCartItems, setTotalCartItems] = useState(0)
-    const getCartLength = async () => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/getCartLength`, {
-                method: 'GET',
-                headers: {
-                    'token': localStorage.getItem('token')
-                }
-            });
-
-            const data = await response.json()
-            setTotalCartItems(data.totalItems)
-            // setTotalCartItems()
-        } catch (error) {
-            console.log('totallength error', error)
-        }
-    }
 
 
     const [isOpen, setAddPortal] = useState(false)
@@ -67,6 +50,37 @@ export const UserContextProvider = ({ children }) => {
         setAddPortal(false)
     }
 
+    const [totalCartItems, setTotalCartItems] = useState(0)
+
+    const [cartTotalPrice, setCartTotalPrice] = useState(0);
+    const [cartItems, setCartItems] = useState([]);
+  
+    const getCartProduct = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/getCartProduct`, {
+          method: 'GET',
+          headers: {
+            'Content-type': 'Application/json',
+            token: localStorage.getItem('token')
+          },
+        });
+        const data = await response.json();
+        if (data.status === 200) {
+          setCartItems(data.cartProducts.Products);
+          setCartTotalPrice(data.cartProducts.Total_Price);
+          setTotalCartItems(data.cartProducts.Total_Quantity)
+
+        } else if (data.status === 204) {
+          setCartItems([]);
+          setCartTotalPrice(0);
+        }else{
+            toast('Shop new items!')
+        }
+      } catch (error) {
+        console.error('Failed to fetch cart products:', error);
+      }
+    };
+
 
 
 
@@ -74,7 +88,8 @@ export const UserContextProvider = ({ children }) => {
     useEffect(() => {
         getPosts()
         checkUser()
-        getCartLength()
+        // getCartLength()
+        getCartProduct()
     }, [isLoggedIn])
 
 
@@ -82,7 +97,7 @@ export const UserContextProvider = ({ children }) => {
 
 
     return (
-        <UserContextApi.Provider value={{ setLoggedIn, isLoggedIn, checkUser, setItemsData,itemsData, totalCartItems, getCartLength ,isOpen,onOpen,onClose}}>
+        <UserContextApi.Provider value={{ setLoggedIn, isLoggedIn, checkUser, setItemsData,itemsData, totalCartItems ,isOpen,onOpen,onClose,cartItems,getCartProduct,cartTotalPrice}}>
             {children}
         </UserContextApi.Provider>
     )

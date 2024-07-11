@@ -11,7 +11,7 @@ const Cards = ({productsdata}) => {
     // console.log(productsdata)
 
     const navigate = useNavigate()
-    const {isLoggedIn,setLoggedIn,getCartLength} = useContext(UserContextApi)
+    const {isLoggedIn,setLoggedIn,getCartProduct} = useContext(UserContextApi)
     const [size,setSize] = useState('')
 
     const addtoCart = async(productid,size,productimg)=>{
@@ -25,7 +25,7 @@ const Cards = ({productsdata}) => {
           body:JSON.stringify({productid,size,productimg})
         })
         const data = await response.json()
-        if(data.status == 200) getCartLength()
+        if(data.status == 200) getCartProduct()
       } catch (error) {
         console.log(error)
       }
@@ -67,8 +67,8 @@ const Cards = ({productsdata}) => {
             <div className='flex justify-between w-full'>
               {/* <div  className='bg-yellow-700 text-center text-white px-2 text-[18px] py-1 w-[48%] cursor-pointer' onClick={()=>{isLoggedIn ? addtoCart(productsdata.PRODUCT_id,size,productsdata.Product_img_url) : notify()}}>Cart+</div> */}
               {/* <div  className='bg-white border text-center text-yellow-700 px-2 text-[18px] py-1 w-[48%] cursor-pointer' onClick={()=>buyProduct() } >Buy </div> */}
-              <div  className='bg-black border text-center text-white rounded-e-full px-2 text-[18px] py-[6px] w-[79%] cursor-pointer' onClick={()=>buyProduct(productsdata.PRODUCT_id) } >Buy </div>
-              <div  className='bg-white text-center  text-black border border-black rounded-[14px] px-2 text-[10px] ss:text-[13px] py-3 w-[18%] cursor-pointer' onClick={()=>{isLoggedIn ? addtoCart(productsdata.PRODUCT_id,size,productsdata.Product_img_url) : notify()}}><FaBagShopping /></div>
+              <div  className='bg-black rounded-[5px] border text-center text-white  px-2 text-[18px] py-[6px] w-[79%] cursor-pointer' onClick={()=>buyProduct(productsdata.PRODUCT_id) } >Buy </div>
+              <div  className='bg-white flex justify-center  text-black border  rounded-[5px]  px-2 text-[10px] ss:text-[13px] py-3 w-[18%] cursor-pointer' onClick={()=>{isLoggedIn ? addtoCart(productsdata.PRODUCT_id,size,productsdata.Product_img_url) : notify()}}><FaBagShopping /></div>
 
             </div>
         </div>

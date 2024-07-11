@@ -4,16 +4,13 @@ import { UserContextApi } from '../context/UserContext';
 
 const CartCardBlock = ({ productsdata, getCartProduct }) => {
 
-  const {getCartLength} = useContext(UserContextApi)
+  // const {getCartLength} = useContext(UserContextApi)
 
   const [quantityCount, setQuantityCount] = useState(productsdata.Quantity);
   const finalPrice = productsdata.Price * quantityCount;
 
   const updateCart = async (newQuantity) => {
     try {
-      // const product_item_id = productsdata.product_id;
-      // const productColor = productsdata.Color
-      // const productSize = productsdata.Size
       const product_item_id = productsdata.product_id+'-'+productsdata.Size+'-'+productsdata.Color
       const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/updateCart`, {
         method: 'POST',
@@ -23,8 +20,11 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
         },
         body: JSON.stringify({ product_item_id ,quantityCount: newQuantity, finalPrice: productsdata.Price * newQuantity })
       });
-      getCartLength()
+      const data = await response.json()
+      if(data.status == 200 ){
+      // getCartLength()
       getCartProduct();
+      }
     } catch (error) {
       console.error('Error updating cart:', error);
     }
@@ -54,12 +54,12 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
   const handleQuantityChange = (change) => {
     const newQuantity = Math.max(1, quantityCount + change);
     setQuantityCount(newQuantity);
-    // getCartLength()
+    getCartProduct()
   };
 
   useEffect(() => {
     updateCart(quantityCount);
-    // getCartLength()
+    // getCartProduct()
   }, [quantityCount]);
 
   return (
@@ -77,7 +77,7 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
         </div>
         <div>{'₹' + productsdata.Price}</div>
         <div className='col-span-2'>
-          <div className='border border-stone-400 bg-slate-100 flex w-fit overflow-hidden rounded-[2px] my-3'>
+          <div className='border border-stone-400 bg-[#eceaea32] flex w-fit overflow-hidden rounded-[2px] my-3'>
             <div onClick={() => handleQuantityChange(-1)} className='px-3 cursor-pointer flex justify-center items-center text-[20px]'>-</div>
             <div className='border-l border-r border-stone-700 flex items-center justify-center w-10'>{quantityCount}</div>
             <div onClick={() => handleQuantityChange(1)} className='cursor-pointer px-2 flex justify-center items-center text-[20px]'>+</div>

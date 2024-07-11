@@ -120,12 +120,10 @@ exports.addtoCart = async (req, res) => {
 exports.updateCart = async (req, res) => {
     const { token } = req.headers
     const { product_item_id, quantityCount, finalPrice } = req.body
-    // console.log(quantityCount, 'total count')
     const [id, size, color] = product_item_id.split('-');
     try {
         // this is to update quantity and price of product in cart of user
         const { userId } = jwt.verify(token, process.env.JWT_KEY)
-        //const findCart = await USER_CART.findOne({ USER_CART_id: userId })
 
         // const productIndex = findCart.Products.findIndex(product => product._id == product_item_id);
         const productID = product_item_id
@@ -163,7 +161,7 @@ exports.updateCart = async (req, res) => {
 
         // await USER_CART.findOne({USER_CART_id:userId},{$set:{Total_Price:etopay}})
 
-        return res.json({ status: 'cart qunatity updated' })
+        return res.json({ status: 200 })
     } catch (error) {
         console.log('update cart error', error)
     }
@@ -248,24 +246,6 @@ exports.getProductToBuy = async (req, res) => {
 }
 
 
-exports.getCartLength = async (req, res) => {
-
-    const { token } = req.headers
-    try {
-
-        const { userId } = jwt.verify(token, process.env.JWT_KEY)
-
-        const findUserCart = await USER_CART.findOne({ USER_CART_id: userId })
-        if(findUserCart.Total_Quantity == 0){
-            await USER_CART.updateOne({USER_CART_id:userId,$set:{Total_Price:0}})
-        }
-
-        return res.json({ status: 200, totalItems: findUserCart.Total_Quantity })
-    } catch (error) {
-        // console.log('cart length error',error)
-        return res.json({ status: 404, message: 'user not found' })
-    }
-}
 
 exports.deleteItem = async (req, res) => {
 
@@ -284,8 +264,6 @@ exports.deleteItem = async (req, res) => {
 
         const findCart = await USER_CART.findOne({ USER_CART_id: userId });
         const pro = findCart.Products.find(p => p.product_id == decoded);
-        //console.log('Found product:', pro); // Log the found product for debugging
-
         if (!pro) {
             return res.status(404).json({ status: 404, message: 'Product not found in cart' });
         }
@@ -297,6 +275,7 @@ exports.deleteItem = async (req, res) => {
                     Products: {
                         product_id: decoded,
                     }
+                //}
                 },
                 $set: {
                     Total_Quantity: findCart.Total_Quantity - pro.Quantity,
@@ -304,6 +283,9 @@ exports.deleteItem = async (req, res) => {
                 }
             }
         );
+        const totalpr =  await USER_CART.findOne({USER_CART_id:userId})
+        if(totalpr.Total_Quantity == 0) await USER_CART.updateOne({USER_CART_id:userId,$set:{Total_Price:0}})
+
         return res.json({ status: 200, message: 'Product deleted from cart' });
 
     } catch (error) {
@@ -315,6 +297,47 @@ exports.deleteItem = async (req, res) => {
 
 // ====================================================================================
 // ====================================================================================
+
+
+// exports.deleteItem = async (req, res) => {
+//     const { token } = req.headers;
+//     const { product } = req.params; // Assuming product is the parameter containing productid-size-color
+
+//     const decoded = decodeURIComponent(product); // Decoding the URL parameter
+//     const [id, size, color] = decoded.split('-'); // Splitting the decoded string into id, size, and color
+
+//     try {
+//         const { userId } = jwt.verify(token, process.env.JWT_KEY);
+
+//         const findCart = await USER_CART.findOne({ USER_CART_id: userId });
+//         const pro = findCart.Products.find(p => p.product_id === decoded);
+//         if (!pro) {
+//             return res.status(404).json({ status: 404, message: 'Product not found in cart' });
+//         }
+
+    
+
+//         const updatedProducts = findCart.Products.filter(p => p.product_id !== decoded);
+//         const updatedQuantity = findCart.Total_Quantity - pro.Quantity;
+//         const updatedPrice = updatedProducts.reduce((total, item) => total + item.Quantity * item.payable_amount, 0);
+
+//         await USER_CART.updateOne(
+//             { USER_CART_id: userId },
+//             {
+//                 $set: {
+//                     Products: updatedProducts,
+//                     Total_Quantity: updatedQuantity,
+//                     Total_Price: updatedPrice
+//                 }
+//             }
+//         );
+//         return res.json({ status: 200, message: 'Product deleted from cart' });
+
+//     } catch (error) {
+//         console.log("delete item error:", error);
+//         return res.status(500).json({ status: 500, message: 'Internal Server Error' });
+//     }
+// };
 
 
 

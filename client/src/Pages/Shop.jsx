@@ -77,12 +77,11 @@ const Shop = () => {
                     }
 
                     
-                    {
+                    {/* {
                         [1,2,3,4].map(m=>{
                             return <CardsContainer key={m} />
                         })
-                    }
-
+                    } */}
                 </div>
 
             </div>
