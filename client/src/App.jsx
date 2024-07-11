@@ -18,6 +18,7 @@ import PrivacyPolicy from './Pages/PrivacyPolicy';
 import ShippinPolicy from './Pages/ShippinPolicy';
 import ExchangePolicy from './Pages/ExchangePolicy';
 import Cancelation from './Pages/Cancelation';
+import TermsCondition from './Pages/TermsCondition';
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
   {
     path:'/cancelationpolicy',
     element:<Cancelation />
+  },
+  {
+    path:'/termsandcondition',
+    element:<TermsCondition />
   },
   
   
