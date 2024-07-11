@@ -35,7 +35,7 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
    const encodedColor = encodeURIComponent(productid); // Example color hex code
 
     const url = `${import.meta.env.VITE_SERVER_URL}/user/deleteCartItem/${encodedColor}`
-    console.log(url)
+    // console.log(url)
     try {
       const response = await fetch(url,{
         method:'DELETE',
