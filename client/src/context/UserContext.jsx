@@ -10,7 +10,7 @@ export const UserContextProvider = ({ children }) => {
     const checkUser = async () => {
         const token = localStorage.getItem('token')
         try {
-            const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/authorization`, {
+            const response = await fetch(`https://e-commerce-jatin-server.onrender.com/user/authorization`, {
                 method: 'POST',
                 headers: {
                     token: localStorage.getItem('token')
