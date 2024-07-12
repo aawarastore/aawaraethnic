@@ -98,7 +98,7 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
           <div className='font-[500]'>{productsdata.product_name}</div>
         </div>
         <div className='flex justify-between px-2 border-b py-2 border-t'>
-          <div>Product:</div>
+          <div>Size:</div>
           <div className='font-[500]'>{productsdata.Size}</div>
         </div>
         <div className='flex justify-between px-2 border-b py-2'>
