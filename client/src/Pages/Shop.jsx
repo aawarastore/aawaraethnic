@@ -67,7 +67,7 @@ const Shop = () => {
 
                 <div className='w-full h-10'></div>
 
-                <div className='productContainer w-screen flex flex-wrap justify-evenly  ss:justify-start  gap-y-5 ss:gap-6  ss:px-14 my-4'>
+                <div className='productContainer w-screen min-h-[70vh] flex flex-wrap justify-evenly  ss:justify-start  gap-y-5 ss:gap-6  ss:px-14 my-4'>
                     {
                         filteredItems.map(item => {
                             return (
