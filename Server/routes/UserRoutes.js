@@ -11,7 +11,6 @@ UserRouter.post('/authorization',authorisation)
 UserRouter.post('/addtoCart',addtoCart)
 UserRouter.post('/updateCart',updateCart)
 UserRouter.get('/getCartProduct',getCartProducts)
-UserRouter.get('/getCartLength',getCartLength)
 UserRouter.delete('/deleteCartItem/:product',deleteItem)
 
 UserRouter.get('/getProducts',getProducts)
