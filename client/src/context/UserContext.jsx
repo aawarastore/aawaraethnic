@@ -73,8 +73,6 @@ export const UserContextProvider = ({ children }) => {
         } else if (data.status === 204) {
           setCartItems([]);
           setCartTotalPrice(0);
-        }else{
-            toast('Shop new items!')
         }
       } catch (error) {
         console.error('Failed to fetch cart products:', error);
