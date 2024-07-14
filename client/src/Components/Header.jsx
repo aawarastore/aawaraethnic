@@ -42,17 +42,9 @@ const Header = () => {
             <div className=' relative' ><Link to={'/cart'}><BsBag className='scale-[1.4]' /></Link>
               <div className='absolute -bottom-2 -right-3  bg-[#000000e7] text-white w-4 h-4 text-[10px] rounded-full text-center'>{totalCartItems}</div>
             </div>
-            {
-              isLoggedIn
-              ?
-              <>
-              <div className=' px-4 py-1 text-white bg-[#000000d1] rounded-full' onClick={logout} >Login</div></>
-              :
-              <>
+            
               <div onClick={()=>setProfileCard(!profileCard)} className='text-black block ss:hidden  text-[18px]'><RiMenu3Line /></div>
-              </>
-
-            }
+          
             {
               profileCard
               ?
