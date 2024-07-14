@@ -65,7 +65,12 @@ const Header = () => {
                 <Link to={'/aboutus'}>About Us</Link>
               </div>
               <div className='mb-10'>
-                <div className='bg-stone-100 px-3 py-2 rounded-md' onClick={logout}>Logout</div>
+                {isLoggedIn
+                  ?
+                  <div className='bg-stone-100 px-3 py-2 rounded-md' onClick={logout}>Logout</div>
+                  :
+                  <Link to={'/login'} ><div  className='bg-stone-100 px-3 py-2 rounded-md'  > Login </div></Link>
+                }
               </div>
               </div>
               :
