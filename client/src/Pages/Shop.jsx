@@ -85,7 +85,11 @@ const Shop = () => {
                     {
                                 filteredItems.length % 2 != 0 
                                 ?
-                                <CardsContainer />
+                         filteredItems.slice(0,1).map(item => {
+                            return (
+                                <Cards key={item.PRODUCT_id} productsdata={item} />
+                            )
+                        })
                                 :
                                 ""
                             }
