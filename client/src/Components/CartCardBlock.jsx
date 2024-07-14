@@ -63,7 +63,7 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
   return (
     <>
     
-      <div className='max:w-[750px] border-b hidden grid-cols-8 lg:grid items-center text-stone-600'>
+      <div className='max:w-[750px] border-b hidden grid-cols-8 s:grid items-center text-stone-600'>
         <div className='flex w-full justify-center'>
           <MdOutlineCancel onClick={()=>deleteItem(productsdata.product_id)} className='text-stone-500 font-[200] text-[18px] cursor-pointer' />
         </div>
@@ -84,7 +84,7 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
         <div>{'₹' + finalPrice}</div>
       </div>
 
-      <div className='w-full border lg:hidden block'>
+      <div className='w-full border s:hidden block'>
         <div className='w-full flex justify-end  pr-5 py-2 bg-red-100'>
           <MdOutlineCancel onClick={()=>deleteItem(productsdata.product_id)} className='text-stone-500 scale-[1.4]' />
         </div>
@@ -94,6 +94,10 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
         <div className='flex justify-between px-2 border-b py-2 border-t'>
           <div>Product:</div>
           <div className='font-[500]'>{productsdata.product_name}</div>
+        </div>
+        <div className='flex justify-between px-2 border-b py-2 border-t'>
+          <div>Size:</div>
+          <div className='font-[500]'>{productsdata.Size}</div>
         </div>
         <div className='flex justify-between px-2 border-b py-2'>
           <div>Price:</div>
