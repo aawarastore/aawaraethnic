@@ -10,7 +10,7 @@ export const UserContextProvider = ({ children }) => {
     const checkUser = async () => {
         const token = localStorage.getItem('token')
         try {
-            const response = await fetch(`https://e-commerce-jatin-server.onrender.com/user/authorization`, {
+            const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/authorization`, {
                 method: 'POST',
                 headers: {
                     token: localStorage.getItem('token')
@@ -30,7 +30,7 @@ export const UserContextProvider = ({ children }) => {
 
     const getPosts = async () => {
         try {
-            const response = await fetch(`https://e-commerce-jatin-server.onrender.com/user/getProducts`)
+            const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/getProducts`)
             const data = await response.json()
             // console.log(data)
             setItemsData(data.products)
@@ -73,8 +73,6 @@ export const UserContextProvider = ({ children }) => {
         } else if (data.status === 204) {
           setCartItems([]);
           setCartTotalPrice(0);
-        }else{
-            toast('Shop new items!')
         }
       } catch (error) {
         console.error('Failed to fetch cart products:', error);

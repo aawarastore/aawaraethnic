@@ -22,8 +22,8 @@ const storage  = multer.diskStorage({
     },
     filename:(req,file,cb)=>{
 
-        const {PRODUCT_id,Price,color} = req.body
-        if(Price) return cb(null,`${PRODUCT_id}-${Price}-${file.originalname}`)
+        const {PRODUCT_id,Product_Color,color} = req.body
+        if(Product_Color) return cb(null,`${PRODUCT_id}-${Product_Color}-${file.originalname}`)
         else{
             return cb(null,`${PRODUCT_id}-${color}-${file.originalname}`)
 

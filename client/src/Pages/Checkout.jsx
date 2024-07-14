@@ -216,11 +216,11 @@ const Checkout = () => {
 
                   </div>
 
-                  {true && (
+                  {/* {true && ( */}
                     <div className='w-full bg-red-900 py-3 text-white text-center overflow-hidden'>
                       <Field className='w-full' type='submit' value='Submit' />
                     </div>
-                  )}
+                  {/* )} */}
                 </Form>
               </Formik>
             </div>
@@ -232,7 +232,7 @@ const Checkout = () => {
 
           </div>
           {otpPortal && (
-            <div className='absolute left-1/2 top-1/2 md:w-[40vw] w-[60vw] -translate-x-1/2 -translate-y-1/2 px-3 py-4 border bg-white z-[99]'>
+            <div className='absolute left-1/2 top-1/2 md:w-[40vw] w-[60vw]  -translate-x-1/2 -translate-y-1/2 px-3 py-4 border bg-white z-[99]'>
               <div className='w-full text-center'>OTP VERIFICATION</div>
               <Formik initialValues={{ otp: '' }} onSubmit={checkOtp}>
                 <Form>

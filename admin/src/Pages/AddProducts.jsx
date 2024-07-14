@@ -17,6 +17,7 @@ const AddProducts = () => {
         formData.append('Description', values.Description);
         formData.append('Price', values.Price);
         formData.append('Discounted_Price', values.Discounted_Price);
+        formData.append('Product_Color',values.product_color)
         formData.append('image', values.image);
         // console.log(formData)
         try {
@@ -27,6 +28,7 @@ const AddProducts = () => {
                 },
                 body: formData
             })
+            const data = await response.json()
             if(data.status == 200){
                 toast('Product Added Successfully!')
             }else if(data.status == 404){
@@ -45,6 +47,7 @@ const AddProducts = () => {
         formData.append('hexcode',values.hexcode)
         formData.append('PRODUCT_id',values.productid)
         formData.append('image',values.image)
+
         console.log(formData)
         try {
             const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/admin/addcolor`,{
@@ -72,7 +75,7 @@ const AddProducts = () => {
                         <div className="px-[10vw]" >
 
                         <Formik
-                            initialValues={{ PRODUCT_id: '', Product_name: '', Description: '', Price: '', Discounted_Price: '',image:null }}
+                            initialValues={{ PRODUCT_id: '', Product_name: '', Description: '', Price: '', Discounted_Price: '',product_color:'',image:null }}
                             onSubmit={handleSendData}
                         >
                             {({ setFieldValue }) => (
@@ -83,6 +86,9 @@ const AddProducts = () => {
                                         </div>
                                         <div className="inputField w-full my-2">
                                             <Field className="w-full px-2 py-2 border-[#666666b5] border" name="Product_name" type="text" placeholder="Product Name" />
+                                        </div>
+                                        <div className="inputField w-full my-2">
+                                            <Field className="w-full px-2 py-2 border-[#666666b5] border" name="product_color" type="text" placeholder="Product Color" />
                                         </div>
                                         <div className="inputField w-full my-2">
                                             <Field className="w-full px-2 py-2 border-[#666666b5] border" name="Description" type="text" placeholder="Description" />

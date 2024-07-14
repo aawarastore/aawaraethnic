@@ -48,7 +48,7 @@ const SizeChart = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Size</TableCell>
-                  <TableCell align="right">34(XL)</TableCell>
+                  <TableCell align="right">34(XS)</TableCell>
                   <TableCell align="right">36(S)</TableCell>
                   <TableCell align="right">38(M)</TableCell>
                   <TableCell align="right">40(L)</TableCell>

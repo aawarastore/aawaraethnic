@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { USER_DATA, USER_CART, PRODUCTS_DB, TEMP_OTP,ORDER_DB } = require('../models/database')
+const { USER_DATA, USER_CART, PRODUCTS_DB, TEMP_OTP, ORDER_DB } = require('../models/database')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
@@ -16,19 +16,24 @@ exports.addtoCart = async (req, res) => {
     try {
         var ProductSize = size
         var productColor = activeIn
+        var img
         if (!size) ProductSize = 'M'
+        // console.log(req.body)
 
         const { userId } = jwt.verify(token, process.env.JWT_KEY)
 
         const findProduct = await PRODUCTS_DB.findOne({ PRODUCT_id: productid })
 
         const findUserCart = await USER_CART.findOne({ USER_CART_id: userId })
-        var img
+
         if (activeIn) img = findProduct.Colors.find(col => col.hexcode == activeIn)
         else {
             img = findProduct.Colors.find(col => col.img_url == productimg)
             productColor = img.hexcode
         }
+
+        // console.log(ProductSize,productColor)
+
 
 
         const PRODUCTID = productid + '-' + ProductSize + '-' + productColor
@@ -41,7 +46,6 @@ exports.addtoCart = async (req, res) => {
             product_img_url: img.img_url,
             Size: ProductSize,
             Color: productColor,
-            // Size:
         }
 
         // check if user cart does not  exist create one..
@@ -50,6 +54,7 @@ exports.addtoCart = async (req, res) => {
                 USER_CART_id: userId,
                 Products: [
                     NEW_PRODUCT
+
                 ],
                 Total_Quantity: 1,
                 Total_Price: findProduct.Discounted_Price,
@@ -66,7 +71,7 @@ exports.addtoCart = async (req, res) => {
         if (If_Product_exist) {
             const updateField = {
                 Quantity: If_Product_exist.Quantity + 1,
-                payable_amount: findProduct.Discounted_Price * If_Product_exist.Quantity,
+                payable_amount: findProduct.Discounted_Price * (If_Product_exist.Quantity + 1),
             }
 
             const updateObj = {}
@@ -83,7 +88,6 @@ exports.addtoCart = async (req, res) => {
                 })
 
 
-            // const cart = await USER_CART.findOne({USER_CART_id:userId})
             const pipeline = [
                 {
                     $set: {
@@ -93,26 +97,33 @@ exports.addtoCart = async (req, res) => {
                 }
             ];
 
-            const result = await USER_CART.updateOne({ USER_CART_id: userId }, pipeline)
+            await USER_CART.updateOne({ USER_CART_id: userId }, pipeline)
 
             return res.json({ status: 200, message: 'product existed and updated' })
         }
 
 
         // if none of the above condition do this  if the  product doesnot exist
-        await findUserCart.updateOne({ $push: { Products: NEW_PRODUCT } })
-        // ,$set: {
-        //     Total_Quantity: findUserCart.Total_Quantity + NEW_PRODUCT.Total_Quantity,
-        //     Total_Price:findUserCart.Total_Price + NEW_PRODUCT.payable_amount
-        // } 
-        // we created newproduct var to store the data of product and we directly used it , that help in code management
-        // await findUserCart.updateOne({$set:{Total_Price:this.Total_Price+findProduct.Discounted_Price}})
 
-        return res.json({ status: 200, message: 'Added to cart' })
+        // await findUserCart.updateOne({ $push: { Products: NEW_PRODUCT },$set:{Total_Quantity:} })
+        const prooo = await USER_CART.findOne({ USER_CART_id: userId });
+        await USER_CART.updateOne(
+            { USER_CART_id: userId },
+            {
+                $push: { Products: NEW_PRODUCT },
+                $set: {
+                    Total_Quantity: prooo.Total_Quantity + 1,
+                    Total_Price: prooo.Total_Price + NEW_PRODUCT.payable_amount
+                }
+            }
+        );
+        
 
-    } catch (error) {
-        console.log(error)
-    }
+    return res.json({ status: 200, message: 'Added to cart' })
+
+} catch (error) {
+    console.log(error)
+}
 }
 
 // this controller is to update the products inside the cart i.e deleting the product or change in quantity and size affects price
@@ -131,6 +142,7 @@ exports.updateCart = async (req, res) => {
             Quantity: quantityCount,
             payable_amount: finalPrice
         }
+        
 
         const updateObj = {}
         for (const key in updateField) {
@@ -157,9 +169,6 @@ exports.updateCart = async (req, res) => {
         ];
 
         const result = await USER_CART.updateOne({ USER_CART_id: userId }, pipeline);
-        //   console.log(result)
-
-        // await USER_CART.findOne({USER_CART_id:userId},{$set:{Total_Price:etopay}})
 
         return res.json({ status: 200 })
     } catch (error) {
@@ -256,17 +265,12 @@ exports.deleteItem = async (req, res) => {
     const decoded = decodeURIComponent(product); // Decoding the URL parameter
     //console.log('Decoded product:', decoded); // Logging the decoded parameter for debugging
 
-    const [id, size, color] = decoded.split('-'); // Splitting the decoded string into id, size, and color
-    //console.log('id:', id, 'size:', size, 'color:', color); // Log individual components for verification
-
     try {
         const { userId } = jwt.verify(token, process.env.JWT_KEY);
 
         const findCart = await USER_CART.findOne({ USER_CART_id: userId });
         const pro = findCart.Products.find(p => p.product_id == decoded);
-        if (!pro) {
-            return res.status(404).json({ status: 404, message: 'Product not found in cart' });
-        }
+
 
         await USER_CART.updateOne(
             { USER_CART_id: userId },
@@ -275,16 +279,17 @@ exports.deleteItem = async (req, res) => {
                     Products: {
                         product_id: decoded,
                     }
-                //}
                 },
                 $set: {
                     Total_Quantity: findCart.Total_Quantity - pro.Quantity,
-                    Total_Price: findCart.Total_Price - pro.Quantity * pro.payable_amount,
+                    Total_Price: findCart.Total_Price -  pro.payable_amount,
                 }
             }
         );
-        const totalpr =  await USER_CART.findOne({USER_CART_id:userId})
-        if(totalpr.Total_Quantity == 0) await USER_CART.updateOne({USER_CART_id:userId,$set:{Total_Price:0}})
+        const totalpr = await USER_CART.findOne({ USER_CART_id: userId })
+        if (totalpr.Total_Quantity == 0) {
+            await USER_CART.deleteOne({ USER_CART_id: userId })
+        }
 
         return res.json({ status: 200, message: 'Product deleted from cart' });
 
@@ -299,45 +304,7 @@ exports.deleteItem = async (req, res) => {
 // ====================================================================================
 
 
-// exports.deleteItem = async (req, res) => {
-//     const { token } = req.headers;
-//     const { product } = req.params; // Assuming product is the parameter containing productid-size-color
 
-//     const decoded = decodeURIComponent(product); // Decoding the URL parameter
-//     const [id, size, color] = decoded.split('-'); // Splitting the decoded string into id, size, and color
-
-//     try {
-//         const { userId } = jwt.verify(token, process.env.JWT_KEY);
-
-//         const findCart = await USER_CART.findOne({ USER_CART_id: userId });
-//         const pro = findCart.Products.find(p => p.product_id === decoded);
-//         if (!pro) {
-//             return res.status(404).json({ status: 404, message: 'Product not found in cart' });
-//         }
-
-    
-
-//         const updatedProducts = findCart.Products.filter(p => p.product_id !== decoded);
-//         const updatedQuantity = findCart.Total_Quantity - pro.Quantity;
-//         const updatedPrice = updatedProducts.reduce((total, item) => total + item.Quantity * item.payable_amount, 0);
-
-//         await USER_CART.updateOne(
-//             { USER_CART_id: userId },
-//             {
-//                 $set: {
-//                     Products: updatedProducts,
-//                     Total_Quantity: updatedQuantity,
-//                     Total_Price: updatedPrice
-//                 }
-//             }
-//         );
-//         return res.json({ status: 200, message: 'Product deleted from cart' });
-
-//     } catch (error) {
-//         console.log("delete item error:", error);
-//         return res.status(500).json({ status: 500, message: 'Internal Server Error' });
-//     }
-// };
 
 
 
@@ -403,21 +370,21 @@ exports.order = async (req, res) => {
 
         const { userID, mail, phone } = jwt.verify(specialtoken, process.env.JWT_KEY)
         console.log(userID, mail, phone)
-        const findCart = await USER_CART.findOne({USER_CART_id:userID})
+        const findCart = await USER_CART.findOne({ USER_CART_id: userID })
         const products = findCart.Product
 
-        const findOrder = await ORDER_DB.findOne({USER_ID:userID})
-        if(findOrder) return res.json({status:204,message:'Order Exist'})
+        const findOrder = await ORDER_DB.findOne({ USER_ID: userID })
+        if (findOrder) return res.json({ status: 204, message: 'Order Exist' })
 
         const createORDER = await ORDER_DB({
-            CART_ID: findCart._id ,
+            CART_ID: findCart._id,
             USER_ID: userID,
-            USER_DETAILS:[
-                {...values,email:mail,mobile:phone}
+            USER_DETAILS: [
+                { ...values, email: mail, mobile: phone }
             ]
         })
         await createORDER.save()
-        res.json({status:200,message:'Completed'})
+        res.json({ status: 200, message: 'Completed' })
         // on sumbiting details open the payment options and then after successfull payment 
         // after payment make the paid or payment feild in db true and the show order placed and send them mail for successfull order
         // on order completion delete the usercart

@@ -10,39 +10,42 @@ import { toast } from 'react-toastify'
 
 const Shop = () => {
 
-    const { itemsData , setItemsData} = useContext(UserContextApi)
-    const [allItems,setallitems] = useState([])
-    
-    const [filteredItems,setFilteredItems] = useState([])
+    const { itemsData } = useContext(UserContextApi)
+    const [allItems, setallitems] = useState([])
 
-    const filterProducts = async (e)=>{
-        const val = e.target.value
+    const [filteredItems, setFilteredItems] = useState([])
 
-        if(val === 'All') return setFilteredItems(allItems)
-        if(val === 'Latest'){
-            const filteredProduct = allItems.filter(item=>item.uploaded_at == 'Latest')
-            setFilteredItems(filteredProduct)
-            return
+
+    const filterProducts = (e) => {
+        const { name, value } = e.target;
+
+        let filteredProduct = [];
+
+        if (name === 'Search') {
+            filteredProduct = allItems.filter(item =>
+                item.Product_name.toLowerCase().includes(value.toLowerCase())
+            );
+        } else if (value === 'All') {
+            filteredProduct = allItems;
+        } else if (value === 'Latest') {
+            filteredProduct = allItems.filter(item => item.uploaded_at === 'Latest');
+        } else if (value === 'hightolow') {
+            filteredProduct = [...allItems].sort((i1, i2) => i2.Discounted_Price - i1.Discounted_Price);
+        } else if (value === 'lowtohigh') {
+            filteredProduct = [...allItems].sort((i1, i2) => i1.Discounted_Price - i2.Discounted_Price);
         }
 
-        
+        setFilteredItems(filteredProduct);
+    };
 
-        const filteredProduct = allItems.filter(item=>item.Product_name.toLowerCase().includes(val.toLowerCase()))
-        console.log('filtered products',filteredProduct)
-        setFilteredItems(filteredProduct)
 
-        
-        
-        
-
-    }
-    useEffect(()=>{
-    const total = itemsData.map(item=>{
-        return {...item }
-    })
-    setallitems(total)
-    setFilteredItems(total)
-    },[itemsData])
+    useEffect(() => {
+        const total = itemsData.map(item => {
+            return { ...item }
+        })
+        setallitems(total)
+        setFilteredItems(total)
+    }, [itemsData])
 
 
     return (
@@ -51,23 +54,27 @@ const Shop = () => {
 
             <div className=' w-screen'>
                 <div className='h-[74px] w-screen bg-white'></div>
-
-                <div className='w-full mt-10 flex justify-center '>
-                    <div>
-                        <input onChange={(e)=>filterProducts(e)} placeholder='Search' name='search' type="search" className='px-3 bg-transparent w-[260px]  py-2 md:w-[520px] border shadow-md' />
-                    </div>
-                    <div className='mx-2 '>
-                        <select onChange={(e)=>filterProducts(e)} className='w-fit px-1 md:px-3 py-[9px] bg-transparent shadow-sm border ' name="filters" >
-                            <option value="All">All</option>
-                            <option value="Price">Price</option>
-                            <option value="Latest">Latest</option>
-                        </select>
+                <div className='w-full justify-center flex'>
+                    <div className='w-full ss:w-[90vw] lg:w-[70vw] gap-2 mt-10 flex flex-wrap ss:flex-nowrap justify-between gap-y-4 px-4 ss:px-10'>
+                        <div className='ss:w-[85%] w-full '>
+                            <input onChange={(e) => filterProducts(e)} placeholder='Search' name='Search' type="search" className='px-3 bg-transparent w-full  py-2  border shadow-md' />
+                        </div>
+                        <div className=''>
+                            <select onChange={(e) => filterProducts(e)} className='w-fit px-1 md:px-3 py-[9px] bg-transparent shadow-sm border ' name="filters" >
+                                <option value="All">All</option>
+                                <option value="Latest">Latest</option>
+                                <option value="hightolow">High to low $</option>
+                                <option value="lowtohigh">Low to High $</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
+
                 <div className='w-full h-10'></div>
 
-                <div className='productContainer w-screen flex flex-wrap justify-evenly  ss:justify-start  gap-y-5 ss:gap-6  ss:px-14 my-4'>
+                <div className='productContainer min-h-[80vh] w-screen flex py-2   justify-center  flex-wrap my-4 ss:px-10'>
+                    <div className='w-[98vw]   flex flex-wrap  py-2 justify-around  ss:justify-around  gap-y-5 ss:gap-6 '>
                     {
                         filteredItems.map(item => {
                             return (
@@ -75,13 +82,23 @@ const Shop = () => {
                             )
                         })
                     }
+                    {
+                                filteredItems.length % 2 != 0 
+                                ?
+                                <CardsContainer />
+                                :
+                                ""
+                            }
 
-                    
+
                     {/* {
                         [1,2,3,4].map(m=>{
                             return <CardsContainer key={m} />
                         })
                     } */}
+                                        </div>
+
+
                 </div>
 
             </div>

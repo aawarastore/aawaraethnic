@@ -5,25 +5,27 @@ import { UserContextApi } from '../context/UserContext';
 import Footer from '../Components/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdSettingsPhone } from 'react-icons/md';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Cart = () => {
 
   const navigate = useNavigate()
 
-  const { isLoggedIn, getCartLength, totalCartItems, cartTotalPrice, cartItems, getCartProduct } = useContext(UserContextApi);
+  const { isLoggedIn, totalCartItems, cartTotalPrice, cartItems, getCartProduct } = useContext(UserContextApi);
 
 
   const UserCheckout = () => {
-    navigate('/checkout')
+    if(totalCartItems > 0) navigate('/checkout')
+    else toast("Let's Shop")
   }
 
   useEffect(() => {
     getCartProduct();
-    // getCartLength()
   }, [totalCartItems]);
 
   return (
     <div className='w-screen  overflow-x-hidden'>
+      <ToastContainer />
       <div className='w-screen z-[9999] fixed shadow-md'><Header totalCartItems={totalCartItems} /></div>
 
       <div className='w-full h-[74px] bg-yellow-700'></div>
@@ -31,7 +33,7 @@ const Cart = () => {
 
       <div className='h-20 w-screen'></div>
 
-      {!isLoggedIn && cartItems.Total_Quantity == 0
+      {!isLoggedIn
         ?
         <div className='w-screen h-[70vh] flex items-center justify-center'>
           <div className=' text-center px-10 py-10'>
@@ -40,11 +42,11 @@ const Cart = () => {
             </div>
             <div className='text-[14px]'>Your cart is empty</div>
             <div className='text-[19px]'>There are no items in your cart.Let's add something</div>
-            <Link><div className='px-5 py-3 my-3 bg-[#191919db] text-white '>Continue Shopping</div></Link>
+            <Link to={'/shop'}><div className='px-5 py-3 my-3 bg-[#191919db] text-white '>Continue Shopping</div></Link>
           </div>
         </div>
         :
-          <div className='w-screen flex justify-center lg:flex-row flex-col lg:items-start items-center gap-3'>
+          <div className='w-screen min-h-[50vh] flex justify-center lg:flex-row flex-col lg:items-start items-center gap-3'>
             <div className='flex justify-center lg:w-[48vw] w-[90vw]'>
               <div className='border lg:w-[3/4] w-full min:h-[300px] text-[14px]'>
                 <div className='hidden lg:grid grid-cols-8 max:w-[750px] px-2 py-2 border font-[500]'>

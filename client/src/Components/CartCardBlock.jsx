@@ -44,8 +44,6 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
         }
       })
       getCartProduct()
-
-      
     } catch (error) {
       console.log('deleteitem ',error)
     }
