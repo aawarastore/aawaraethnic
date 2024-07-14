@@ -102,7 +102,9 @@ const Home = () => {
                             {
                                 itemsData.length % 2 != 0 
                                 ?
-                                <CardsContainer />
+                                itemsData.slice(0,2).map(item=>{
+                                    return <Cards key={item.PRODUCT_id} productsdata={item} />
+                                })
                                 :
                                 ""
                             }
