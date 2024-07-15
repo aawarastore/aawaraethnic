@@ -60,10 +60,11 @@ const Shop = () => {
                         </div>
                         <div className=''>
                             <select onChange={(e) => filterProducts(e)} className='w-fit px-1 md:px-3 py-[9px] bg-transparent shadow-sm border ' name="filters" >
+                                <option selected value="sort">Sort</option>
                                 <option value="All">All</option>
                                 <option value="Latest">Latest</option>
-                                <option value="hightolow">High to low $</option>
-                                <option value="lowtohigh">Low to High $</option>
+                                <option value="hightolow">Prices: High to Low</option>
+                                <option value="lowtohigh">Prices: Low to High</option>
                             </select>
                         </div>
                     </div>
