@@ -54,12 +54,12 @@ const Cards = ({ productsdata }) => {
     <>
       <div className='f:w-[300px] relative  s:w-[270px]   sl:w-[220px] ss:w-[190px] w-[160px]  flex justify-center items-center flex-col'>
       <ToastContainer />
-        <div className='f:w-[300px] f:h-[448px] s:w-[270px] s:h-[404px] sl:w-[220px] sl:h-[328px] ss:w-[190px] ss:h-[280px] w-[160px] h-[240px] rounded-[6px]  overflow-hidden relative'>
+        <div className='f:w-[300px] f:h-[448px] s:w-[270px] s:h-[404px] sl:w-[220px] sl:h-[328px] border  border-b-0 border-[#2323233c] ss:w-[190px] ss:h-[280px] w-[160px] h-[240px] rounded-[6px]  overflow-hidden relative'>
         <div className='bg-[#ffffff9d]  ss:flex justify-center  text-black border absolute right-2 top-2  z-[99]  rounded-[06px]  px-2 text-[10px] ss:text-[13px] py-2 w-[18%] cursor-pointer' onClick={() => { isLoggedIn ? addtoCart(productsdata.PRODUCT_id, size, productsdata.Product_img_url) : notify() }}><FaBagShopping /></div>
-          <img className='w-full bg-stone-200 hover:scale-[1.01] transition-all ease-out h-full z-50 ' src={productsdata.Product_img_url} alt='Network!!' />
+          <img className='w-full bg-stone-200 hover:scale-[1.01] transition-all ease-out h-full z-50  ' src={productsdata.Product_img_url} alt='Network!!' />
         </div>
         <div className='w-full  text-[11px] px-[4px] text-black  ss:text-[17px]   '>
-          <div className='uppercase   font-[800]'>Aawara Ethnic </div>
+          <div className='uppercase ss:font-[700]  font-[800]'>Aawara Ethnic </div>
           <div className='uppercase  w-full whitespace-nowrap truncate  text-[12px] text-[#b0b0b0] font-[500]'>{productsdata.Description}</div>
           <div className='w-full flex gap-1 items-center'>
             <div className=' line-through ss:text-[15px] text-red-600 text-[12px] opacity-[0.6]'> ₹ {productsdata.Price}</div>

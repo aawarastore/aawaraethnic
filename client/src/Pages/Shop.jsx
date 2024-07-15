@@ -43,7 +43,7 @@ const Shop = () => {
         })
         setallitems(total)
         setFilteredItems(total)
-    }, [itemsData])
+    }, [itemsData]) 
 
 
     return (
@@ -54,12 +54,12 @@ const Shop = () => {
                 <div className='h-[74px] w-screen'></div>
                 <div className='w-full justify-center flex'>
                     <div className='w-full ss:w-[90vw] lg:w-[70vw] gap-2 mt-10 flex flex-wrap ss:flex-nowrap justify-between gap-y-4 px-4 ss:px-10'>
-                        <div className='ss:w-[85%] w-full border relative'>
+                        <div className='ss:w-[85%] w-full border border-[#23232372] relative'>
                             <div className='absolute top-3 left-3'><CiSearch className='scale-[1.4]  opacity-[0.9]' /></div>
                             <input onChange={(e) => filterProducts(e)} placeholder='Search Products' name='Search' type="search" className='pl-10 pr-5 bg-transparent w-full  py-2   border-none outline-none' />
                         </div>
-                        <div className=''>
-                            <select onChange={(e) => filterProducts(e)} className='w-fit px-1 md:px-3 py-[9px] bg-transparent shadow-sm border ' name="filters" >
+                        <div className='bg-transparent shadow-sm border px-2 border-[#23232372] '>
+                            <select onChange={(e) => filterProducts(e)} className='w-fit  md:px-3 py-[9px] bg-transparent outline-none ' name="filters" >
                                 <option selected value="sort">Sort</option>
                                 <option value="All">All</option>
                                 <option value="Latest">Latest</option>

@@ -7,7 +7,8 @@ import {UserContextApi} from '../context/UserContext'
 import Cards from '../Components/Cards'
 
 const Home = () => {
-    const img_url='../src/assets/kurtabanner.webp'
+    const img_url='/banner.jpg'
+    // const img_url='/kurta2.jpg'
     // make it changeable from admin portal
     const navigate = useNavigate()
 
@@ -26,9 +27,12 @@ const Home = () => {
             <div className='w-screen bg-red-400 h-[50px] lg:h-[79px]'></div>
             <div className='w-screen bg-black lg:py-3 pt-4 pb-1 text-white text-center QuoteLines'>Aawara Ethincs</div>
 
-                <div className='md:h-[86%] sm:h-[60%] h-1/2 w-full '>
+                <div className='md:h-[86%] sm:h-[60%] h-1/2 w-full  relative'>
                     <div className='h-full w-full object-contain overflow-hidden bg-[#928f8fe7]'>
-                        <img className='object-contain object-center' src={img_url} alt="" />
+                        <img className='w-full h-full' src={img_url} alt="" />
+                    </div>
+                    <div className='absolute QuoteLines top-10 text-yellow-700  bg-'>
+                        Best Kurtas
                     </div>
                 </div>
 
