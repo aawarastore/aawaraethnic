@@ -85,7 +85,7 @@ Chauta Bazar , near Bhat Hospital, <br />
 Surat 395003 <br />
 aawarathnic@gmail.com
 <br />
-Contact No.: 7499219587
+Contact No.:+91 7499219587
     </div>
     </div>
   )

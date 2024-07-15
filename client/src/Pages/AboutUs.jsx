@@ -40,7 +40,7 @@ const AboutUs = () => {
                                             Explore our online store and discover the allure of traditional Indian attire reinvented for the modern discerning individual. Join us in celebrating the beauty of cultural diversity and embark on a journey of sartorial elegance with Aawara Ethnic.
                                         </p>
                                         <p className="mt-4 text-lg text-gray-600">
-                                            For any inquiries or assistance, please don't hesitate to reach out to us at <a href="mailto:aawaraethnic@gmail.com" className="text-blue-500">aawaraethnic@gmail.com</a> or visit us at Chauta Bazar, near Bhat Hospital, Surat - 390053.
+                                            For any inquiries or assistance, please don't hesitate to reach out to us at <a href="mailto:aawaraethnic@gmail.com" className="text-blue-500">aawaraethnic@gmail.com</a> <p>Contact:- +91 7499219587</p> or visit us at Chauta Bazar, near Bhat Hospital, Surat - 390053.
                                         </p>
                                     </div>
                                 </div>

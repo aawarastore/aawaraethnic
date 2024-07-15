@@ -8,7 +8,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import SizeChart from './Pages/SizeChart';
 import AboutUs from './Pages/AboutUs';
 import Shop from './Pages/Shop';
 import Cart from './Pages/Cart';
@@ -78,9 +77,6 @@ const router = createBrowserRouter([
     path:'/termsandcondition',
     element:<TermsCondition />
   },
-  
-  
-
 ])
 
 const App = () => {

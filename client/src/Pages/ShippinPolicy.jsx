@@ -34,7 +34,7 @@ const ShippinPolicy = () => {
                 Surat 395003 <br />
                 aawarathnic@gmail.com
                 <br />
-                Contact No.: 7499219587
+                Contact No.: +91 7499219587
                 {/* </pre> */}
             </div>
         </div>

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link ,useNavigate} from 'react-router-dom'
 import { BsBag } from "react-icons/bs";
-import { FaRegUser } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
+
 import { UserContextApi } from '../context/UserContext';
 import { RiMenu3Line } from "react-icons/ri";
 const Header = () => {
@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <>
-      <div className='w-screen px-5 lg:px-10 py-2 pt-3  ss:py-2 lg:py-[16px] ss:bg-[#ffffff] bg-white ss:text-black   shadow-md'>
+      <div className='w-screen px-5 lg:px-10 py-2 pt-3  ss:py-2 lg:py-[16px] ss:bg-[#ffffff] border-b bg-white ss:text-black'>
         <div className='flex justify-between w-full'>
 
           <div className='flex  gap-5 items-center text-[18px]'>
@@ -37,11 +37,20 @@ const Header = () => {
 
           <div className='flex gap-5 items-center relative'>
             <Link to={'/shop'}>
-            <div className='scale-[1.3]'><FaSearch /></div>
+            <div className='scale-[1.8] font-[800]'><CiSearch /></div>
             </Link>
-            <div className=' relative' ><Link to={'/cart'}><BsBag className='scale-[1.4]' /></Link>
+            {
+              isLoggedIn
+              ?
+              <div className=' relative' >
+              <Link to={'/cart'}><BsBag className='scale-[1.4] font-[300]' /></Link>
               <div className='absolute -bottom-2 -right-3  bg-[#000000e7] text-white w-4 h-4 text-[10px] rounded-full text-center'>{totalCartItems}</div>
             </div>
+              :
+               <Link className='bg-black text-white shadow-md px-4 py-[6px] rounded-full text-[15px]' to={'/login'}><div>Login</div></Link>
+
+
+            }
             
               <div onClick={()=>setProfileCard(!profileCard)} className='text-black block ss:hidden  text-[18px]'><RiMenu3Line /></div>
           
@@ -49,19 +58,20 @@ const Header = () => {
               profileCard
               ?
 
-              <div className='absolute bottom-[-90vh] py-4 px-5  flex flex-col justify-between  w-[260px] h-[90vh] right-[-8px] bg-white border'> 
+              <div className='absolute bottom-[-80vh] py-4 px-5  flex flex-col justify-between  w-[260px] h-[80vh] right-[-8px] bg-white border'> 
               <div className='absolute bg-white border h-5 right-2 border-b-0 border-r-0 -top-[10px] rotate-45 w-5'></div>
               <div className='w-full flex justify-start flex-col py-10  text-[22px] gap-y-5'>
-                <Link to={'/home'}>Home</Link>
-                <Link to={'/shop'}>Shop</Link>
-                <Link to={'/aboutus'}>About Us</Link>
+                <Link className='hover:bg-stone-50 px-3 py-2 rounded-md'  to={'/home'}>Home</Link>
+                <Link  className='hover:bg-stone-50 px-3 py-2 rounded-md' to={'/shop'}>Shop</Link>
+                <Link className='hover:bg-stone-50 px-3 py-2 rounded-md'  to={'/aboutus'}>About Us</Link>
               </div>
               <div className='mb-10'>
                 {isLoggedIn
                   ?
                   <div className='bg-stone-100 px-3 py-2 rounded-md' onClick={logout}>Logout</div>
                   :
-                  <Link to={'/login'} ><div  className='bg-stone-100 px-3 py-2 rounded-md'  > Login </div></Link>
+                  // <Link to={'/login'} ><div  className='bg-stone-100 px-3 py-2 rounded-md'  > Login </div></Link>
+                  ''
                 }
               </div>
               </div>

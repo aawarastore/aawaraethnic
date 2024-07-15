@@ -16,18 +16,13 @@ const BuyProduct = () => {
   const [activeIn, setactiveIndex] = useState(null)
 
   const { id } = useParams()
-  const { getCartLength, isLoggedIn, itemsData } = useContext(UserContextApi)
+  const { getCartProduct, isLoggedIn, itemsData } = useContext(UserContextApi)
 
   const [ItemData, setItemdata] = useState([])
   const [subImg, setSubImg] = useState([])
   const [mainImg, setMainImg] = useState('')
-  const [discount, setDiscount] = useState(null)
 
-  const makeDiscount = (price, disPrice) => {
-    const tot = (price - disPrice) / price
-    const dis = Math.floor(tot * 100)
-    setDiscount(dis)
-  }
+  
 
   const fetchProductData = async (id) => {
 
@@ -45,7 +40,6 @@ const BuyProduct = () => {
         setItemdata(data.product)
         setSubImg(data.product.Colors)
         setMainImg(data.product.Product_img_url)
-        makeDiscount(ItemData.Price, ItemData.Discounted_Price)
       }
     } catch (error) {
       console.log(error)
@@ -64,7 +58,7 @@ const BuyProduct = () => {
         body: JSON.stringify({ productid, size, activeIn, productimg })
       })
       const data = await response.json()
-      if (data.status == 200) getCartLength()
+      if (data.status == 200) getCartProduct()
     } catch (error) {
       console.log(error)
     }
@@ -144,8 +138,7 @@ const BuyProduct = () => {
             <div className='ss:text-[20px] text-[15px]  tracking-[1px] my-2'>{ItemData.Description}</div>
 
             <div className='text-[22px] tracking-[3px] font-[700]'>Rs. {ItemData.Discounted_Price}</div>
-            <div className='text-[18px] font-[500] '><span className='line-through'>Rs. {ItemData.Price}</span>
-              <span className='text-yellow-800  pl-4 bg-gradient-to-r from-orange-100 to-orange-400 ml-2 px-2 py-[2px] rounded-e-full '>{discount + '% OFF'}</span></div>
+            <div className='text-[18px] font-[500] opacity-[0.7] '><span className='line-through'>Rs. {ItemData.Price}</span></div>
             <div className='text-[14px] my-2 '>Inclusive Of all Taxes</div>
             <div className='h-[1px] w-full  bg-stone-300 mb-3 mt-4'></div>
             <div className='flex w-full'>
@@ -198,7 +191,7 @@ const BuyProduct = () => {
 
           </div>
         </div>
-        <div className='flex justify-center mt-10 w-full'><Link to={'/shop'}> <div className='px-5 py-1 border'>Shop More</div></Link></div>
+        <div className='flex justify-center mt-10 w-full'><Link to={'/shop'} className='hover:bg-gradient-to-r from-[#1b1b1b] to-black hover:text-white'> <div className='px-5 py-1 border '>Shop More</div></Link></div>
       </div>
       <div className='mt-10'>
         <Footer />
