@@ -98,10 +98,9 @@ const Home = () => {
                         </div>
                         <div className='flex md:w-[95vw]  w-full gap-y-6 flex-wrap justify-evenly my-4'>
                             {
-                                itemsData.map(item=>{
+                                itemsData.slice(0,12).map(item=>{
                                     return <Cards key={item.PRODUCT_id} productsdata={item} />
                                 })
-
                             }
                             {
                                 itemsData.length % 2 != 0 
