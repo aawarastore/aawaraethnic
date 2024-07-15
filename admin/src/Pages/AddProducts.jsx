@@ -8,8 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const AddProducts = () => {
 
 
-
-
     const handleSendData = async (values) => {
         const formData = new FormData();
         formData.append('PRODUCT_id', values.PRODUCT_id);

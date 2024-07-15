@@ -1,6 +1,6 @@
 const express = require('express')
 const { authenticate_admin_portal, register_Admin } = require('../controllers/AdminCredentials')
-const { getUsers, getProducts, addProduct, addColor } = require('../controllers/AdminControls')
+const { getUsers, getProducts, addProduct, addColor, updateProducts } = require('../controllers/AdminControls')
 const multer = require('multer')
 
 const AdminRouter = express.Router()
@@ -15,6 +15,8 @@ AdminRouter.get('/getusers',getUsers)
 //get products:
 AdminRouter.get('/getProduct',getProducts)
 
+//edit product
+AdminRouter.post('/updateProduct',updateProducts)
 
 const storage  = multer.diskStorage({
     destination:function(req,file,cb){

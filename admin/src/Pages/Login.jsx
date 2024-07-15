@@ -37,7 +37,7 @@ const Login = () => {
                         <Field name='email' type='text' placeholder='Email' className='w-full pl-2 py-3 rounded-sm border border-stone-400' />
                     </div>
                     <div className=' my-2'>
-                        <Field name='password' type='text' placeholder='Password' className='w-full pl-2 py-3 rounded-sm border border-stone-400' />
+                        <Field name='password' type='password' placeholder='Password' className='w-full pl-2 py-3 rounded-sm border border-stone-400' />
                     </div>
                     <div className=' my-2'>
                         <Field name='adminKey' type='text' placeholder='Admin ID' className='w-full pl-2 py-3 rounded-sm border border-stone-400' />

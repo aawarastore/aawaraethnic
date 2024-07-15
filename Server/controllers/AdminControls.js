@@ -104,10 +104,31 @@ exports.addColor = async (req, res) => {
           );
 
           return res.json({status:200,message:'Updated'})
-        
-
 } catch (error) {
     console.log(error)
 }
 }
 
+
+exports.updateProducts = async (req,res)=>{
+    const {values,id} = req.body
+    // console.log(values,id)
+
+    try {
+         await PRODUCTS_DB.updateOne({PRODUCT_id:id},{
+            $set:{
+                Product_name:values.product_name,
+                Price:values.price,
+                Discounted_Price:values.discounted_price
+            }
+        })
+
+        return res.json({status:200})
+
+        
+
+        
+    } catch (error) {
+        
+    }
+}
