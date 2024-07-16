@@ -88,7 +88,7 @@ const BuyProduct = () => {
     fetchProductData(id)
   }, [id])
 
-  const shareLink = `${import.meta.env.VITE_WEB_URL}/buyproduct/${id}`
+  const shareLink = `https://aawarastore.in/buyproduct/${id}`
   const copyLInk = ()=>{
     navigator.clipboard.writeText(shareLink)
     toast('Link Copied')
