@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import { FaBagShopping } from "react-icons/fa6";
 
 const Cards = ({ productsdata }) => {
-  // console.log(productsdata)
 
   const navigate = useNavigate()
   const { isLoggedIn, setLoggedIn, getCartProduct } = useContext(UserContextApi)
@@ -53,9 +52,10 @@ const Cards = ({ productsdata }) => {
   return (
     <>
       <div className='f:w-[300px] relative  s:w-[270px]   sl:w-[220px] ss:w-[190px] w-[160px]  flex justify-center items-center flex-col'>
-      <ToastContainer />
+        <ToastContainer newestOnTop={true} autoClose={1000}
+          toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true} />
         <div className='f:w-[300px] f:h-[448px] s:w-[270px] s:h-[404px] sl:w-[220px] sl:h-[328px] border  border-b-0 border-[#2323233c] ss:w-[190px] ss:h-[280px] w-[160px] h-[240px] rounded-[6px]  overflow-hidden relative'>
-        <div className='bg-[#ffffff9d]  ss:flex justify-center  text-black border absolute right-2 top-2  z-[99]  rounded-[06px]  px-2 text-[10px] ss:text-[13px] py-2 w-[18%] cursor-pointer' onClick={() => { isLoggedIn ? addtoCart(productsdata.PRODUCT_id, size, productsdata.Product_img_url) : notify() }}><FaBagShopping /></div>
+          <div className='bg-[#ffffff9d]  ss:flex justify-center  text-black border absolute right-2 top-2  z-[99]  rounded-[06px]  px-2 text-[10px] ss:text-[13px] py-2 w-[18%] cursor-pointer' onClick={() => { isLoggedIn ? addtoCart(productsdata.PRODUCT_id, size, productsdata.Product_img_url) : notify() }}><FaBagShopping /></div>
           <img className='w-full bg-stone-200 hover:scale-[1.01] transition-all ease-out h-full z-50  ' src={productsdata.Product_img_url} alt='Network!!' />
         </div>
         <div className='w-full  text-[11px] px-[4px] text-black  ss:text-[17px]   '>
@@ -80,8 +80,8 @@ const Cards = ({ productsdata }) => {
           </div>
         </div>
         <div className='flex  justify-between mt-1 w-full '>
-            <div className='bg-gradient-to-r hover:bg-gradient-to-t from-[#282828d2]  to-black  rounded-[5px]  text-center text-white  px-2 text-[15px] ss:text-[18px] py-[6px] w-full  cursor-pointer' onClick={() => buyProduct(productsdata.PRODUCT_id)} >Buy </div>
-          </div>
+          <div className='bg-gradient-to-r hover:bg-gradient-to-t from-[#282828d2]  to-black  rounded-[5px]  text-center text-white  px-2 text-[15px] ss:text-[18px] py-[6px] w-full  cursor-pointer' onClick={() => buyProduct(productsdata.PRODUCT_id)} >Buy </div>
+        </div>
       </div>
     </>
   )

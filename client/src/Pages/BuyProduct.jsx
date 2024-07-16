@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Header from '../Components/Header'
+import Header from '../Component/Header'
 import { Link, useParams } from 'react-router-dom'
 import { UserContextApi } from '../context/UserContext'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import SizeChart from './SizeChart'
-import Cards from '../Components/Cards'
-import Footer from '../Components/Footer'
-import CardsContainer from '../Components/CardsContainer'
-
+import Cards from '../Component/Cards'
+import Footer from '../Component/Footer'
+import CardsContainer from '../Component/CardsContainer'
+import { GoLink } from "react-icons/go";
 
 const BuyProduct = () => {
   const { onOpen, isOpen } = useContext(UserContextApi)
@@ -88,14 +88,20 @@ const BuyProduct = () => {
     fetchProductData(id)
   }, [id])
 
+  const shareLink = `${import.meta.env.VITE_WEB_URL}/buyproduct/${id}`
+  const copyLInk = ()=>{
+    navigator.clipboard.writeText(shareLink)
+    toast('Link Copied')
 
-
+    return
+  }
 
   return (
     <>
       <div className='w-screen fixed z-[990]'><Header /></div>
 
-      <ToastContainer />
+      <ToastContainer newestOnTop={true} autoClose={800}
+          toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true}/>
       <div className='w-screen relative min-h-screen  overflow-hidden'>
         {
           isOpen && <SizeChart />
@@ -133,13 +139,12 @@ const BuyProduct = () => {
 
           <div className='md:pl-[70px] px-2 md:my-0 mt-10  ss:w-fit w-full ss:text-left   text-stone-900'>
 
-            <div className='md:text-[28px] text-[20px] tracking-[1px] md:tracking-[4px] font-[500] uppercase'> {ItemData.Product_name}</div>
-            {/* <div>Product Size: {ItemData.Size}</div> */}
-            <div className='ss:text-[20px] text-[15px]  tracking-[1px] my-2'>{ItemData.Description}</div>
+            <div className='md:text-[28px] text-[22px] tracking-[1px] md:tracking-[4px] font-[600] uppercase'> {ItemData.Product_name}</div>
+            <div className='ss:text-[20px] text-[15px]  tracking-[1px] mb-2'>{ItemData.Description}</div>
 
-            <div className='text-[22px] tracking-[3px] font-[700]'>Rs. {ItemData.Discounted_Price}</div>
-            <div className='text-[18px] font-[500] opacity-[0.7] '><span className='line-through'>Rs. {ItemData.Price}</span></div>
-            <div className='text-[14px] my-2 '>Inclusive Of all Taxes</div>
+            <div className='text-[24px]  tracking-[2px] font-[700]'> { '₹' + ItemData.Discounted_Price}  <span className='text-[14px] tracking-[0] opacity-[0.6] font-[400] my-2 '>MRP Inclusive Of all Taxes</span> </div>
+            <div className='text-[18px] font-[500] opacity-[0.7] '><span className='line-through'>{'₹' + ItemData.Price}</span></div>
+           
             <div className='h-[1px] w-full  bg-stone-300 mb-3 mt-4'></div>
             <div className='flex w-full'>
               <div className='my-2 '>
@@ -167,7 +172,10 @@ const BuyProduct = () => {
             </div>
             <div className='cursor-pointer' onClick={onOpen}>Size Chart</div>
             <div className='h-5'></div>
-            <div onClick={() => addtoCart(ItemData.PRODUCT_id, size, activeIn, mainImg)} className='cursor-pointer w-full md:py-3 py-3 tracking-[5px] md:text-[20px] text-center bg-[#040303eb] text-white'>Add To Cart</div>
+            <div  className='w-full flex justify-between flex-row-reverse'>
+            <div onClick={()=>copyLInk()} className='w-[18%] flex justify-center items-center border'><GoLink className='scale-[1.3]' /></div>
+            <div onClick={() => addtoCart(ItemData.PRODUCT_id, size, activeIn, mainImg)} className='cursor-pointer w-[80%] md:py-3 py-3 tracking-[5px] md:text-[20px] text-center bg-[#040303eb] text-white'>Add To Cart</div>
+            </div>
           </div>
 
 

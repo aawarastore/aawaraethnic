@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../Components/Header';
+import Header from '../Component/Header';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { ToastContainer, toast } from 'react-toastify';

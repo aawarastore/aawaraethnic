@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Header from '../Components/Header'
-import CardsContainer from '../Components/CardsContainer'
-import Cards from '../Components/Cards'
+import Header from '../Component/Header'
+import CardsContainer from '../Component/CardsContainer'
+import Cards from '../Component/Cards'
 import { UserContextApi } from '../context/UserContext'
-import Footer from '../Components/Footer'
+import Footer from '../Component/Footer'
 import { CiSearch } from "react-icons/ci";
 
 const Shop = () => {

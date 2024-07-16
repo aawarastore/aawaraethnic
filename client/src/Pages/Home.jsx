@@ -1,10 +1,11 @@
 import React , {useContext,useEffect, useState} from 'react'
-import Header from '../Components/Header'
-import Footer from '../Components/Footer'
-import CardsContainer from '../Components/CardsContainer'
+import Header from '../Component/Header'
+import Footer from '../Component/Footer'
+import CardsContainer from '../Component/CardsContainer'
 import { Link, useNavigate } from 'react-router-dom'
 import {UserContextApi} from '../context/UserContext'
-import Cards from '../Components/Cards'
+import Cards from '../Component/Cards'
+
 
 const Home = () => {
     const img_url='/banner.jpg'
@@ -25,11 +26,12 @@ const Home = () => {
             <div className='fixed w-screen z-[9999] shadow-md'><Header /></div>
             <div className='scrollBar_design  scrollbar-track-[#ffffff00] scrollbar-thumb-yellow-800  scrollbar-thin h-screen w-screen  overflow-x-hidden'>
             <div className='w-screen bg-red-400 h-[50px] lg:h-[79px]'></div>
-            <div className='w-screen bg-black lg:py-3 pt-4 pb-1 text-white text-center QuoteLines'>Aawara Ethincs</div>
+            <div className='w-screen bg-black lg:py-3 pt-4 pb-1 text-white text-center QuoteLines'>Aawara Ethinc</div>
 
                 <div className='md:h-[86%] sm:h-[60%] h-1/2 w-full  relative'>
                     <div className='h-full w-full object-contain overflow-hidden bg-[#928f8fe7]'>
                         <img className='w-full h-full' src={img_url} alt="" />
+
                     </div>
                     <div className='absolute QuoteLines top-10 text-yellow-700  bg-'>
                         Best Kurtas
@@ -76,9 +78,7 @@ const Home = () => {
                             <div className='h-[14vw] w-full rounded-[13px] mt-6 flex justify-between'>
                                 <div className='h-full w-[32%] rounded-[13px] border  bg-gradient-to-tr from-orange-50 to-blue-50  shadow-md'></div>
                                 <div className='h-full w-[32%] rounded-[13px] border  bg-gradient-to-tr from-orange-50 to-blue-50  shadow-md'></div>
-                                <div className='h-full w-[32%] rounded-[13px] border  bg-gradient-to-tr from-orange-50 to-blue-50  shadow-md'></div>
-                              
-                                
+                                <div className='h-full w-[32%] rounded-[13px] border  bg-gradient-to-tr from-orange-50 to-blue-50  shadow-md'></div>  
                             </div>
                         </div>
                         <div className='ss:w-[30%] ss:ml-6 lg:w-[20%] mx-0 flex ss:bg-white bg-black justify-center  w-full'>

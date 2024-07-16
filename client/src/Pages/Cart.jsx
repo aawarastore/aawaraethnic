@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Header from '../Components/Header';
-import CartCardBlock from '../Components/CartCardBlock';
+import Header from '../Component/Header';
+import CartCardBlock from '../Component/CartCardBlock';
 import { UserContextApi } from '../context/UserContext';
-import Footer from '../Components/Footer';
+import Footer from '../Component/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdSettingsPhone } from 'react-icons/md';
 import { toast, ToastContainer } from 'react-toastify';
