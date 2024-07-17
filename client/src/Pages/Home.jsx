@@ -8,9 +8,7 @@ import Cards from '../Component/Cards'
 
 
 const Home = () => {
-    const img_url='/banner.jpg'
-    // const img_url='/kurta2.jpg'
-    // make it changeable from admin portal
+
     const navigate = useNavigate()
 
     const {itemsData} = useContext(UserContextApi)
@@ -26,15 +24,11 @@ const Home = () => {
             <div className='fixed w-screen z-[9999] shadow-md'><Header /></div>
             <div className='scrollBar_design  scrollbar-track-[#ffffff00] scrollbar-thumb-yellow-800  scrollbar-thin h-screen w-screen  overflow-x-hidden'>
             <div className='w-screen bg-red-400 h-[50px] lg:h-[79px]'></div>
-            <div className='w-screen bg-black lg:py-3 pt-4 pb-1 text-white text-center QuoteLines'>Aawara Ethinc</div>
+            <div className='w-screen bg-black lg:py-3 pt-4 pb-1 text-white text-center QuoteLines'>"A dash of tradition in every thread"</div>
 
                 <div className='md:h-[86%] sm:h-[60%] h-1/2 w-full  relative'>
                     <div className='h-full w-full object-contain overflow-hidden bg-[#928f8fe7]'>
-                        <img className='w-full h-full' src={img_url} alt="" />
-
-                    </div>
-                    <div className='absolute QuoteLines top-10 text-yellow-700  bg-'>
-                        Best Kurtas
+                        <img className='w-full h-full' src={'/aawaraposter.jpg'} alt="" />
                     </div>
                 </div>
 
