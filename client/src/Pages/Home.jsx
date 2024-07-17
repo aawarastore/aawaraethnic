@@ -24,9 +24,9 @@ const Home = () => {
             <div className='fixed w-screen z-[9999] shadow-md'><Header /></div>
             <div className='scrollBar_design  scrollbar-track-[#ffffff00] scrollbar-thumb-yellow-800  scrollbar-thin h-screen w-screen  overflow-x-hidden'>
             <div className='w-screen bg-red-400 h-[50px] lg:h-[79px]'></div>
-            <div className='w-screen bg-black lg:py-3 pt-4 pb-1 text-white text-center QuoteLines'>"A dash of tradition in every thread"</div>
+            <div className='w-screen bg-black lg:py-3 pt-4 pb-1 text-white ss:text-[16px] text-[12px] text-center QuoteLines'>"A dash of tradition in every thread"</div>
 
-                <div className='md:h-[86%] sm:h-[60%] h-1/2 w-full  relative'>
+                <div className='md:h-[86%] sm:h-[60%] h-[40vh] w-full  relative'>
                     <div className='h-full w-full object-contain overflow-hidden bg-[#928f8fe7]'>
                         <img className='w-full h-full' src={'/aawaraposter.jpg'} alt="" />
                     </div>
