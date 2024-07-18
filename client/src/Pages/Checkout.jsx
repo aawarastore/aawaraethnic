@@ -121,6 +121,7 @@ const Checkout = () => {
       if (data.status == 200) {
         setVerified(true);
         setOtpPortal(false);
+        setOff(false)
         sessionStorage.setItem('#poiqerjffjf',true)
         toast('Verified');
       } else {
