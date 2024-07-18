@@ -5,6 +5,10 @@ export const UserContextApi = createContext()
 
 export const UserContextProvider = ({ children }) => {
 
+  const [isAllowedToCheckout, setIsAllowedToCheckout] = useState(false);
+
+
+
     const [isLoggedIn, setLoggedIn] = useState(false)
 
     const checkUser = async () => {
@@ -95,7 +99,7 @@ export const UserContextProvider = ({ children }) => {
 
 
     return (
-        <UserContextApi.Provider value={{ setLoggedIn, isLoggedIn, checkUser, setItemsData,itemsData, totalCartItems ,isOpen,onOpen,onClose,cartItems,getCartProduct,cartTotalPrice}}>
+        <UserContextApi.Provider value={{ isAllowedToCheckout, setIsAllowedToCheckout,setLoggedIn, isLoggedIn, checkUser, setItemsData,itemsData, totalCartItems ,isOpen,onOpen,onClose,cartItems,getCartProduct,cartTotalPrice}}>
             {children}
         </UserContextApi.Provider>
     )

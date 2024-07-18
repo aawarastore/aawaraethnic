@@ -62,43 +62,12 @@ const PRODUCT_DB = new mongoose.Schema({
     { collection: 'PRODUCT_DB' })
 const PRODUCTS_DB = new mongoose.model('PRODUCT_DB', PRODUCT_DB)
 
-// {
-//     "PRODUCT_id": 121,
-//     "Product_img_url": "http://localhost:3000/uploads/images/kurta1.jpeg",
-//     "Product_name": "Mens best designing kurta",
-//     "Price": 9999, 
-//     "Discounted_Price": 6999,
-//     "Description": 'Soft best fabric kurta',
-//     "Status": "available",
-//     "Colors": [
-//         {
-//             "img_url": "http://localhost:3000/uploads/images/kurta2.jpg",
-//             "color": "lightblue",
-//             "hexcode": "#ADD8E6",
-//         },
-//         {
-//             "img_url": http://localhost:3000/uploads/images/kurta3.jpg",
-//             "color":"yellow",
-//             "hexcode": "#FFFF00",
-//         },
-//         {
-//             "img_url": "http://localhost:3000/uploads/images/kurta4.jpg",
-//             "color":"pink",
-//             "hexcode": "#FFC0CB",
-//         },
-//         {
-//             "img_url": "http://localhost:3000/uploads/images/kurta4.jpg",
-//             "color":"lightgreen",
-//             "hexcode": "#90EE90",
-//         }
-//     ]
-// }
 
 
 const USER_ORDER_DB = new mongoose.Schema({
     CART_ID: String,
     USER_ID: String,
-    USER_DETAILS: [{
+    USER_DETAILS:{
         firstname: String,
         lastname: String,
         address: String,
@@ -107,10 +76,9 @@ const USER_ORDER_DB = new mongoose.Schema({
         pincode: String,
         email: String,
         mobile: String,
-    }],
+    },
     ITEMS: [
         {
-            Price: Number,
             product_id: String,
             product_name: String,
             Quantity: Number,
@@ -119,12 +87,18 @@ const USER_ORDER_DB = new mongoose.Schema({
             Amount: Number,
         }
     ],
-    Payment:Boolean,
+    TRANSACTION:{
+        orderId: String,
+        paymentId: String,
+        signature: String,
+        amount: Number,
+        currency: String,
+        status: { type: String, default: 'Pending' }, // Could be 'Pending', 'Paid', 'Failed', etc.
+    },
+    orderStatus: { type: String, default: 'Processing' }, // Could be 'Processing', 'Shipped', 'Delivered', etc.
+    createdAt: { type: Date, default: Date.now },
     Total_Quantity: Number,
     Total_Price: Number,
-    Transaction_ID: String,
-
-
 }, { collection: 'ORDER_DB' })
 const ORDER_DB = new mongoose.model("ORDER", USER_ORDER_DB)
 
@@ -134,7 +108,7 @@ const OTP_DB = new mongoose.Schema({
     Request_Mail: String,
     OTP: String,
     token: String,
-    createdAt: { type: Date, default: Date.now, expires: 3000 }
+    createdAt: { type: Date, default: Date.now, expires: 1000 }
 }, { collection: 'OTP_DB' })
 
 const TEMP_OTP = new mongoose.model('OTP-DB', OTP_DB)

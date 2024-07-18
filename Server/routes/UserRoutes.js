@@ -1,6 +1,7 @@
 const express = require('express')  
 const { registerUser, loginUser, authorisation } = require('../controllers/UserCredentials')
 const { addtoCart, getProducts, updateCart, addProduct, getCartProducts, getProductToBuy, getCartLength, deleteItem, order,  requestMail, checkotp } = require('../controllers/Products')
+const { handlePayment, createOrder, paymentOrder } = require('../controllers/PaymentController')
 const UserRouter = express.Router()
 
 UserRouter.post('/register',registerUser)
@@ -22,7 +23,8 @@ UserRouter.post('/requestotp',requestMail)
 UserRouter.post('/checkotp',checkotp)
 UserRouter.post('/submitOrderDetails',order)
 
+UserRouter.post('/createOrder',createOrder)
 
-
+UserRouter.post('/payment-success',paymentOrder)
 
 module.exports = UserRouter

@@ -18,6 +18,7 @@ import ShippinPolicy from './Pages/ShippinPolicy';
 import ExchangePolicy from './Pages/ExchangePolicy';
 import Cancelation from './Pages/Cancelation';
 import TermsCondition from './Pages/TermsCondition';
+import SuccessfulOrder from './Pages/SuccessfulOrder';
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
   {
     path:'/termsandcondition',
     element:<TermsCondition />
+  },
+  {
+    path:'/successfull-order',
+    element:<SuccessfulOrder />
   },
 ])
 

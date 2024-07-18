@@ -58,15 +58,20 @@ const Shop = () => {
                             <div className='absolute top-3 left-3'><CiSearch className='scale-[1.4]  opacity-[0.9]' /></div>
                             <input onChange={(e) => filterProducts(e)} placeholder='Search Products' name='Search' type="search" className='pl-10 pr-5 bg-transparent w-full  py-2   border-none outline-none' />
                         </div>
+                        <div className='flex ss:block justify-between w-full ss:w-fit ss:border-none items-center border-b border-t ss:py-0 py-2 '>
+                            <div className='ss:hidden'>Filters</div>
                         <div className='bg-transparent shadow-sm border px-2 border-[#23232372] '>
-                            <select onChange={(e) => filterProducts(e)} className='w-fit  md:px-3 py-[9px] bg-transparent outline-none ' name="filters" >
-                                <option selected value="sort">Sort</option>
+                            
+                            <select defaultValue={'Sort'}   onChange={(e) => filterProducts(e)} className='w-fit  md:px-3 py-[9px] bg-transparent outline-none ' name="filters" >
+                                <option name='Sort' value="Sort">Sort</option>
                                 <option value="All">All</option>
-                                <option value="Latest">Latest</option>
+                                <option  value="Latest">Latest</option>
                                 <option value="hightolow">Prices: High to Low</option>
                                 <option value="lowtohigh">Prices: Low to High</option>
                             </select>
                         </div>
+                        </div>
+
                     </div>
                 </div>
 

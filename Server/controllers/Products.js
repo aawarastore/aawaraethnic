@@ -13,6 +13,7 @@ require('dotenv').config()
 exports.addtoCart = async (req, res) => {
     const { token } = req.headers
     const { productid, size, activeIn, productimg } = req.body
+    console.log(token)
     try {
         var ProductSize = size
         var productColor = activeIn
@@ -199,7 +200,6 @@ exports.getCartProducts = async (req, res) => {
         const findCart = await USER_CART.findOne({ USER_CART_id: userId })
 
         if (!findCart) {
-
             return res.json({ status: 204, message: 'No Products' })
         }
 
@@ -322,7 +322,7 @@ exports.requestMail = async (req, res) => {
         if (!findUser) return res.json({ status: 404, error: 'error occured' })
         // const userId  = 'adkl434309sef'
         const findOTP = await TEMP_OTP.findOne({ USER_ID: userId, Request_Mail: email })
-        if (findOTP) res.json({ status: 429 })  //429 is for too many requests
+        if (findOTP) return res.json({ status: 429 })  //429 is for too many requests
 
 
         const createToken = jwt.sign({ userID: userId, mail: email, phone: mobile }, process.env.JWT_KEY)
@@ -371,7 +371,6 @@ exports.order = async (req, res) => {
         const { userID, mail, phone } = jwt.verify(specialtoken, process.env.JWT_KEY)
         console.log(userID, mail, phone)
         const findCart = await USER_CART.findOne({ USER_CART_id: userID })
-        const products = findCart.Product
 
         const findOrder = await ORDER_DB.findOne({ USER_ID: userID })
         if (findOrder) return res.json({ status: 204, message: 'Order Exist' })
@@ -379,15 +378,13 @@ exports.order = async (req, res) => {
         const createORDER = await ORDER_DB({
             CART_ID: findCart._id,
             USER_ID: userID,
-            USER_DETAILS: [
-                { ...values, email: mail, mobile: phone }
-            ]
+            USER_DETAILS: { ...values, email: mail, mobile: phone },
+            Total_Quantity:findCart.Total_Quantity,
+            Total_Price:findCart.Total_Price
         })
         await createORDER.save()
         res.json({ status: 200, message: 'Completed' })
-        // on sumbiting details open the payment options and then after successfull payment 
-        // after payment make the paid or payment feild in db true and the show order placed and send them mail for successfull order
-        // on order completion delete the usercart
+
     } catch (error) {
         console.log(error)
     }

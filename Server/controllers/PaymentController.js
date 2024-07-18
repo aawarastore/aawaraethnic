@@ -1,0 +1,93 @@
+require('dotenv').config()
+const Razorpay = require('razorpay')
+const { USER_CART, ORDER_DB } = require('../models/database')
+
+
+const razorpay = new Razorpay({
+    key_id:process.env.RAZORPAY_KEY_ID,
+    key_secret:process.env.RAZORPAY_KEY_SECRET
+})
+
+
+exports.createOrder = async (req,res)=>{
+   
+    const options = {
+        amount:req.body.totalprice*100,
+        currency:'INR',
+        receipt:'receipt 1'
+    }
+    
+    try {
+        const usercart = await USER_CART.findOne({_id:req.body.CARTID})
+        const productss = usercart.Products
+    
+        // const order = await ORDER_DB.findOne({CART_ID:req.body.CARTID})
+
+
+        const response = await razorpay.orders.create(options)
+
+        // const orderdata = {
+            const ITEMS1 = productss.map(item=>({
+                product_id: item.product_id,
+                product_name: item.product_name,
+                Quantity: item.Quantity,
+                Size: item.Size,
+                Color:item.Color,
+                Amount: item.payable_amount,
+            })
+        )
+        const TRANSACTION1= {
+                orderId: response.id,
+                amount: response.amount/100,
+                currency: response.currency,
+            }
+        await ORDER_DB.updateOne({CART_ID:req.body.CARTID},
+            {
+                $set:{
+                    ITEMS:ITEMS1,
+                    TRANSACTION:TRANSACTION1
+                }
+            }
+        )
+
+
+        console.log('done')
+        return res.json({orderID:response.id,amount:response.amount,currency:response.currency})
+
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.paymentOrder = async (req,res)=>{
+ 
+ 
+    const { order_creation_id,paymentid,orderid,sign,cartID} = req.body;
+
+
+    try {
+        const payment = await razorpay.payments.fetch(paymentid)
+        // console.log(payment)
+        if(!payment) return res.json({message:'error at razorpay loading',status:500})
+        
+            const order = await ORDER_DB.findOneAndUpdate(
+                { 'TRANSACTION.orderId': order_creation_id },
+                {
+                    'TRANSACTION.paymentId': paymentid,
+                    'TRANSACTION.signature': sign,
+                    'TRANSACTION.status': 'Paid',
+                    orderStatus: 'Processing',
+                    updatedAt: new Date()
+                },
+                { new: true }
+            );
+        
+        const findcart = await USER_CART.deleteOne({_id:cartID})
+
+        return res.json({method:payment.method,success:true})
+
+    } catch (error) {
+        console.log(error)
+    }
+}
