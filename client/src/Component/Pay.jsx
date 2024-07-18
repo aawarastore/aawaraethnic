@@ -29,7 +29,7 @@ const Pay = ({cartItems,cartTotalPrice,CARTID ,off}) => {
             return;
         }
 
-        const result = await axios.post('http://localhost:3000/user/createOrder', { totalprice,CARTID });
+        const result = await axios.post(`${import.meta.env.VITE_SERVER_URL}/user/createOrder`, { totalprice,CARTID });
 
         if (!result) {
             alert('Server error. Are you online?');
