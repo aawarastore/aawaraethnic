@@ -64,7 +64,7 @@ const Home = () => {
 
                     
                     <div className='w-screen h-full flex justify-center items-center'>
-                        <div className='ss:w-[45vw]  ss:block hidden'>
+                        <div className='ss:w-[45vw]  s:block hidden'>
                             <div className='h-[14vw] rounded-[13px] flex justify-center items-center mb-6 border bg-gradient-to-tr from-orange-50 to-fuchsia-100'>
                             <div className='text-[22px] text-center text-orange-900 w-[60%] font-[600]'>"From Casual to Festive, Find the Perfect Kurta for Every Moment!"</div>
 

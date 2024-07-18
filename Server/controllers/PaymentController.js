@@ -1,6 +1,7 @@
 require('dotenv').config()
 const Razorpay = require('razorpay')
-const { USER_CART, ORDER_DB } = require('../models/database')
+const { USER_CART, ORDER_DB, USER_DATA } = require('../models/database')
+const jwt = require('jsonwebtoken')
 
 
 const razorpay = new Razorpay({
@@ -20,9 +21,6 @@ exports.createOrder = async (req,res)=>{
     try {
         const usercart = await USER_CART.findOne({_id:req.body.CARTID})
         const productss = usercart.Products
-    
-        // const order = await ORDER_DB.findOne({CART_ID:req.body.CARTID})
-
 
         const response = await razorpay.orders.create(options)
 
@@ -34,6 +32,7 @@ exports.createOrder = async (req,res)=>{
                 Size: item.Size,
                 Color:item.Color,
                 Amount: item.payable_amount,
+                Product_url:item.product_img_url
             })
         )
         const TRANSACTION1= {
@@ -51,7 +50,6 @@ exports.createOrder = async (req,res)=>{
         )
 
 
-        console.log('done')
         return res.json({orderID:response.id,amount:response.amount,currency:response.currency})
 
 
@@ -86,6 +84,31 @@ exports.paymentOrder = async (req,res)=>{
         const findcart = await USER_CART.deleteOne({_id:cartID})
 
         return res.json({method:payment.method,success:true})
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+
+exports.getOrders = async (req,res)=>{
+
+    const {token} = req.headers
+
+    try {
+
+        const {userId} = jwt.verify(token,process.env.JWT_KEY)
+        const findUser = await USER_DATA.findOne({_id:userId})
+
+        if(!findUser) return res.json({status:404})
+        
+        const findOrders = await ORDER_DB.find({},'-TRANSACTION.paymentId -TRANSACTION.orderId -TRANSACTION.signature')
+
+        const products = findOrders.map(order =>  order.ITEMS)
+        // console.log(products)
+        return res.json({status:200,Orders:findOrders,Products:products})
 
     } catch (error) {
         console.log(error)

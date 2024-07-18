@@ -19,6 +19,7 @@ import ExchangePolicy from './Pages/ExchangePolicy';
 import Cancelation from './Pages/Cancelation';
 import TermsCondition from './Pages/TermsCondition';
 import SuccessfulOrder from './Pages/SuccessfulOrder';
+import Orders from './Pages/Orders';
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
     path:'/successfull-order',
     element:<SuccessfulOrder />
   },
+  {
+    path:'/myorders',
+    element:<Orders />
+  }
 ])
 
 const App = () => {

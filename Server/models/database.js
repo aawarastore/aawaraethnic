@@ -67,6 +67,7 @@ const PRODUCTS_DB = new mongoose.model('PRODUCT_DB', PRODUCT_DB)
 const USER_ORDER_DB = new mongoose.Schema({
     CART_ID: String,
     USER_ID: String,
+    USER_ORDER_ID:String,
     USER_DETAILS:{
         firstname: String,
         lastname: String,
@@ -85,6 +86,7 @@ const USER_ORDER_DB = new mongoose.Schema({
             Size: String,
             Color: String,
             Amount: Number,
+            Product_url:String
         }
     ],
     TRANSACTION:{

@@ -56,6 +56,9 @@ const Pay = ({cartItems,cartTotalPrice,CARTID ,off}) => {
                 }
             const result = await axios.post(`${import.meta.env.VITE_SERVER_URL}/user/payment-success`,data)
             if(result.data.success){
+                sessionStorage.removeItem('#poiqerjffjf')
+                sessionStorage.removeItem('form1Data')
+                sessionStorage.removeItem('form2Data')
                 navigate('/successfull-order')
             }
             },
@@ -90,7 +93,7 @@ const Pay = ({cartItems,cartTotalPrice,CARTID ,off}) => {
 
         <button  onClick={
             ()=>{
-                if(!off){
+                if(off){
                     toast('Please Sumbit Your Details.')
                 }else{
                 displayRazorpay(cartTotalPrice,CARTID)

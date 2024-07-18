@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
 const sendOtpEmail = require('../services/mailer')
 require('dotenv').config()
-
+const {v4:uuidv4} = require('uuid')
 
 // add items to cart: if cart exist push them into products array
 // add items to cart: if cart doesnot exist create a cart and then add it to the array of Products
@@ -320,14 +320,17 @@ exports.requestMail = async (req, res) => {
         const { userId } = jwt.verify(token, process.env.JWT_KEY)
         const findUser = await USER_DATA.findOne({ _id: userId })
         if (!findUser) return res.json({ status: 404, error: 'error occured' })
-        // const userId  = 'adkl434309sef'
+
+
         const findOTP = await TEMP_OTP.findOne({ USER_ID: userId, Request_Mail: email })
         if (findOTP) return res.json({ status: 429 })  //429 is for too many requests
 
+        const orderid = uuidv4()
 
-        const createToken = jwt.sign({ userID: userId, mail: email, phone: mobile }, process.env.JWT_KEY)
+        const createToken = jwt.sign({ userID: userId, mail: email, phone: mobile ,user_order_id:orderid}, process.env.JWT_KEY)
+        
 
-        const otp = crypto.randomBytes(3).toString('hex')
+        const otp = crypto.randomInt(100000,1000000)
         const temp_Cred = await TEMP_OTP({
             USER_ID: userId,
             Request_Mail: email,
@@ -353,9 +356,9 @@ exports.checkotp = async (req, res) => {
         //check otp:
         if (findOtp.OTP == otp) {
             await TEMP_OTP.deleteOne({ USER_ID: userID })
-            res.json({ status: 200, message: 'Verified' })
+            return res.json({ status: 200, message: 'Verified' })
         }
-        else res.json({ status: 202, message: 'not verified' })
+        else return res.json({ status: 202, message: 'not verified' })
     } catch (error) {
         console.log('checkotp eroro', error)
     }
@@ -365,25 +368,25 @@ exports.checkotp = async (req, res) => {
 exports.order = async (req, res) => {
     const { token, specialtoken } = req.headers
     const { values } = req.body
-    // console.log(values,specialtoken)
-    try {
+    try {       
 
-        const { userID, mail, phone } = jwt.verify(specialtoken, process.env.JWT_KEY)
-        console.log(userID, mail, phone)
+        const { userID, mail, phone,user_order_id } = jwt.verify(specialtoken, process.env.JWT_KEY)
         const findCart = await USER_CART.findOne({ USER_CART_id: userID })
 
-        const findOrder = await ORDER_DB.findOne({ USER_ID: userID })
+        const findOrder = await ORDER_DB.findOne({ USER_ORDER_ID: user_order_id })
         if (findOrder) return res.json({ status: 204, message: 'Order Exist' })
+        
 
         const createORDER = await ORDER_DB({
             CART_ID: findCart._id,
             USER_ID: userID,
+            USER_ORDER_ID:user_order_id,
             USER_DETAILS: { ...values, email: mail, mobile: phone },
             Total_Quantity:findCart.Total_Quantity,
             Total_Price:findCart.Total_Price
         })
         await createORDER.save()
-        res.json({ status: 200, message: 'Completed' })
+        return res.json({ status: 200, message: 'Completed' })
 
     } catch (error) {
         console.log(error)

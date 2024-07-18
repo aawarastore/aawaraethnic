@@ -7,8 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Pay from '../Component/Pay';
 import { UserContextApi } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
-import { BsArrowReturnLeft } from 'react-icons/bs';
-import { FaLeaf } from 'react-icons/fa6';
+
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -49,6 +48,7 @@ const Checkout = () => {
   const [CARTID, setCartid] = useState('')
   const [verified, setVerified] = useState(false);
   const [otpPortal, setOtpPortal] = useState(false);
+  const [detailssubmit,setDeatilssubmitted]  = useState(false)
   const [off, setOff] = useState(true)
 
 
@@ -150,7 +150,9 @@ const Checkout = () => {
       const data = await response.json()
       if (data.status == 200) {
         // console.log('sucess')
-        setOff(!off)
+        setOff(false)
+        setDeatilssubmitted(true)
+        sessionStorage.removeItem('specialtoken')
         toast('Details Sumbited')
       }
 
@@ -224,7 +226,7 @@ const Checkout = () => {
                     </div>
 
                     <div className='mt-4 mb-2 text-[13px]'><span><Field className='translate-y-[2px]' required name='agreetoterms' type="checkbox" /></span> By Signing In, I agree to the Terms of Use and Privacy Policy</div>
-                    <button disabled={verified} type='submit' style={{ backgroundColor: verified ? 'green' : '#7F1D1D' }} className='w-full bg-red-900 py-3  text-white text-center overflow-hidden'>
+                    <button disabled={verified}  type='submit' style={{ backgroundColor: verified ? 'green' : '#7F1D1D' }} className='w-full bg-red-900 py-3  text-white text-center overflow-hidden'>
                       {verified ? 'Verified' : 'Submit & Request OTP'}
                     </button>
 
@@ -241,7 +243,9 @@ const Checkout = () => {
                   onSubmit={(values) => {
                     if (off) {
                       toast('Request for OTP first')
+                      return
                     } else {
+                      console.log('dhlkdk')
                       submitDetails(values)
                     }
                   }}
@@ -281,8 +285,8 @@ const Checkout = () => {
 
                     </div>
 
-                    <div className='w-full bg-red-900 py-3 text-white text-center overflow-hidden'>
-                      <Field className='w-full' type='submit' value='Submit' />
+                    <div className='w-full   text-white text-center overflow-hidden'>
+                      <button disabled={false} style={{backgroundColor: detailssubmit ?  'green':'#7F1D1D'}} type='submit' className='w-full py-3 '>Submit</button>
                     </div>
                   </Form>
                 </Formik>
