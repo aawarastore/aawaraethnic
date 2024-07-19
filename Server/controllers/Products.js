@@ -13,7 +13,6 @@ const {v4:uuidv4} = require('uuid')
 exports.addtoCart = async (req, res) => {
     const { token } = req.headers
     const { productid, size, activeIn, productimg } = req.body
-    console.log(token)
     try {
         var ProductSize = size
         var productColor = activeIn
@@ -177,12 +176,6 @@ exports.updateCart = async (req, res) => {
     }
 }
 
-// ======================================================================================================
-
-
-// =======================================================================================================
-
-
 
 // controller to send the cart data to user's cart to show it on ui
 
@@ -213,10 +206,6 @@ exports.getCartProducts = async (req, res) => {
     }
 }
 
-
-// ===========================================================================
-// ===========================================================================
-// ===========================================================================
 
 
 // gives all the data of products to the ui
@@ -304,10 +293,6 @@ exports.deleteItem = async (req, res) => {
 // ====================================================================================
 
 
-
-
-
-
 exports.requestMail = async (req, res) => {
 
     const { token } = req.headers
@@ -389,7 +374,7 @@ exports.order = async (req, res) => {
         return res.json({ status: 200, message: 'Completed' })
 
     } catch (error) {
-        console.log(error)
+        return res.json({stauts:404,erorr:error})
     }
 }
 

@@ -69,7 +69,7 @@ exports.paymentOrder = async (req,res)=>{
         // console.log(payment)
         if(!payment) return res.json({message:'error at razorpay loading',status:500})
         
-            const order = await ORDER_DB.findOneAndUpdate(
+            await ORDER_DB.findOneAndUpdate(
                 { 'TRANSACTION.orderId': order_creation_id },
                 {
                     'TRANSACTION.paymentId': paymentid,
@@ -81,7 +81,7 @@ exports.paymentOrder = async (req,res)=>{
                 { new: true }
             );
         
-        const findcart = await USER_CART.deleteOne({_id:cartID})
+        await USER_CART.deleteOne({_id:cartID})
 
         return res.json({method:payment.method,success:true})
 
