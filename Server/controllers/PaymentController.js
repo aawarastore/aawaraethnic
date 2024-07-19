@@ -104,10 +104,9 @@ exports.getOrders = async (req,res)=>{
 
         if(!findUser) return res.json({status:404})
         
-        const findOrders = await ORDER_DB.find({},'-TRANSACTION.paymentId -TRANSACTION.orderId -TRANSACTION.signature')
+        const findOrders = await ORDER_DB.find({USER_ID:userId},'-TRANSACTION.paymentId -TRANSACTION.orderId -TRANSACTION.signature')
 
         const products = findOrders.map(order =>  order.ITEMS)
-        // console.log(products)
         return res.json({status:200,Orders:findOrders,Products:products})
 
     } catch (error) {
