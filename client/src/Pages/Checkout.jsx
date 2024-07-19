@@ -206,7 +206,7 @@ const Checkout = () => {
                   </Formik>
                 </div>
               )}
-              <div className='border-b py-3 bodytext text-[18px] font-[600] border-black'>Step 1:</div>
+              <div className='border-b py-3 bodytext text-[18px] font-[600] border-black'>Step 1 : <span className='text-[14px] font-[300] '>add your contact no. and email</span></div>
               <div className='mb-5'>
                 <Formik
                   initialValues={initialValues2}
@@ -225,7 +225,7 @@ const Checkout = () => {
                       <ErrorMessage component='div' className='text-red-700' name='email' />
                     </div>
 
-                    <div className='mt-4 mb-2 text-[13px]'><span><Field className='translate-y-[2px]' required name='agreetoterms' type="checkbox" /></span> By Signing In, I agree to the Terms of Use and Privacy Policy</div>
+                    <div className='mt-4 mb-2 text-[13px]'><span><Field className='translate-y-[2px]' required name='agreetoterms' type="checkbox" /></span> By Signing In, I agree to the <a href="/termsandcondition" className='text-blue-800 font-[500] hover:underline'> Terms of Use </a> and <a className='text-blue-800 font-[500] hover:underline' href="/privacypolicy"> Privacy Policy </a></div>
                     <button disabled={verified}  type='submit' style={{ backgroundColor: verified ? 'green' : '#7F1D1D' }} className='w-full bg-red-900 py-3  text-white text-center overflow-hidden'>
                       {verified ? 'Verified' : 'Submit & Request OTP'}
                     </button>
@@ -236,7 +236,7 @@ const Checkout = () => {
 
 
               <div>
-                <div className='border-b pb-3 my-2 bodytext text-[18px] font-[600] border-black'>Step 2:</div>
+                <div className='border-b pb-3 my-2 bodytext text-[18px] font-[600] border-black'>Step 2 : <span className='text-[14px] font-[300] '>add your delivery address </span></div>
 
                 <Formik
                   initialValues={initialValues1}
@@ -282,7 +282,6 @@ const Checkout = () => {
                         <div className='pl-2 mb-2'>Pincode*</div>
                         <Field placeholder='Pincode' name='pincode' type='text' className='w-full py-3 pl-2  border border-[#77777781] ' />
                       </div>
-
                     </div>
 
                     <div className='w-full   text-white text-center overflow-hidden'>
@@ -299,7 +298,7 @@ const Checkout = () => {
 
           <div className='lg:w-[30%] w-full '>
             <div className='lg:px-2 px-5 ss:px-[60px] border '>
-              <div className='border-b py-3 bodytext text-[18px] font-[600] border-black'>Step 3:</div>
+              <div className='border-b py-3 bodytext text-[18px] font-[600] border-black'>Step 3 : <span className='text-[14px] font-[300] '>Place your order!</span></div>
 
               <div className='pl-2 text-[22px] font-[500] border-b pt-2 pb-2'>Order Summary</div>
 
@@ -321,10 +320,9 @@ const Checkout = () => {
               ))}
 
               <div className=' border-b py-2 px-1 mt-4  flex justify-between gap-6 text-[19px] font-[200]'>
-                <div>Order Total:</div>
+                <div className='font-[500] '>Order Total:</div>
                 <div className='font-[600]'> ₹ {cartTotalPrice}</div>
               </div>
-
 
               {
                 <div className='w-full px-1 mt-10 mb-3'>

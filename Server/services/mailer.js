@@ -34,4 +34,31 @@ const sendOtpEmail = (to, otp) => {
     });
 };
 
-module.exports = sendOtpEmail;
+const sendOrderMail = () => {
+    const subject = 'A Order has been placed!!';
+    const html = `<div>AawaraEthincs</div>
+            <div>
+                <p>A new Order has been placed!</p>
+                <p>Kindly Login and Check the Status!</p>
+            </div>`;
+
+    const mailOptions = {
+        from: process.env.EMAIL_USER, // sender address
+        to: 'jatinvardhani@gmail.com',                       // list of receivers
+        subject: subject,             // Subject line
+        html: html                    // html body
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('new order placed');
+    });
+};
+
+
+
+
+// module.exports = sendOrderMail
+module.exports = {sendOtpEmail,sendOrderMail};

@@ -16,7 +16,7 @@ const Header = () => {
 
   const { isLoggedIn, setLoggedIn, totalCartItems } = useContext(UserContextApi)
   const [profileCard, setProfileCard] = useState(false)
-  const [menu,setMenu ] = useState(false)
+  const [menu, setMenu] = useState(false)
 
   const logout = async () => {
     localStorage.removeItem('token')
@@ -42,43 +42,43 @@ const Header = () => {
             <Link to={'/shop'}>
               <div className='scale-[1.8] font-[800]'><CiSearch /></div>
             </Link>
+
             {
               isLoggedIn
                 ?
-                <div className=' relative' >
-                  <Link to={'/cart'}><BsBag className='scale-[1.4] font-[300]' /></Link>
-                  <div className='absolute -bottom-2 -right-3  bg-[#000000e7] text-white w-4 h-4 text-[10px] rounded-full text-center'>{totalCartItems}</div>
-                </div>
+                <>
+                  <Link className='hidden ss:block' to={'/myorders'}>
+                    <div className='scale-[1.8] cursor-pointer ml-1 font-[800] translate-y-[2px] '><CiDeliveryTruck /></div>
+                  </Link>
+                  <div className=' relative' >
+                    <Link to={'/cart'}><BsBag className='scale-[1.4] font-[300]' /></Link>
+                    <div className='absolute -bottom-2 -right-3  bg-[#000000e7] text-white w-4 h-4 text-[10px] rounded-full text-center'>{totalCartItems}</div>
+                  </div>
+                  <div className='hidden ss:block relative' >
+                    <div onClick={() => setProfileCard(!profileCard)} className='scale-[1.8] cursor-pointer ml-1 font-[800] translate-y-[2px] '><LuUserCircle2 /></div>
+                    {
+                      profileCard
+                        ?
+
+                        <div className='absolute bottom-[-150px] py-4 px-5  flex flex-col justify-between  w-[260px] h-[120px] right-[-8px] z-[999] bg-white border'>
+                          <div className='absolute bg-white border h-5 right-2 border-b-0 border-r-0 -top-[10px] rotate-45 w-5'></div>
+                          <div className='mb-10'>
+                            {isLoggedIn
+                              ?
+                              <div className='bg-stone-100 px-3 py-2 cursor-pointer rounded-md' onClick={logout}>Logout</div>
+                              :
+                              ''
+                            }
+                          </div>
+                        </div>
+                        :
+                        ''
+                    }
+                  </div>
+                </>
                 :
                 <Link className='bg-black text-white shadow-md px-4 py-[6px] rounded-full text-[15px]' to={'/login'}><div>Login</div></Link>
             }
-            <Link  className='hidden ss:block' to={'/myorders'}>
-              <div className='scale-[1.8] cursor-pointer ml-1 font-[800] translate-y-[2px] '><CiDeliveryTruck /></div>
-            </Link>
-            <div className='hidden ss:block relative' >
-              <div onClick={()=>setProfileCard(!profileCard)} className='scale-[1.8] cursor-pointer ml-1 font-[800] translate-y-[2px] '><LuUserCircle2 /></div>
-              
-            {
-              profileCard
-                ?
-
-                <div className='absolute bottom-[-150px] py-4 px-5  flex flex-col justify-between  w-[260px] h-[120px] right-[-8px] z-[999] bg-white border'>
-                  <div className='absolute bg-white border h-5 right-2 border-b-0 border-r-0 -top-[10px] rotate-45 w-5'></div>
-                  {/* <div className='w-full flex justify-start flex-col py-10  text-[20px] gap-y-5 uppercase'>
-                  </div> */}
-                  <div className='mb-10'>
-                    {isLoggedIn
-                      ?
-                      <div className='bg-stone-100 px-3 py-2 cursor-pointer rounded-md' onClick={logout}>Logout</div>
-                      :
-                      ''
-                    }
-                  </div>
-                </div>
-                :
-                ''
-            }
-            </div>
 
 
             <div onClick={() => setMenu(!menu)} className='text-black block ss:hidden  text-[18px]'><RiMenu3Line /></div>

@@ -2,6 +2,7 @@ require('dotenv').config()
 const Razorpay = require('razorpay')
 const { USER_CART, ORDER_DB, USER_DATA } = require('../models/database')
 const jwt = require('jsonwebtoken')
+const { sendOrderMail } = require('../services/mailer')
 
 
 const razorpay = new Razorpay({
@@ -81,8 +82,10 @@ exports.paymentOrder = async (req,res)=>{
                 { new: true }
             );
         
+        
         await USER_CART.deleteOne({_id:cartID})
-
+        sendOrderMail()
+        
         return res.json({method:payment.method,success:true})
 
     } catch (error) {
