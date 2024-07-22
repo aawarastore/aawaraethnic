@@ -117,8 +117,16 @@ const Orders = () => {
                                                 </div>
 
                                                 {
-                                                    order.orderStatus  == 'Processing'
+                                                    order.orderStatus  == 'Delivered'
+
                                                     ?
+                                                    order.Issue_Reported
+                                                    ?
+                                                    <div className='w-full pl-2 '>
+                                                            <h1>Your Issue has been reported. Our Team will contact you soon. </h1>
+                                                            <h1>Keep Patience! :)</h1>
+                                                    </div>
+                                                    :
                                                     <div className='w-full'>
                                                         <div>Raise Issues:</div>
                                                         <Formik initialValues={{subject:'',main:''}}
