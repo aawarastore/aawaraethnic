@@ -15,7 +15,8 @@ const AddProducts = () => {
         formData.append('Description', values.Description);
         formData.append('Price', values.Price);
         formData.append('Discounted_Price', values.Discounted_Price);
-        formData.append('Product_Color',values.product_color)
+        formData.append('Product_Hexcode', values.Product_Hexcode);
+        formData.append('Product_Color',values.product_color);
         formData.append('image', values.image);
         // console.log(formData)
         try {
@@ -73,7 +74,7 @@ const AddProducts = () => {
                         <div className="px-[10vw]" >
 
                         <Formik
-                            initialValues={{ PRODUCT_id: '', Product_name: '', Description: '', Price: '', Discounted_Price: '',product_color:'',image:null }}
+                            initialValues={{ PRODUCT_id: '', Product_name: '', Description: '', Price: '', Discounted_Price: '',product_color:'',Product_Hexcode:'',image:null }}
                             onSubmit={handleSendData}
                         >
                             {({ setFieldValue }) => (
@@ -87,6 +88,9 @@ const AddProducts = () => {
                                         </div>
                                         <div className="inputField w-full my-2">
                                             <Field className="w-full px-2 py-2 border-[#666666b5] border" name="product_color" type="text" placeholder="Product Color" />
+                                        </div>
+                                        <div className="inputField w-full my-2">
+                                            <Field className="w-full px-2 py-2 border-[#666666b5] border" name="Product_Hexcode" type="text" placeholder="Product Hexcode" />
                                         </div>
                                         <div className="inputField w-full my-2">
                                             <Field className="w-full px-2 py-2 border-[#666666b5] border" name="Description" type="text" placeholder="Description" />

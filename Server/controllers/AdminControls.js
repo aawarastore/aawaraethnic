@@ -68,6 +68,17 @@ exports.addProduct = async (req, res) => {
 
         const addproduct = await PRODUCTS_DB({ ...req.body, Status: 'available', Product_img_url: `${imageurl}` ,uploaded_at:'Latest'})
         await addproduct.save()
+        
+        await PRODUCTS_DB.updateOne({PRODUCT_id:req.body.PRODUCT_id},{
+            $set:{
+                Colors:[{
+                    img_url:imageurl,
+                    color:req.body.Product_Color,
+                    hexcode:req.body.Product_Hexcode
+                }]
+            }
+        })
+
         return res.json({ status: 200, message: 'Sucess' })
 
     } catch (error) {

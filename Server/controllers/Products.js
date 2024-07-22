@@ -18,7 +18,6 @@ exports.addtoCart = async (req, res) => {
         var productColor = activeIn
         var img
         if (!size) ProductSize = 'M'
-        // console.log(req.body)
 
         const { userId } = jwt.verify(token, process.env.JWT_KEY)
 
@@ -31,10 +30,6 @@ exports.addtoCart = async (req, res) => {
             img = findProduct.Colors.find(col => col.img_url == productimg)
             productColor = img.hexcode
         }
-
-        // console.log(ProductSize,productColor)
-
-
 
         const PRODUCTID = productid + '-' + ProductSize + '-' + productColor
         const NEW_PRODUCT = {

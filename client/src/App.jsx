@@ -20,6 +20,7 @@ import Cancelation from './Pages/Cancelation';
 import TermsCondition from './Pages/TermsCondition';
 import SuccessfulOrder from './Pages/SuccessfulOrder';
 import Orders from './Pages/Orders';
+import ForgetPassword from './Component/ForgetPassword';
 
 const router = createBrowserRouter([
   {
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
     element:<BuyProduct />
   },
   {
-    path:'/checkout',
+    path:'/cart/checkout',
     element:<Checkout />
   },
   {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
   {
     path:'/myorders',
     element:<Orders />
+  },
+  {
+    path:'/login/forget-password',
+    element:<ForgetPassword />
   }
 ])
 

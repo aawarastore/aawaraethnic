@@ -25,6 +25,7 @@ const Cards = ({ productsdata }) => {
   }, [])
 
   const addtoCart = async (productid, size, productimg) => {
+    console.log(productimg,size,productid)
     try {
       const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/addtoCart`, {
         method: 'POST',

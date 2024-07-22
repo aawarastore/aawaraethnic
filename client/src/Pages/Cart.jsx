@@ -15,7 +15,7 @@ const Cart = () => {
 
 
   const UserCheckout = () => {
-    if(totalCartItems > 0) navigate('/checkout')
+    if(totalCartItems > 0) navigate('/cart/checkout')
     else toast("Let's Shop")
   }
 

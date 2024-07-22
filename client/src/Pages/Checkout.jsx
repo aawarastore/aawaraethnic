@@ -182,7 +182,7 @@ const Checkout = () => {
       <div>
         <div className='w-screen fixed z-[99]' ><Header /></div>
         <div className='ss:h-[200px] h-[120px] '></div>
-        <div className='w-screen justify-center flex lg:flex-row flex-col bodytext'>
+        <div className='w-screen justify-center flex lg:flex-row flex-col bodytext bg-gradient-to-br from-stone-500 via-stone-400 to-stone-500'>
           {/* <ToastContainer pauseOnFocusLoss={false} pauseOnHover={false} newestOnTop={true} autoClose={1000} toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true} /> */}
           <div className='lg:w-[50%] w-full'>
 

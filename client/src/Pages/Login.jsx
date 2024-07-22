@@ -47,47 +47,46 @@ const Login = () => {
   })
   return (
     <>
-      <div className='w-screen h-screen  flex justify-center items-center relative'>
+      <div className='w-screen h-screen  flex justify-center items-center relative bg-gradient-to-br from-black via-stone-900 to-[#101720]'>
       <div className='absolute top-10 left-10 md:top-[20%] md:left-[20%] bg-yellow-700 text-white px-6 py-2 rounded-full'><Link to={'/home'}>Back</Link></div>
       <ToastContainer />
 
-        <div className='border px-10 py-6 md:w-[30vw] '>
+        <div className=' backdrop:blur-lg  shadow-md shadow-[#4747479c] px-10 py-6 md:w-[30vw] bg-[#ffffff17] text-white '>
 
         <Formik
          initialValues={{ email: '', password: '' }}
          validationSchema={validationSchema}
          onSubmit={handleLogin}>
           <Form>
-          <div className='QuoteLines w-full text-[18px] text-center font-[500] relative my-10'>
+          <div className='QuoteLines  w-full text-[18px] text-center font-[500] relative my-10'>
             <div>Enter in our Shop !</div>
             <div className='productCardHeading w-full h-[1px] bg-yellow-800 mt-2'></div>
           </div>
             <div className='my-2 w-full px-3'>
               <Field
                 placeholder='Email'
-                className='w-full rounded-md bg-transparent border border-black py-2 pl-3'
+                className='w-full rounded-md bg-transparent border border-stone-600 py-2 pl-3'
                 name="email"
                 type="email"
               />
-              <ErrorMessage name="email" component="div" className="text-red-500" />
+              <ErrorMessage name="email" component="div" className="text-red-500 pl-3" />
             </div>
             <div className='my-2 w-full px-3'>
               <Field
                 placeholder='Password'
-                className='w-full rounded-md bg-transparent border border-black py-2 pl-3'
+                className='w-full rounded-md bg-transparent border border-stone-600 py-2 pl-3'
                 name="password"
                 type="password"
               />
-              <ErrorMessage name="pass" component="div" className="text-red-500" />
+              <ErrorMessage name="pass"  component="div" className="text-red-500 pl-2" />
             </div>
             <div className='my-2 w-full px-3'>
               <button className='w-full bg-yellow-600 rounded-md py-2 text-white text-[17px]' type="submit">LogIn</button>
             </div>
           </Form>
         </Formik>
-
-        <div className=' px-4 text-[15px] text-yellow-800 -translate-y-2 hover:text-blue-700'> <Link to={'/register'}>Don't have an account?</Link></div>
-          
+        <div className='w-full text-[13px] pb-3 text-stone-300  px-4 text-end'><Link to={'/login/forget-password'} className='hover:underline hover:text-stone-200'>Forgot Password?</Link></div>
+        <div className=' px-4 text-[15px] text-stone-400 -translate-y-2 hover:text-blue-700'> <Link to={'/register'}>Don't have an account?</Link></div>
         </div>
       </div >
     </>

@@ -45,6 +45,7 @@ const PRODUCT_DB = new mongoose.Schema({
     Description: String,
     Status: String,// outof stock,available
     Product_Color:String,
+    Product_Hexcode:String,
     // Discount: Number,
     Colors: [
         {
