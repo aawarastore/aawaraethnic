@@ -3,7 +3,7 @@ const { USER_DATA, USER_CART, PRODUCTS_DB, TEMP_OTP, ORDER_DB } = require('../mo
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
-const sendOtpEmail = require('../services/mailer')
+const {sendOtpEmail} = require('../services/mailer')
 require('dotenv').config()
 const {v4:uuidv4} = require('uuid')
 
@@ -308,7 +308,10 @@ exports.requestMail = async (req, res) => {
 
 
         const findOTP = await TEMP_OTP.findOne({ USER_ID: userId, Request_Mail: email })
-        if (findOTP) return res.json({ status: 429 })  //429 is for too many requests
+        // if (findOTP){
+            await TEMP_OTP.deleteOne({USER_ID:userId,Request_Mail:email})
+            //return res.json({ status: 429 }) 
+        // } //429 is for too many requests
 
         const orderid = uuidv4()
 
@@ -323,6 +326,7 @@ exports.requestMail = async (req, res) => {
             token: createToken
         })
         await temp_Cred.save()
+        // console.log(email,otp)
         sendOtpEmail(email, otp)
         return res.json({ status: 200, message: 'done', verificationToken: createToken })
     } catch (error) {

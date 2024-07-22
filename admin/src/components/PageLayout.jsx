@@ -10,7 +10,7 @@ const PageLayout = ({children,title}) => {
                         <div className='w-full h-full px-5'>
                         <Link to={'/allusers'}><div className=' my-2 py-1 px-2 rounded-sm hover:bg-stone-300 '>Users</div></Link>
                         <Link to={'/products'}><div className=' my-2 py-1 px-2 rounded-sm hover:bg-stone-300 '>Products</div></Link>
-                        <Link to={'/'}><div className=' my-2 py-1 px-2 rounded-sm hover:bg-stone-200 '>Orders</div></Link>
+                        <Link to={'/orders'}><div className=' my-2 py-1 px-2 rounded-sm hover:bg-stone-200 '>Orders</div></Link>
                         <Link to={'/addproduct'}><div className=' my-2 py-1 px-2 rounded-sm hover:bg-stone-200 '>Add Product</div></Link>
                         </div>
                     </div>

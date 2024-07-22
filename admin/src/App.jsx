@@ -5,6 +5,7 @@ import AdminPage from './Pages/AdminPage'
 import Users from './Pages/Users'
 import Products from './Pages/Products'
 import AddProducts from './Pages/AddProducts'
+import Orders from './Pages/Orders'
 
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
     {
       path:'/addproduct',
       element:<AddProducts />
+    },
+    {
+      path:'/orders',
+      element:<Orders/>
     }
   ])
 

@@ -58,7 +58,32 @@ const sendOrderMail = () => {
 };
 
 
+const sendIssueReported = (subject,main,orderid) => {
+    const Subject = `${subject}`;
+    const html = `<div>AawaraEthincs</div>
+            <div>
+                <p>A new issue has been reported for the ORDER_ID:${orderid}</p>
+                <P>${main}</p>
+                <p>Kindly Login and Check the Status!</p>
+            </div>`;
+
+    const mailOptions = {
+        from: process.env.EMAIL_USER, // sender address
+        to: 'jatinvardhani@gmail.com',                       // list of receivers
+        subject: Subject,             // Subject line
+        html: html                    // html body
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('new issuse reported!');
+    });
+};
+
+
 
 
 // module.exports = sendOrderMail
-module.exports = {sendOtpEmail,sendOrderMail};
+module.exports = {sendOtpEmail,sendOrderMail,sendIssueReported};

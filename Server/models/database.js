@@ -97,6 +97,7 @@ const USER_ORDER_DB = new mongoose.Schema({
         currency: String,
         status: { type: String, default: 'Pending' }, // Could be 'Pending', 'Paid', 'Failed', etc.
     },
+    Issue_Reported:{type:Boolean,default:false},
     orderStatus: { type: String, default: 'Processing' }, // Could be 'Processing', 'Shipped', 'Delivered', etc.
     createdAt: { type: Date, default: Date.now },
     Total_Quantity: Number,
@@ -115,7 +116,20 @@ const OTP_DB = new mongoose.Schema({
 
 const TEMP_OTP = new mongoose.model('OTP-DB', OTP_DB)
 
-module.exports = { USER_DATA, USER_CART, PRODUCTS_DB, TEMP_OTP, ORDER_DB }
+
+const ISSUES  = new mongoose.Schema({
+    USER_ID:String,
+    ORDER_ID:String,
+    Subject:String,
+    Main:String,
+    Contact:String,
+    Mobile:String,
+},{collection:'ISSUES_DB'})
+
+const ISSUES_DB  = new mongoose.model('ISSUES_DB',ISSUES)
+
+
+module.exports = { USER_DATA, USER_CART, PRODUCTS_DB, TEMP_OTP, ORDER_DB, ISSUES_DB }
 
 
 

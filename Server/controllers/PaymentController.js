@@ -1,8 +1,8 @@
 require('dotenv').config()
 const Razorpay = require('razorpay')
-const { USER_CART, ORDER_DB, USER_DATA } = require('../models/database')
+const { USER_CART, ORDER_DB, USER_DATA, ISSUES_DB } = require('../models/database')
 const jwt = require('jsonwebtoken')
-const { sendOrderMail } = require('../services/mailer')
+const { sendOrderMail, sendIssueReported } = require('../services/mailer')
 
 
 const razorpay = new Razorpay({
@@ -18,14 +18,12 @@ exports.createOrder = async (req,res)=>{
         currency:'INR',
         receipt:'receipt 1'
     }
-    
     try {
         const usercart = await USER_CART.findOne({_id:req.body.CARTID})
         const productss = usercart.Products
 
         const response = await razorpay.orders.create(options)
 
-        // const orderdata = {
             const ITEMS1 = productss.map(item=>({
                 product_id: item.product_id,
                 product_name: item.product_name,
@@ -49,8 +47,7 @@ exports.createOrder = async (req,res)=>{
                 }
             }
         )
-
-
+        // console.log(response.id)
         return res.json({orderID:response.id,amount:response.amount,currency:response.currency})
 
 
@@ -114,5 +111,44 @@ exports.getOrders = async (req,res)=>{
 
     } catch (error) {
         console.log(error)
+    }
+}
+
+
+exports.requestIssues =async (req,res)=>{
+
+    const {subject,main,orderid} = req.body
+    const {token} = req.headers
+    try {
+
+        const {userId} =  jwt.verify(token,process.env.JWT_KEY)
+        const findUser = await USER_DATA.findOne({_id:userId})
+
+        if(!findUser) return res.json({status:404})
+
+        const createIssue = await ISSUES_DB({
+            USER_ID:userId,
+            ORDER_ID:orderid,
+            Subject:subject,
+            Main:main,
+            Contact:findUser.email,
+            Mobile:findUser.Mobile_No
+        })
+
+        await createIssue.save()
+
+        sendIssueReported(subject,main,orderid)
+        await ORDER_DB.updateOne({USER_ORDER_ID:orderid},{
+            $set:{
+                Issue_Reported:true
+            }
+        })
+
+        return res.json({status:200,Message:'Submitted'})
+
+
+        
+    } catch (error) {
+        
     }
 }

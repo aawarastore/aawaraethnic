@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
   const navigate = useNavigate()
-  const { isLoggedIn } = useContext(UserContextApi)
+  // const { isLoggedIn } = useContext(UserContextApi)
 
   const formKey1 = 'form1Data';
   const formKey2 = 'form2Data';
@@ -149,7 +149,6 @@ const Checkout = () => {
 
       const data = await response.json()
       if (data.status == 200) {
-        // console.log('sucess')
         setOff(false)
         setDeatilssubmitted(true)
         sessionStorage.removeItem('specialtoken')

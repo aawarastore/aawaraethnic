@@ -6,11 +6,16 @@ import { TfiPackage } from "react-icons/tfi";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { MdOutlineDoneOutline } from "react-icons/md";
 
+import {Formik,Form,Field} from 'formik'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const Orders = () => {
 
     const { isLoggedIn } = useContext(UserContextApi)
     const [allOrders, setAllOrders] = useState([])
-    // const [products,setProducts] = useState([])
 
     const findOrders = async () => {
 
@@ -31,6 +36,27 @@ const Orders = () => {
         }
     }
 
+    const sendRequest =async (values,orderid)=>{
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/request-us`,{
+                method:'POST',
+                headers:{
+                    'Content-type':'Application/json',
+                    token:localStorage.getItem('token')
+                },
+                body:   JSON.stringify({subject:values.subject,main:values.main,orderid})
+            })
+            const data = await response.json()
+            if(data.status=200){
+                toast('Your request has been reported.')
+            }
+        } catch (error) {
+            toast('error occured')
+            toast('please try later!')
+        }
+    }
+
     useEffect(() => {
         findOrders()
     }, [])
@@ -39,6 +65,7 @@ const Orders = () => {
     return (
         <>
             <div className='w-screen'>
+                <ToastContainer />
                 <div className='w-full fixed z-[99]'><Header /></div>
                 <div className='w-full bodytext  bg-stone-50'>
                     <div className='w-screen bg-red-400 h-[50px] ss:h-[60px] sl:h-[65px] f:h-[79px]'></div>
@@ -84,7 +111,7 @@ const Orders = () => {
                                                 <div className='w-full flex justify-center my-3 items-center'>
                                                     <div style={{backgroundColor : order.orderStatus == 'Processing' ? 'green':'darkgreen'}} className={`ss:w-10 ss:h-10 w-7 h-7 rounded-full border border-green-600 flex justify-center items-center ${order.orderStatus == 'Processing' ? 'animate-pulse' :''}`}>{order.orderStatus == 'Processing' ? <TfiPackage  className='ss:scale-[1.2] scale-[1] text-white' /> :''} </div>
                                                     <div className='relative w-[70px] ss:w-[100px] h-1 bg-gradient-to-r  from-green-400 to-green-500'></div>
-                                                    <div  style={{backgroundColor : order.orderStatus == 'Shipped' ? 'green':'white'}} className={`ss:w-10 ss:h-10 w-7 h-7 rounded-full border border-green-600 flex justify-center items-center ${order.orderStatus == 'Shipped' ? 'animate-pulse' :''}`}>{order.orderStatus == 'Shipped' ? <LiaShippingFastSolid  className='ss:scale-[1.2]  scale-[1] text-white' /> :<LiaShippingFastSolid   className='scale-[1] ss:scale-[1.2] ' />}</div>
+                                                    <div  style={{backgroundColor : order.orderStatus == 'Shipped'  ?  order.orderStatus == 'Delivered' ? 'green':'white' :'green'}} className={`ss:w-10 ss:h-10 w-7 h-7 rounded-full border border-green-600 flex justify-center items-center ${order.orderStatus == 'Shipped' ? 'animate-pulse' :''}`}>{order.orderStatus == 'Shipped' ? <LiaShippingFastSolid  className='ss:scale-[1.2]  scale-[1] text-white' /> :<LiaShippingFastSolid   className='scale-[1] ss:scale-[1.2] ' />}</div>
                                                     <div className='relative w-[70px] ss:w-[100px] h-1 bg-gradient-to-r from-green-300 to-green-500'></div>
                                                     <div  style={{backgroundColor : order.orderStatus == 'Delivered' ? 'green':'white'}} className={`ss:w-10 ss:h-10 w-7 h-7 rounded-full border border-green-600 flex justify-center items-center ${order.orderStatus == 'Delivered' ? 'animate-pulse' :''}`} >{order.orderStatus == 'Delivered' ? <MdOutlineDoneOutline  className='ss:scale-[1.2] scale-[1] text-white' /> :<MdOutlineDoneOutline   className='scale-[1] ss:scale-[1.2] ' />}</div>
                                                 </div>
@@ -93,7 +120,21 @@ const Orders = () => {
                                                     order.orderStatus  == 'Processing'
                                                     ?
                                                     <div className='w-full'>
-                                                        Raise Issue
+                                                        <div>Raise Issues:</div>
+                                                        <Formik initialValues={{subject:'',main:''}}
+                                                        onSubmit={(values)=>sendRequest(values,order.USER_ORDER_ID)}>
+                                                            <Form>
+                                                                <div className='my-2'>
+                                                                    <Field className='px-3 w-full text-[12px] py-2 border outline-none ' placeholder='Subject : refund,exchange?' type='text' name='subject'/>
+                                                                </div>
+                                                                <div className='my-2'>
+                                                                    <Field className='px-3 w-full py-2 text-[12px] border outline-none ' placeholder='Explain your issues...' type='text' as='textarea' name='main' />
+                                                                </div>
+                                                                <div className=''>
+                                                                    <button className='bg-red-400' type='submit'>Request </button>
+                                                                </div>
+                                                            </Form>
+                                                        </Formik>
                                                     </div>
                                                     :
                                                     ''
