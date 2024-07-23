@@ -186,7 +186,7 @@ const Checkout = () => {
   return (
     <>
 
-      <div>
+      <div className='bg-[#efefef]'>
         <div className='w-screen fixed z-[99]' ><Header /></div>
         <div className='ss:h-[200px] h-[120px] '></div>
         <div className='w-screen justify-center flex lg:flex-row flex-col bodytext bg-gradient-to-br from-[white] via-[#ffffffeb] to-[#f6f6f6]'>

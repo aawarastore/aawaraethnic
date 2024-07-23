@@ -60,7 +60,7 @@ const Pay = ({cartItems,cartTotalPrice,CARTID ,off}) => {
                 sessionStorage.removeItem('#verifieddet')
                 sessionStorage.removeItem('form1Data')
                 sessionStorage.removeItem('form2Data')
-                navigate('/successfull-order')
+                navigate('/user/successful-order')
             }
             },
             prefill: {

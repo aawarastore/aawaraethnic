@@ -164,7 +164,7 @@ const BuyProduct = () => {
                   const brandSize = Object.keys(item)[0]; // Get the key from the object
                   const value = item[brandSize]; // Get the value from the object
                   return (
-                    <div onClick={() => setSize(brandSize)} key={value} style={{ backgroundColor: size == brandSize ? 'rgb(78 78 78 / 48%)' : 'white' }} className='py-2 hover:shadow-md  w-12 cursor-pointer text-center border border-stone-300 ss:text-[15px] text-[12px]  text-stone-700 uppercase'>{brandSize}</div>
+                    <div onClick={() => setSize(brandSize)} key={value} style={{ backgroundColor: size == brandSize ? 'rgb(78 78 78 / 48%)' : 'white' }} className='py-2 hover:border-[#1D0100]  w-12 cursor-pointer text-center border border-stone-300 ss:text-[15px] text-[12px]  text-stone-700 uppercase'>{brandSize}</div>
                   );
                 })
               }

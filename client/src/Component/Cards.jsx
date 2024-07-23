@@ -85,7 +85,7 @@ const Cards = ({ productsdata }) => {
         </div>
         <div className='flex  justify-between mt-1 w-full '>
           {/* <div className='bg-gradient-to-r hover:bg-gradient-to-t from-[#282828d2]  to-black  rounded-[5px]  text-center text-white  px-2 text-[15px] ss:text-[18px] py-[6px] w-full  cursor-pointer' onClick={() => buyProduct(productsdata.PRODUCT_id)} >Buy </div> */}
-          <div className='bg-[#1D0100] text-center text-white  px-2 text-[15px] ss:text-[18px] py-[6px] w-full  cursor-pointer  bttn ' onClick={() => buyProduct(productsdata.PRODUCT_id)} >Buy </div>
+          <div className='bg-[#1D0100] border text-center text-white  px-2 text-[15px] ss:text-[18px] py-[6px] w-full  cursor-pointer  bttn ' onClick={() => buyProduct(productsdata.PRODUCT_id)} >Buy </div>
         </div>
       </div>
     </>

@@ -45,13 +45,15 @@ const Register = () => {
   })
   return (
     <>
-      <div className='w-screen h-screen  flex justify-center items-center relative bg-gradient-to-br from-black via-stone-900 to-[#101720] '>
-        <div className='absolute top-10 left-10 md:top-[20%] md:left-[20%] bg-yellow-700 text-white px-6 py-2 rounded-full'><Link to={'/home'}>Back</Link></div>
+      <div className='w-screen h-screen  flex justify-center items-center relative  overflow-hidden'>
+        <div className='bg-[#140403] w-[150vw] -rotate-[60deg] ss:w-full absolute top-[-30px] ss:-top-[30%] h-full ss:-rotate-[39deg] ss:-left-[23%] z-[-1]'></div>
+      {/* <div className='w-screen h-screen  flex justify-center items-center relative bg-gradient-to-br from-black via-[#140606f7] to-[#140403] '> */}
+        <div className='absolute top-10 left-10 md:top-[20%] md:left-[20%] bg-[#ffffff]  border border-white text-black px-6 py-2 rounded-full'><Link to={'/home'}>Back</Link></div>
         <ToastContainer />
 
-        <div className=' px-10 py-6 w-full md:w-[40vw] backdrop:blur-lg  shadow-md shadow-[#4747479c]  bg-[#ffffff17] text-white '>
+        <div className=' px-10 py-6 w-full md:w-[40vw] backdrop:blur-lg border shadow-xl border-[#393939d5] border-t-0 border-l-0  bg-[#ffffff]  '>
           <div className='QuoteLines text-[18px] text-center my-4  relative'>
-            <div>Create Your Account!</div>
+            <div className='text-black'>Create Your Account!</div>
             <div className='mt-1 w-full h-[1px] bg-yellow-800 productCardHeading'></div>
           </div>
           <Formik
@@ -65,7 +67,7 @@ const Register = () => {
                 <div className='my-2 w-1/2 px-3'>
                   <Field
                     placeholder='First Name'
-                    className='w-full rounded-md bg-transparent border border-stone-600 py-2 pl-3'
+                    className='w-full outline-[#585858a7]  bg-transparent border border-stone-600 py-2 pl-3'
                     name="firstname"
                     type="text"
                     required
@@ -75,7 +77,7 @@ const Register = () => {
                 <div className='my-2 w-1/2 px-3'>
                   <Field
                     placeholder='Last Name'
-                    className='w-full rounded-md bg-transparent border border-stone-600 py-2 pl-3'
+                    className='w-full outline-[#585858a7]  bg-transparent border border-stone-600 py-2 pl-3'
                     name="lastname"
                     type="text"
                     required
@@ -87,7 +89,7 @@ const Register = () => {
               <div className='my-2 w-full px-3'>
                 <Field
                   placeholder='Whatsapp No.'
-                  className='w-full rounded-md bg-transparent border border-stone-600 py-2 pl-3'
+                  className='w-full outline-[#585858a7]  bg-transparent border border-stone-600 py-2 pl-3'
                   name="mobile"
                   type="text"
                 />
@@ -97,7 +99,7 @@ const Register = () => {
               <div className='my-2 w-full bg-transparent px-3'>
                 <Field
                   placeholder='Email'
-                  className='w-full rounded-md bg-transparent border border-stone-600 py-2 pl-3'
+                  className='w-full  outline-[#585858a7] bg-transparent border border-stone-600 py-2 pl-3'
                   name="email"
                   type="email"
                 />
@@ -106,7 +108,7 @@ const Register = () => {
               <div className='my-2 w-full px-3'>
                 <Field
                   placeholder='Password'
-                  className='w-full rounded-md bg-transparent border border-stone-600 py-2 pl-3'
+                  className='w-full outline-[#585858a7] bg-transparent border border-stone-600 py-2 pl-3'
                   name="password"
                   type="password"
                 />
@@ -115,13 +117,13 @@ const Register = () => {
               <div className='my-2 w-full px-3 bg-transparent'>
                 <Field
                   placeholder='Confirm Password'
-                  className='w-full rounded-md bg-transparent  border border-stone-600 py-2 pl-3'
+                  className='w-full  bg-transparent  outline-[#585858a7]  border border-stone-600 py-2 pl-3'
                   name="confirmPassword"
                   type="password"
                 />
               </div>
               <div className='my-2 w-full px-3'>
-                <button className='w-full bg-yellow-600 rounded-md py-2 text-white text-[17px] ' type="submit">Create Account</button>
+                <button className='w-full bg-[#1D0100] uppercase tracking-[2px]  py-3 text-white text-[15px] ' type="submit">Create Account</button>
               </div>
             </Form>
           </Formik>

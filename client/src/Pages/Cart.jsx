@@ -24,12 +24,13 @@ const Cart = () => {
   }, [totalCartItems]);
 
   return (
-    <div className='w-screen  overflow-x-hidden'>
-      <ToastContainer />
-      <div className='w-screen z-[9999] fixed shadow-md'><Header totalCartItems={totalCartItems} /></div>
+    <div className='w-screen  bg-[#efefef] overflow-x-hidden'>
+      <div className='w-screen z-[9999] fixed shadow-md'><Header /></div>
 
       <div className='w-full h-[74px] bg-yellow-700'></div>
       <div className='w-full pl-6 md:pl-10 text-2xl QuoteLines mt-10'>Cart</div>
+      <ToastContainer newestOnTop={true} autoClose={1000}
+          toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true}  />
 
       <div className='h-20 w-screen'></div>
 

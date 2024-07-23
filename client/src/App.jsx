@@ -86,7 +86,7 @@ const router = createBrowserRouter([
     element:<TermsCondition />
   },
   {
-    path:'/successfull-order',
+    path:'/user/successful-order',
     element:<SuccessfulOrder />
   },
   {

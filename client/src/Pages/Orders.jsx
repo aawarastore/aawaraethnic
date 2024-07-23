@@ -65,9 +65,10 @@ const Orders = () => {
     return (
         <>
             <div className='w-screen'>
-                <ToastContainer />
+                <ToastContainer newestOnTop={true} autoClose={1000}
+          toastStyle={{ backgroundColor: "white", color: "black" }} pauseOnFocusLoss={true} pauseOnHover={false} hideProgressBar={true}  />
                 <div className='w-full fixed z-[99]'><Header /></div>
-                <div className='w-full bodytext  bg-stone-50'>
+                <div className='w-full bodytext  bg-[#efefef]'>
                     <div className='w-screen bg-red-400 h-[50px] ss:h-[60px] sl:h-[65px] f:h-[79px]'></div>
                     {
                         isLoggedIn
@@ -153,10 +154,11 @@ const Orders = () => {
                                 </div>
                             </div>
                             :
-                            <div className='w-full h-screen flex justify-center items-center'>
-                                <div>
-                                <div>Seems your session is over!</div>
-                                <Link to={'/login'}>Login</Link>
+                            <div className='w-full h-screen flex flex-col justify-center items-center px-3'>
+                                <div id='outofsession' className=''></div>
+                                <div className='text-center'>
+                                    <h1 className='ss:text-[25px] text-[20px] uppercase bodytext mb-2'>Your Session is over!</h1>
+                                    <Link to={'/login'}  ><div className='ss:text-[19px] text-[15px] uppercase tracking-[2px] px-7 bg-[#1D0100] py-2 text-white '  >Login</div></Link>
                                 </div>
                             </div>
                     }
