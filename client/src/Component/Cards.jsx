@@ -59,7 +59,7 @@ const Cards = ({ productsdata }) => {
         <ToastContainer newestOnTop={true} autoClose={1000}
           toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true} />
         <div className='f:w-[300px] f:h-[448px] s:w-[270px] s:h-[404px] sl:w-[220px] sl:h-[328px] border  border-b-0 border-[#2323233c] ss:w-[190px] ss:h-[280px] w-[160px] h-[240px] rounded-[0px]  overflow-hidden relative'>
-          <div className='bg-[#ffffff9d]  ss:flex justify-center  text-black border absolute right-2 top-2  z-[99]  rounded-[06px]  px-2 text-[10px] ss:text-[13px] py-2 w-[18%] cursor-pointer' onClick={() => { isLoggedIn ? addtoCart(productsdata.PRODUCT_id, size, productsdata.Product_img_url) : notify() }}><FaBagShopping /></div>
+          <div className='bg-[#1D0100]  ss:flex justify-center  text-white border absolute right-2 top-2  z-[99]  rounded-[06px]  px-2 text-[10px] ss:text-[13px] py-2 w-[18%] cursor-pointer' onClick={() => { isLoggedIn ? addtoCart(productsdata.PRODUCT_id, size, productsdata.Product_img_url) : notify() }}><FaBagShopping /></div>
           <img className='w-full bg-stone-200 hover:scale-[1.01] transition-all ease-out duration-[0.9s] h-full z-50  ' src={productsdata.Product_img_url} alt='Network!!' />
         </div>
         <div className='w-full  text-[11px] px-[4px] text-black flex flex-col justify-center items-center  ss:text-[16px]   '>
