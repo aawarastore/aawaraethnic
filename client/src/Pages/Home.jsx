@@ -22,8 +22,8 @@ const Home = () => {
         <>
 
             <div className='fixed w-screen z-[9999] shadow-md'><Header /></div>
-            <div className='scrollBar_design  scrollbar-track-[#ffffff00] scrollbar-thumb-yellow-800  scrollbar-thin h-screen w-screen  overflow-x-hidden'>
-            <div className='w-screen bg-red-400 h-[50px] ss:h-[60px] sl:h-[65px] f:h-[79px]'></div>
+            <div className='scrollBar_design bg-[#EFEFEF]  scrollbar-track-[#ffffff00] scrollbar-thumb-yellow-800  scrollbar-thin h-screen w-screen  overflow-x-hidden'>
+            <div className='w-screen bg-red-400 h-[50px] ss:h-[60px] sl:h-[65px] f:h-[75px]'></div>
             <div className='w-screen bg-black s:py-3 pt-4 pb-1 text-white s:text-[16px] text-[10px] text-center QuoteLines'>"A dash of tradition in every thread"</div>
 
                 <div className='md:h-[86%] sm:h-[60%] h-[40vh] w-full  relative'>
@@ -32,7 +32,7 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className='h-4 w-full bg-white'></div>
+                <div className='h-4 w-full'></div>
 
                 <div className=' w-full '>
                     <div className='py-14  w-full flex justify-center items-center '>
@@ -47,7 +47,7 @@ const Home = () => {
                 <div className='bodytext px-auto  text-[17px] w-screen'>
                     <div className='my-10 ss:mx-10 mx-1'>
                         <div className='  relative flex justify-center'>
-                            <h1 className='text-3xl z-[10] bg-white  py-2 px-5 w-fit'>Our Products</h1>
+                            <h1 className='text-[22px] tracking-[3px] z-[10] bodytext  bg-[#efefef] py-2 px-5 w-fit uppercase'>Latest Collection</h1>
                             <div className='productCardHeading w-[90vw]   h-[1px] bg-yellow-600 absolute  top-6'></div>
                         </div>
                         <div className='flex md:w-[95vw] w-full gap-y-6 flex-wrap justify-evenly my-4'>
@@ -84,11 +84,11 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className='bodytext px-auto  text-[17px] w-screen  bg-white'>
+                <div className='bodytext px-auto  text-[17px] w-screen '>
                     <div className='my-10 ss:mx-10 mx-1 '>
-                        <div className='  relative flex justify-center'>
-                            <h1 className=' text-3xl z-[10] bg-white px-5 w-fit'>New Arrivals</h1>
-                            <div className='productCardHeading w-[90vw]   h-[1px] bg-yellow-600 absolute  top-4'></div>
+                        <div className='  relative flex justify-center '>
+                        <h1 className='text-[22px] tracking-[3px] z-[10] bodytext  bg-[#efefef]  py-2 px-5 w-fit uppercase'>our products</h1>
+                            <div className='productCardHeading w-[90vw]   h-[1px] bg-yellow-600 absolute  top-1/2'></div>
                         </div>
                         <div className='flex md:w-[95vw]  w-full gap-y-6 flex-wrap justify-evenly my-4'>
                             {
@@ -109,8 +109,8 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className='w-screen flex justify-center my-5'>
-                    <div className='text-yellow-600 border border-yellow-600 px-3 py-2'><Link to={'/shop'}>Shop More</Link></div>
+                <div className='w-screen flex justify-center mt-20 mb-5'>
+                    <div className='text-white bg-[#1D0100] bttn border border-[#1D0100] px-8 py-[10px] uppercase bodytext text-[12px]'><Link to={'/shop'}>View All Products</Link></div>
                 </div>
 
 

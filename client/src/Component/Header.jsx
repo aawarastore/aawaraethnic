@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <>
-      <div className='w-screen px-5 lg:px-10 py-2 pt-3 bodytext ss:py-2 lg:py-[14px] ss:bg-[#ffffff] border-b bg-white ss:text-black'>
+      <div className='w-screen px-5 lg:px-10 py-2 pt-3 bodytext ss:py-1 lg:py-[10px] ss:bg-[#ffffff] border-b bg-white ss:text-black'>
         <div className='flex justify-between w-full'>
 
           <div className='flex  gap-5 items-center text-[16px]'>
@@ -77,7 +77,7 @@ const Header = () => {
                   </div>
                 </>
                 :
-                <Link className='bg-black text-white shadow-md px-4 py-[6px] rounded-full text-[15px]' to={'/login'}><div>Login</div></Link>
+                <Link className='bg-[#1D0100] text-white shadow-md px-4 py-[6px] rounded-full text-[15px]' to={'/login'}><div>Login</div></Link>
             }
 
 

@@ -21,8 +21,13 @@ import TermsCondition from './Pages/TermsCondition';
 import SuccessfulOrder from './Pages/SuccessfulOrder';
 import Orders from './Pages/Orders';
 import ForgetPassword from './Component/ForgetPassword';
+import ErrorPage from './Pages/Error';
 
 const router = createBrowserRouter([
+  {
+    path:'*',
+    element:<ErrorPage />
+  },
   {
     path:'/',
     element:<Home />

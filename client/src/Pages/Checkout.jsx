@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Pay from '../Component/Pay';
 import { UserContextApi } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import States from '../../../admin/src/addressData';
 
 
 const Checkout = () => {
@@ -48,7 +49,7 @@ const Checkout = () => {
   const [CARTID, setCartid] = useState('')
   const [verified, setVerified] = useState(false);
   const [otpPortal, setOtpPortal] = useState(false);
-  const [detailssubmit,setDeatilssubmitted]  = useState(false)
+  const [detailssubmit, setDeatilssubmitted] = useState(false)
   const [off, setOff] = useState(true)
 
 
@@ -122,7 +123,7 @@ const Checkout = () => {
         setVerified(true);
         setOtpPortal(false);
         setOff(false)
-        sessionStorage.setItem('#poiqerjffjf',true)
+        sessionStorage.setItem('#verifieditems', true)
         toast('Verified');
       } else {
 
@@ -134,6 +135,7 @@ const Checkout = () => {
   };
 
   const submitDetails = async (values) => {
+
     saveFormData(formKey1, values)
     try {
       const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/submitOrderDetails`, {
@@ -150,7 +152,9 @@ const Checkout = () => {
       const data = await response.json()
       if (data.status == 200) {
         setOff(false)
+
         setDeatilssubmitted(true)
+        sessionStorage.setItem('#verifieddet',true)
         sessionStorage.removeItem('specialtoken')
         toast('Details Sumbited')
       }
@@ -162,10 +166,13 @@ const Checkout = () => {
 
   useEffect(() => {
     getCartProduct();
-    if (sessionStorage.getItem('#poiqerjffjf')){
-     setOtpPortal(false) 
-     setVerified(true)
-     setOff(false)
+    if (sessionStorage.getItem('#verifieditems')) {
+      setOtpPortal(false)
+      setVerified(true)
+      setOff(false)
+    }
+    if(sessionStorage.getItem('#verifieddet')){
+      setDeatilssubmitted(true)
     }
   }, []);
 
@@ -182,28 +189,31 @@ const Checkout = () => {
       <div>
         <div className='w-screen fixed z-[99]' ><Header /></div>
         <div className='ss:h-[200px] h-[120px] '></div>
-        <div className='w-screen justify-center flex lg:flex-row flex-col bodytext bg-gradient-to-br from-stone-500 via-stone-400 to-stone-500'>
+        <div className='w-screen justify-center flex lg:flex-row flex-col bodytext bg-gradient-to-br from-[white] via-[#ffffffeb] to-[#f6f6f6]'>
           {/* <ToastContainer pauseOnFocusLoss={false} pauseOnHover={false} newestOnTop={true} autoClose={1000} toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true} /> */}
           <div className='lg:w-[50%] w-full'>
 
 
             <div className='ss:px-16 px-5 pb-10'>
               {otpPortal && (
-                <div className='absolute left-1/2 top-1/2 md:w-[40vw] w-[60vw]  -translate-x-1/2 -translate-y-1/2 px-3 py-4 border bg-white z-[99]'>
-                  <div className='w-full text-center'>OTP VERIFICATION</div>
-                  <Formik initialValues={{ otp: '' }} onSubmit={checkOtp}>
-                    <Form>
-                      <div className='w-full text-center flex justify-center mt-3'>
-                        <Field name='otp' type='text' placeholder='Enter OTP' className='w-[100px] border-b-2 text-center py-1 px-2 border-black' />
-                      </div>
-                      <div className='w-full text-center my-4'>
-                        <button type='submit' className='w-full bg-red-900 py-3 text-white text-center overflow-hidden'>
-                          Submit & verify
-                        </button>
-                      </div>
-                    </Form>
-                  </Formik>
+                <div className='absolute left-1/2 top-1/2 md:w-[90vw] w-[95vw] h-[90vh] flex justify-center items-center   -translate-x-1/2 -translate-y-1/2 px-3 py-10 border bg-white z-[99]'>
+                  <div className='ss:w-1/2 w-[95%] '>
+                    <div className='w-full text-center'>OTP VERIFICATION</div>
+                    <Formik initialValues={{ otp: '' }} onSubmit={checkOtp}>
+                      <Form>
+                        <div className='w-full text-center flex justify-center mt-3'>
+                          <Field name='otp' type='text' placeholder='Enter OTP' className='outline-none w-[100px] border-b-2 text-center py-1 px-2 border-black' />
+                        </div>
+                        <div className='w-full text-center my-4'>
+                          <button type='submit' className='w-full bg-red-900 py-3 text-white text-center overflow-hidden'>
+                            Submit & verify
+                          </button>
+                        </div>
+                      </Form>
+                    </Formik>
+                  </div>
                 </div>
+
               )}
               <div className='border-b py-3 bodytext text-[18px] font-[600] border-black'>Step 1 : <span className='text-[14px] font-[300] '>add your contact no. and email</span></div>
               <div className='mb-5'>
@@ -215,17 +225,17 @@ const Checkout = () => {
                   <Form>
                     <div className='my-2'>
                       <div>Mobile Number*</div>
-                      <Field className='w-full py-3 pl-2 border border-[#77777781]' type='text' placeholder='Enter Mobile Number' name='mobile' />
+                      <Field disabled={verified} className='w-full py-3 pl-2 border border-[#77777781]' type='text' placeholder='Enter Mobile Number' name='mobile' />
                       <ErrorMessage component='div' className='text-red-700' name='mobile' />
                     </div>
                     <div className='my-4'>
                       <div>Email*</div>
-                      <Field className='w-full py-3 pl-2 border border-[#77777781]' type='text' placeholder='Email' name='email' />
+                      <Field disabled={verified} className='w-full py-3 pl-2 border border-[#77777781]' type='text' placeholder='Email' name='email' />
                       <ErrorMessage component='div' className='text-red-700' name='email' />
                     </div>
 
-                    <div className='mt-4 mb-2 text-[13px]'><span><Field className='translate-y-[2px]' required name='agreetoterms' type="checkbox" /></span> By Signing In, I agree to the <a href="/termsandcondition" className='text-blue-800 font-[500] hover:underline'> Terms of Use </a> and <a className='text-blue-800 font-[500] hover:underline' href="/privacypolicy"> Privacy Policy </a></div>
-                    <button disabled={verified}  type='submit' style={{ backgroundColor: verified ? 'green' : '#7F1D1D' }} className='w-full bg-red-900 py-3  text-white text-center overflow-hidden'>
+                    <div className='mt-4 mb-2 text-[13px]'><span><Field className='translate-y-[2px]' required name='agreetoterms' type="checkbox" /></span> By Signing In, I agree to the <a target='_blank' href="/termsandcondition" className='text-blue-800 font-[500] hover:underline'> Terms of Use </a> and <a target='_blank' className='text-blue-800 font-[500] hover:underline' href="/privacypolicy"> Privacy Policy </a></div>
+                    <button disabled={verified} type='submit' style={{ backgroundColor: verified ? 'green' : '#7F1D1D' }} className='w-full bg-red-900 py-3  text-white text-center overflow-hidden'>
                       {verified ? 'Verified' : 'Submit & Request OTP'}
                     </button>
 
@@ -252,24 +262,32 @@ const Checkout = () => {
                   <Form>
                     <div className='flex justify-between'>
                       <div className='w-[48%]'>
-                        <Field type='text' className='border border-[#77777781] w-full py-3 pl-2' placeholder='First Name' name='firstname' required />
+                        <Field   disabled={detailssubmit}  type='text' className='border border-[#77777781] w-full py-3 pl-2' placeholder='First Name' name='firstname' required />
                       </div>
                       <div className='w-[48%]'>
-                        <Field type='text' className='border border-[#77777781] active:shadow-lg w-full py-3 pl-2' placeholder='Last Name' name='lastname' required />
+                        <Field  disabled={detailssubmit}  type='text' className='border border-[#77777781] w-full py-3 pl-2' placeholder='Last Name' name='lastname' required />
                       </div>
                     </div>
                     <div className='my-4'>
                       <div className='mb-2 pl-1'>Address*</div>
-                      <Field className='w-full py-3 pl-2 border border-[#77777781]' placeholder='Address Line 1' type='text' name='address' required />
+                      <Field  disabled={detailssubmit}  className='w-full py-3 pl-2 border border-[#77777781]' placeholder='Address Line 1' type='text' name='address' required />
                     </div>
                     <div className='flex w-full justify-between gap-2'>
                       <div className='my-2 w-[48%]'>
                         <div className='mb-2 pl-1'>City*</div>
-                        <Field className='w-full py-3 pl-2 border border-[#77777781]' type='text' placeholder='City' name='city' required />
+                        <Field  disabled={detailssubmit}  className='w-full py-3 pl-2 border border-[#77777781]' type='text' placeholder='City' name='city' required />
                       </div>
                       <div className='my-2 w-[48%]'>
                         <div className='mb-2 pl-1'>State*</div>
-                        <Field className='w-full py-3 pl-2 border border-[#77777781]' type='text' placeholder='State' name='state' required />
+                        <Field  disabled={detailssubmit}  className='w-full py-3 pl-2 border text-black  border-[#77777781]' as='select' type='text'  name='state' required >
+                          <option  label="State" />
+                          {States.map(state => (
+                            <option className="text-black" key={state.key} value={state.name}>
+                              {state.name}
+                            </option>
+                          ))}
+                        </Field>
+
                       </div>
                     </div>
                     <div className='flex w-full justify-between gap-2'>
@@ -279,12 +297,12 @@ const Checkout = () => {
                       </div>
                       <div className='my-4 w-[48%]'>
                         <div className='pl-2 mb-2'>Pincode*</div>
-                        <Field placeholder='Pincode' name='pincode' type='text' className='w-full py-3 pl-2  border border-[#77777781] ' />
+                        <Field  disabled={detailssubmit}  placeholder='Pincode' name='pincode' type='number' className='w-full py-3 pl-2  border border-[#77777781] ' />
                       </div>
                     </div>
 
                     <div className='w-full   text-white text-center overflow-hidden'>
-                      <button disabled={false} style={{backgroundColor: detailssubmit ?  'green':'#7F1D1D'}} type='submit' className='w-full py-3 '>Submit</button>
+                      <button  style={{ backgroundColor: detailssubmit ? 'green' : '#7F1D1D' }} type='submit' className='w-full py-3 '>Submit</button>
                     </div>
                   </Form>
                 </Formik>

@@ -16,14 +16,17 @@ exports.addtoCart = async (req, res) => {
     try {
         var ProductSize = size
         var productColor = activeIn
-        var img
+        var user_pass_token,img
+        var userID = ''
         if (!size) ProductSize = 'M'
 
         const { userId } = jwt.verify(token, process.env.JWT_KEY)
+        userID = userId
+
 
         const findProduct = await PRODUCTS_DB.findOne({ PRODUCT_id: productid })
 
-        const findUserCart = await USER_CART.findOne({ USER_CART_id: userId })
+        const findUserCart = await USER_CART.findOne({ USER_CART_id: userID })
 
         if (activeIn) img = findProduct.Colors.find(col => col.hexcode == activeIn)
         else {
@@ -42,11 +45,11 @@ exports.addtoCart = async (req, res) => {
             Size: ProductSize,
             Color: productColor,
         }
-
+        // console.log(NEW_PRODUCT)
         // check if user cart does not  exist create one..
         if (!findUserCart) {
             const createCart = await USER_CART({
-                USER_CART_id: userId,
+                USER_CART_id: userID,
                 Products: [
                     NEW_PRODUCT
 
@@ -57,7 +60,7 @@ exports.addtoCart = async (req, res) => {
             // you can update the terms or data by storing it in a new variable and then uploading or updating itf
 
             createCart.save()
-            return res.json({ status: 200, message: 'Created and Added to cart', })
+            return res.json({ status: 200, message: 'Created and Added to cart',client_token:user_pass_token })
         }
 
         // if cart exist
@@ -72,17 +75,14 @@ exports.addtoCart = async (req, res) => {
             const updateObj = {}
             for (const key in updateField) {
                 updateObj[`Products.$.${key}`] = updateField[key]
-
-
             }
 
             await USER_CART.updateOne(
-                { USER_CART_id: userId, 'Products.product_id': PRODUCTID },
+                { USER_CART_id: userID, 'Products.product_id': PRODUCTID },
                 {
                     $set: updateObj
                 })
-
-
+                
             const pipeline = [
                 {
                     $set: {
@@ -92,18 +92,18 @@ exports.addtoCart = async (req, res) => {
                 }
             ];
 
-            await USER_CART.updateOne({ USER_CART_id: userId }, pipeline)
+            await USER_CART.updateOne({ USER_CART_id: userID }, pipeline)
 
-            return res.json({ status: 200, message: 'product existed and updated' })
+            return res.json({ status: 200, message: 'product existed and updated'})
         }
 
 
         // if none of the above condition do this  if the  product doesnot exist
 
         // await findUserCart.updateOne({ $push: { Products: NEW_PRODUCT },$set:{Total_Quantity:} })
-        const prooo = await USER_CART.findOne({ USER_CART_id: userId });
+        const prooo = await USER_CART.findOne({ USER_CART_id: userID });
         await USER_CART.updateOne(
-            { USER_CART_id: userId },
+            { USER_CART_id: userID },
             {
                 $push: { Products: NEW_PRODUCT },
                 $set: {

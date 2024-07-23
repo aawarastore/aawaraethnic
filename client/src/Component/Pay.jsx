@@ -56,7 +56,8 @@ const Pay = ({cartItems,cartTotalPrice,CARTID ,off}) => {
                 }
             const result = await axios.post(`${import.meta.env.VITE_SERVER_URL}/user/payment-success`,data)
             if(result.data.success){
-                sessionStorage.removeItem('#poiqerjffjf')
+                sessionStorage.removeItem('#verifieditems')
+                sessionStorage.removeItem('#verifieddet')
                 sessionStorage.removeItem('form1Data')
                 sessionStorage.removeItem('form2Data')
                 navigate('/successfull-order')

@@ -92,7 +92,6 @@ const BuyProduct = () => {
   const copyLInk = ()=>{
     navigator.clipboard.writeText(shareLink)
     toast('Link Copied')
-
     return
   }
 
