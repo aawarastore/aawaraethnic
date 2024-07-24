@@ -28,7 +28,7 @@ const Home = () => {
 
                 <div className='md:h-[86%] sm:h-[60%] h-[40vh] w-full  relative'>
                     <div className='h-full w-full object-contain overflow-hidden bg-[#928f8fe7]'>
-                        <img className='w-full h-full' src={'/aawaraposter.jpg'} alt="" />
+                        <img className='w-full h-full' src={'/aawaralogo2.jpg'} alt="" />
                     </div>
                 </div>
 

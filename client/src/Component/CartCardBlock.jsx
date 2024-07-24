@@ -94,6 +94,9 @@ const CartCardBlock = ({ productsdata, getCartProduct }) => {
       </div>
 
       <div className='w-full border s:hidden block'>
+      {
+          isPortalOpen ? <CartAnimation /> : ''
+        }
         <div className='w-full flex justify-end  pr-5 py-2 bg-red-100'>
           <MdOutlineCancel onClick={()=>deleteItem(productsdata.product_id)} className='text-stone-500 scale-[1.4]' />
         </div>
