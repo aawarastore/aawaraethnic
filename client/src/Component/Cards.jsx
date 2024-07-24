@@ -6,26 +6,27 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 import { FaBagShopping } from "react-icons/fa6";
+import CartAnimation from './CarAnimation';
+
+
 
 const Cards = ({ productsdata }) => {
 
   const navigate = useNavigate()
   const { isLoggedIn, setLoggedIn, getCartProduct } = useContext(UserContextApi)
   const [size, setSize] = useState('')
-  const [discount, setDisccount] = useState(0)
 
-  const findDis = () => {
-    const tot = (productsdata.Price - productsdata.Discounted_Price) / productsdata.Price
-    const dis = Math.floor(tot * 100)
+  const [isPortalOpen, setIsPortalOpen] = useState(false);
 
-    setDisccount(dis)
-  }
-  useEffect(() => {
-    findDis()
-  }, [])
+
+
+  
+
+
 
   const addtoCart = async (productid, size, productimg) => {
     console.log(productimg,size,productid)
+    setIsPortalOpen(true)
     try {
       const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/addtoCart`, {
         method: 'POST',
@@ -38,7 +39,7 @@ const Cards = ({ productsdata }) => {
       const data = await response.json()
       if (data.status == 200) {
         getCartProduct()
-        // localStorage.setItem('token',data.client_token)
+        setIsPortalOpen(false)
       }
     } catch (error) {
       console.log(error)
@@ -59,7 +60,7 @@ const Cards = ({ productsdata }) => {
         <ToastContainer newestOnTop={true} autoClose={1000}
           toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true} />
         <div className='f:w-[300px] f:h-[448px] s:w-[270px] s:h-[404px] sl:w-[220px] sl:h-[328px] border  border-b-0 border-[#2323233c] ss:w-[190px] ss:h-[280px] w-[160px] h-[240px] rounded-[0px]  overflow-hidden relative'>
-          <div className='bg-[#1D0100]  ss:flex justify-center  text-white border absolute right-2 top-2  z-[99]  rounded-[06px]  px-2 text-[10px] ss:text-[13px] py-2 w-[18%] cursor-pointer' onClick={() => { isLoggedIn ? addtoCart(productsdata.PRODUCT_id, size, productsdata.Product_img_url) : notify() }}><FaBagShopping /></div>
+          <div className='bg-[#1D0100]  ss:flex justify-center  text-white  absolute right-1 top-1 ss:right-2 ss:top-2  z-[99]  rounded-[6px]   text-[10px] ss:text-[13px] py-3 px-2 ss:w-[14%] cursor-pointer' onClick={() => { isLoggedIn ? addtoCart(productsdata.PRODUCT_id, size, productsdata.Product_img_url) : notify() }}><FaBagShopping className='scale-[1.2]' /></div>
           <img className='w-full bg-stone-200 hover:scale-[1.01] transition-all ease-out duration-[0.9s] h-full z-50  ' src={productsdata.Product_img_url} alt='Network!!' />
         </div>
         <div className='w-full  text-[11px] px-[4px] text-black flex flex-col justify-center items-center  ss:text-[16px]   '>
@@ -87,6 +88,9 @@ const Cards = ({ productsdata }) => {
           {/* <div className='bg-gradient-to-r hover:bg-gradient-to-t from-[#282828d2]  to-black  rounded-[5px]  text-center text-white  px-2 text-[15px] ss:text-[18px] py-[6px] w-full  cursor-pointer' onClick={() => buyProduct(productsdata.PRODUCT_id)} >Buy </div> */}
           <div className='bg-[#1D0100] border text-center text-white  px-2 text-[15px] ss:text-[18px] py-[6px] w-full  cursor-pointer  bttn ' onClick={() => buyProduct(productsdata.PRODUCT_id)} >Buy </div>
         </div>
+        {
+          isPortalOpen ? <CartAnimation  /> : ''
+        }
       </div>
     </>
   )

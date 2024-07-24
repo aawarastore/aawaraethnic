@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Header from '../Component/Header'
 import CardsContainer from '../Component/CardsContainer'
 import Cards from '../Component/Cards'
@@ -6,11 +6,12 @@ import { UserContextApi } from '../context/UserContext'
 import Footer from '../Component/Footer'
 import { CiSearch } from "react-icons/ci";
 
+
 const Shop = () => {
 
     const { itemsData } = useContext(UserContextApi)
     const [allItems, setallitems] = useState([])
-
+   
     const [filteredItems, setFilteredItems] = useState([])
 
 
@@ -79,6 +80,7 @@ const Shop = () => {
 
                 <div className='productContainer min-h-[80vh] w-screen flex py-2   justify-center  flex-wrap  ss:px-10'>
                     <div className='w-[98vw]   flex flex-wrap  py-2 justify-around  ss:justify-around  gap-y-5 ss:gap-6 '>
+
                         {
                             filteredItems.map(item => {
                                 return (

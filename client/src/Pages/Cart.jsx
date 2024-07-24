@@ -24,7 +24,7 @@ const Cart = () => {
   }, [totalCartItems]);
 
   return (
-    <div className='w-screen  bg-[#efefef] overflow-x-hidden'>
+    <div className='w-screen  bg-[#f8f8f8] overflow-x-hidden'>
       <div className='w-screen z-[9999] fixed shadow-md'><Header /></div>
 
       <div className='w-full h-[74px] bg-yellow-700'></div>
@@ -49,8 +49,8 @@ const Cart = () => {
         :
           <div className='w-screen min-h-[50vh] flex justify-center lg:flex-row flex-col lg:items-start items-center gap-3'>
             <div className='flex justify-center lg:w-[48vw] w-[90vw]'>
-              <div className='border lg:w-[3/4] w-full min:h-[300px] text-[14px]'>
-                <div className='hidden lg:grid grid-cols-8 max:w-[750px] px-2 py-2 border font-[500]'>
+              <div className='border-[2px]   border-[#aca9a9] lg:w-[3/4] w-full min:h-[300px] text-[14px]'>
+                <div className='hidden lg:grid grid-cols-8 max:w-[750px] px-2 py-2  border-b-[2px] border-b-[#aca9a9] font-[500]'>
                   <div className=''></div>
                   <div className=''></div>
                   <div className='col-span-2 pl-3'>Product</div>
@@ -66,8 +66,8 @@ const Cart = () => {
               </div>
             </div>
 
-            <div className='lg:w-[25vw] mb-10 w-[90vw] border-2'>
-              <div className='w-full py-[7px] border-b px-5 font-[700]'>Cart Total</div>
+            <div className='lg:w-[25vw] mb-10 w-[90vw] border-[2px] border-[#aca9a9]'>
+              <div className='w-full py-[7px] border-b-[2px] border-b-[#aca9a9] px-5 font-[700]'>Cart Total</div>
               <div className='w-full px-5 text-stone-500'>
                 <div className='flex w-full py-3 border-b justify-between'>
                   <div>Subtotal</div>

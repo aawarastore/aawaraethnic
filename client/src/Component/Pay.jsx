@@ -90,7 +90,7 @@ const Pay = ({cartItems,cartTotalPrice,CARTID ,off}) => {
     <ToastContainer newestOnTop={true} autoClose={1000}
           toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true} />
 
-            <div className='w-full cursor-pointer bg-red-900 hover:bg-white  hover:text-black text-white border  hover:border-black py-3'>
+            <div className='w-full cursor-pointer bg-[#1D0100] hover:bg-white  hover:text-black text-white border  hover:border-black py-3'>
 
         <button  onClick={
             ()=>{

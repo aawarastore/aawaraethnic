@@ -186,12 +186,12 @@ const Checkout = () => {
   return (
     <>
 
-      <div className='bg-[#efefef]'>
+      <div className='bg-[#f3f3f3] relative overflow-x-hidden'>
         <div className='w-screen fixed z-[99]' ><Header /></div>
         <div className='ss:h-[200px] h-[120px] '></div>
-        <div className='w-screen justify-center flex lg:flex-row flex-col bodytext bg-gradient-to-br from-[white] via-[#ffffffeb] to-[#f6f6f6]'>
-          {/* <ToastContainer pauseOnFocusLoss={false} pauseOnHover={false} newestOnTop={true} autoClose={1000} toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true} /> */}
-          <div className='lg:w-[50%] w-full'>
+        <div className='bg-[#1D0100] rounded-full h-[40vw] w-[40vw] absolute -right-[20%] -top-[20%]'></div>
+        <div className='w-screen justify-center flex lg:flex-row flex-col bodytext'>
+          <div className='lg:w-[50%] w-full z-[88]'>
 
 
             <div className='ss:px-16 px-5 pb-10'>
@@ -225,17 +225,17 @@ const Checkout = () => {
                   <Form>
                     <div className='my-2'>
                       <div>Mobile Number*</div>
-                      <Field disabled={verified} className='w-full py-3 pl-2 border border-[#77777781]' type='text' placeholder='Enter Mobile Number' name='mobile' />
+                      <Field disabled={verified} className='w-full py-3 pl-2 border border-[#77777781] bg-transparent' type='text' placeholder='Enter Mobile Number' name='mobile' />
                       <ErrorMessage component='div' className='text-red-700' name='mobile' />
                     </div>
                     <div className='my-4'>
                       <div>Email*</div>
-                      <Field disabled={verified} className='w-full py-3 pl-2 border border-[#77777781]' type='text' placeholder='Email' name='email' />
+                      <Field disabled={verified} className='w-full py-3 pl-2 border border-[#77777781] bg-transparent' type='text' placeholder='Email' name='email' />
                       <ErrorMessage component='div' className='text-red-700' name='email' />
                     </div>
 
                     <div className='mt-4 mb-2 text-[13px]'><span><Field className='translate-y-[2px]' required name='agreetoterms' type="checkbox" /></span> By Signing In, I agree to the <a target='_blank' href="/termsandcondition" className='text-blue-800 font-[500] hover:underline'> Terms of Use </a> and <a target='_blank' className='text-blue-800 font-[500] hover:underline' href="/privacypolicy"> Privacy Policy </a></div>
-                    <button disabled={verified} type='submit' style={{ backgroundColor: verified ? 'green' : '#7F1D1D' }} className='w-full bg-red-900 py-3  text-white text-center overflow-hidden'>
+                    <button disabled={verified} type='submit' style={{ backgroundColor: verified ? 'green' : '#1D0100' }} className='w-full bg-red-900 py-3  text-white text-center overflow-hidden'>
                       {verified ? 'Verified' : 'Submit & Request OTP'}
                     </button>
 
@@ -245,7 +245,7 @@ const Checkout = () => {
 
 
               <div>
-                <div className='border-b pb-3 my-2 bodytext text-[18px] font-[600] border-black'>Step 2 : <span className='text-[14px] font-[300] '>add your delivery address </span></div>
+                <div className='border-b pb-3 my-2 bodytext text-[18px] font-[600]  border-black'>Step 2 : <span className='text-[14px] font-[300] '>add your delivery address </span></div>
 
                 <Formik
                   initialValues={initialValues1}
@@ -262,24 +262,24 @@ const Checkout = () => {
                   <Form>
                     <div className='flex justify-between'>
                       <div className='w-[48%]'>
-                        <Field   disabled={detailssubmit}  type='text' className='border border-[#77777781] w-full py-3 pl-2' placeholder='First Name' name='firstname' required />
+                        <Field   disabled={detailssubmit}  type='text' className='border bg-transparent border-[#77777781] w-full py-3 pl-2' placeholder='First Name' name='firstname' required />
                       </div>
                       <div className='w-[48%]'>
-                        <Field  disabled={detailssubmit}  type='text' className='border border-[#77777781] w-full py-3 pl-2' placeholder='Last Name' name='lastname' required />
+                        <Field  disabled={detailssubmit}  type='text' className='border bg-transparent border-[#77777781] w-full py-3 pl-2' placeholder='Last Name' name='lastname' required />
                       </div>
                     </div>
                     <div className='my-4'>
                       <div className='mb-2 pl-1'>Address*</div>
-                      <Field  disabled={detailssubmit}  className='w-full py-3 pl-2 border border-[#77777781]' placeholder='Address Line 1' type='text' name='address' required />
+                      <Field  disabled={detailssubmit}  className='w-full py-3 pl-2 border bg-transparent border-[#77777781]' placeholder='Address Line 1' type='text' name='address' required />
                     </div>
                     <div className='flex w-full justify-between gap-2'>
                       <div className='my-2 w-[48%]'>
                         <div className='mb-2 pl-1'>City*</div>
-                        <Field  disabled={detailssubmit}  className='w-full py-3 pl-2 border border-[#77777781]' type='text' placeholder='City' name='city' required />
+                        <Field  disabled={detailssubmit}  className='w-full py-3 pl-2 border bg-transparent border-[#77777781]' type='text' placeholder='City' name='city' required />
                       </div>
                       <div className='my-2 w-[48%]'>
                         <div className='mb-2 pl-1'>State*</div>
-                        <Field  disabled={detailssubmit}  className='w-full py-3 pl-2 border text-black  border-[#77777781]' as='select' type='text'  name='state' required >
+                        <Field  disabled={detailssubmit}  className='w-full py-3 pl-2 border text-black bg-transparent  border-[#77777781]' as='select' type='text'  name='state' required >
                           <option  label="State" />
                           {States.map(state => (
                             <option className="text-black" key={state.key} value={state.name}>
@@ -293,16 +293,16 @@ const Checkout = () => {
                     <div className='flex w-full justify-between gap-2'>
                       <div className='my-4 w-[48%]'>
                         <div className='mb-2 pl-1'>Country*</div>
-                        <div className='w-full py-3 pl-2 border border-[#77777781]'>India</div>
+                        <div className='w-full py-3 pl-2 border bg-transparent border-[#77777781]'>India</div>
                       </div>
                       <div className='my-4 w-[48%]'>
                         <div className='pl-2 mb-2'>Pincode*</div>
-                        <Field  disabled={detailssubmit}  placeholder='Pincode' name='pincode' type='number' className='w-full py-3 pl-2  border border-[#77777781] ' />
+                        <Field  disabled={detailssubmit}  placeholder='Pincode' name='pincode' type='number' className='w-full py-3 pl-2  bg-transparent border border-[#77777781] ' />
                       </div>
                     </div>
 
                     <div className='w-full   text-white text-center overflow-hidden'>
-                      <button  style={{ backgroundColor: detailssubmit ? 'green' : '#7F1D1D' }} type='submit' className='w-full py-3 '>Submit</button>
+                      <button  style={{ backgroundColor: detailssubmit ? 'green' : '#1D0100' }} type='submit' className='w-full py-3 '>Submit</button>
                     </div>
                   </Form>
                 </Formik>
@@ -313,14 +313,14 @@ const Checkout = () => {
 
 
 
-          <div className='lg:w-[30%] w-full '>
-            <div className='lg:px-2 px-5 ss:px-[60px] border '>
-              <div className='border-b py-3 bodytext text-[18px] font-[600] border-black'>Step 3 : <span className='text-[14px] font-[300] '>Place your order!</span></div>
+          <div className='lg:w-[30%] w-full z-[88] bg-[#f3f3f3] '>
+            <div className='lg:px-2 px-5 ss:px-[60px] border-dotted border-[2px] border-[#aca9a9] '>
+              <div className='border-b-[2px] py-3 bodytext text-[18px] font-[600]  border-[#aca9a9]'>Step 3 : <span className='text-[14px] font-[300] '>Place your order!</span></div>
 
               <div className='pl-2 text-[22px] font-[500] border-b pt-2 pb-2'>Order Summary</div>
 
               {cartItems.map((pro) => (
-                <div key={pro._id} className='w-full py-2 border-b px-2 flex gap-3 my-2 relative'>
+                <div key={pro._id} className='w-full py-2 border-b-[2px] border-dotted border-b-[#aca9a9] px-2 flex gap-3 my-2 relative'>
                   <div className='lg:h-[130px] h-[150px]'>
                     <img className='h-full w-full' src={pro.product_img_url} alt='' />
                   </div>

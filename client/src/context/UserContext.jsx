@@ -80,6 +80,7 @@ export const UserContextProvider = ({ children }) => {
         }
       } catch (error) {
         console.error('Failed to fetch cart products:', error);
+        
       }
     };
 
