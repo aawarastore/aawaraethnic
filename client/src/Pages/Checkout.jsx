@@ -94,6 +94,7 @@ const Checkout = () => {
         toast('OTP sent to your email');
         setOtpPortal(true);
         sessionStorage.setItem('specialtoken', data.verificationToken);
+        // sessionStorage.setItem('portal',true)
         return
       } else if (data.status === 429) {
         toast('Too Many Requests');
@@ -121,9 +122,11 @@ const Checkout = () => {
       const data = await response.json();
       if (data.status == 200) {
         setVerified(true);
-        setOtpPortal(false);
         setOff(false)
         sessionStorage.setItem('#verifieditems', true)
+        // sessionStorage.removeItem('portal')
+        setOtpPortal(false);
+
         toast('Verified');
       } else {
 
@@ -174,6 +177,7 @@ const Checkout = () => {
     if(sessionStorage.getItem('#verifieddet')){
       setDeatilssubmitted(true)
     }
+    // if(sessionStorage.getItem('portal')) setOtpPortal(true)
   }, []);
 
   const mobileNumberRegex = /^[0-9]{10}$/;
@@ -196,7 +200,7 @@ const Checkout = () => {
 
             <div className='ss:px-16 px-5 pb-10'>
               {otpPortal && (
-                <div className='absolute left-1/2 top-1/2 md:w-[90vw] w-[95vw] h-[90vh] flex justify-center items-center   -translate-x-1/2 -translate-y-1/2 px-3 py-10 border bg-white z-[99]'>
+                <div className='absolute left-1/2 ss:top-1/2 md:w-[90vw] w-[95vw] h-[90vh] flex justify-center items-center top-[25%]  -translate-x-1/2 -translate-y-1/2 px-3 py-10 border bg-white z-[99]'>
                   <div className='ss:w-1/2 w-[95%] '>
                     <div className='w-full text-center'>OTP VERIFICATION</div>
                     <Formik initialValues={{ otp: '' }} onSubmit={checkOtp}>
