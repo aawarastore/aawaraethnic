@@ -83,14 +83,14 @@ const Cards = ({ productsdata }) => {
           <div className='bg-[#1D0100]  ss:flex justify-center  text-white  absolute right-1 top-1 ss:right-2 ss:top-2  z-[99]  rounded-[6px]   text-[10px] ss:text-[13px] py-3 px-2 ss:w-[14%] cursor-pointer' onClick={() => { isLoggedIn ? addtoCart(productsdata.PRODUCT_id, size, productsdata.Product_img_url) : notify() }}><FaBagShopping className='scale-[1.2]' /></div>
           <img  className='w-full bg-stone-200 hover:scale-[1.01] transition-all ease-out duration-[0.9s] h-full z-50  ' src={productsdata.Product_img_url} alt='Network!!' />
           <div onClick={()=>buyProduct(productsdata.PRODUCT_id)} className='absolute cursor-pointer bottom-2 w-full   px-3 '>
-            <div ref={cols} className='w-full text-end bg-[#ffffff4a] rounded-full backdrop-blur-sm  px-2 py-2 relative'>
+            <div ref={cols} className='w-full text-end bg-[#ffffff4a] rounded-full backdrop-blur-sm px-1 py-1  ss:px-2 ss:py-2 relative'>
             
             {   
               productsdata.Colors.map((color,index)=>{  
-                return <div key={color.hexcode} style={{backgroundColor:`${color.hexcode}`,zIndex:index,left:index*18+4+'px'}} className={`w-7 opacity-[1]    top-1/2 -translate-y-1/2 h-7  absolute inset-0  rounded-full`}></div>
+                return <div key={color.hexcode} style={{backgroundColor:`${color.hexcode}`,zIndex:index,left:index*18+4+'px'}} className={`ss:w-7  w-6 opacity-[1]    top-1/2 -translate-y-1/2 ss:h-7 h-6  absolute inset-0  rounded-full`}></div>
               })
             }
-            <div   className='text-[15px] font-[700] text-[#1D0100]'>{ productsdata.Colors.length-1 == 0 ? 'see more..': `+${productsdata.Colors.length} colors`} </div>
+            <div   className='ss:text-[15px] text-[13px] font-[700] text-[#1D0100]'>{ productsdata.Colors.length-1 == 0 ? 'see more..': `+${productsdata.Colors.length} colors`} </div>
             </div>
           </div>
         </div>
