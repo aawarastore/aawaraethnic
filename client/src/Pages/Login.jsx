@@ -51,7 +51,8 @@ const Login = () => {
       <div className='bg-[#140403] w-[125vw] -rotate-[60deg] ss:w-full absolute top-[-10px] ss:-top-[30%] h-full ss:-rotate-[40deg] ss:-left-[23%] z-[-1]'></div>
 
       <div className='absolute top-10 left-10 md:top-[20%] md:left-[20%] bg-white  px-6 py-2 rounded-full'><Link to={'/home'}>Back</Link></div>
-      <ToastContainer />
+      <ToastContainer newestOnTop={true} autoClose={1000}
+          toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true} />
 
         <div className=' backdrop:blur-lg  shadow-md shadow-[#4747479c] px-10 py-6 md:w-[30vw] bg-white text-black '>
 

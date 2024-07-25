@@ -49,7 +49,8 @@ const Register = () => {
         <div className='bg-[#140403] w-[150vw] -rotate-[60deg] ss:w-full absolute top-[-30px] ss:-top-[30%] h-full ss:-rotate-[39deg] ss:-left-[23%] z-[-1]'></div>
       {/* <div className='w-screen h-screen  flex justify-center items-center relative bg-gradient-to-br from-black via-[#140606f7] to-[#140403] '> */}
         <div className='absolute top-10 left-10 md:top-[20%] md:left-[20%] bg-[#ffffff]  border border-white text-black px-6 py-2 rounded-full'><Link to={'/home'}>Back</Link></div>
-        <ToastContainer />
+        <ToastContainer newestOnTop={true} autoClose={1000}
+          toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true}  />
 
         <div className=' px-10 py-6 w-full md:w-[40vw] backdrop:blur-lg border shadow-xl border-[#393939d5] border-t-0 border-l-0  bg-[#ffffff]  '>
           <div className='QuoteLines text-[18px] text-center my-4  relative'>

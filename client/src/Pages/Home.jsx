@@ -22,7 +22,7 @@ const Home = () => {
         <>
 
             <div className='fixed w-screen z-[9999] shadow-md'><Header /></div>
-            <div className='scrollBar_design bg-[#EFEFEF]  scrollbar-track-[#ffffff00] scrollbar-thumb-yellow-800  scrollbar-thin h-screen w-screen  overflow-x-hidden'>
+            <div className='scrollBar_design bg-[#EFEFEF]   h-screen w-screen  overflow-x-hidden'>
             <div className='w-screen bg-red-400 h-[50px] ss:h-[60px] sl:h-[65px] f:h-[75px]'></div>
             <div className='w-screen bg-black s:py-3 pt-4 pb-1 text-white s:text-[16px] text-[10px] text-center QuoteLines'>"A dash of tradition in every thread"</div>
 

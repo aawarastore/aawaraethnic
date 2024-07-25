@@ -127,13 +127,10 @@ exports.updateCart = async (req, res) => {
     const { token } = req.headers
     const { product_item_id, quantityCount, finalPrice } = req.body
     const [id, size, color] = product_item_id.split('-');
-    console.log(id)
     try {
         // this is to update quantity and price of product in cart of user
         const { userId } = jwt.verify(token, process.env.JWT_KEY)
 
-        // const productIndex = findCart.Products.findIndex(product => product._id == product_item_id);
-        // const productID = product_item_id
         const updateField = {
             Quantity: quantityCount,
             payable_amount: finalPrice

@@ -64,18 +64,18 @@ const Orders = () => {
 
     return (
         <>
-            <div className='w-screen'>
+            <div className='w-screen bg-[#efefef] '>
                 <ToastContainer newestOnTop={true} autoClose={1000}
           toastStyle={{ backgroundColor: "white", color: "black" }} pauseOnFocusLoss={true} pauseOnHover={false} hideProgressBar={true}  />
                 <div className='w-full fixed z-[99]'><Header /></div>
-                <div className='w-full bodytext  bg-[#efefef]'>
+                <div className='w-full bodytext '>
                     <div className='w-screen bg-red-400 h-[50px] ss:h-[60px] sl:h-[65px] f:h-[79px]'></div>
                     {
                         isLoggedIn
                             ?
                             <div>
                                 <div className='h-10 w-full'></div>
-                                <div className='w-full ss:pl-10 pl-5 s:pl-20 QuoteLines  '> My Orders</div>
+                                <div className='w-full ss:pl-10 pl-5 s:pl-20 QuoteLines font-[600]  text-[20px] '> My Orders</div>
                                 <div className='pt-10 px-5  s:px-[15vw] '>
                                     {
                                         allOrders.map(order => {
@@ -112,7 +112,7 @@ const Orders = () => {
                                                 <div className='w-full flex justify-center my-3 items-center'>
                                                     <div style={{backgroundColor : order.orderStatus == 'Processing' ? 'green':'darkgreen'}} className={`ss:w-10 ss:h-10 w-7 h-7 rounded-full border border-green-600 flex justify-center items-center ${order.orderStatus == 'Processing' ? 'animate-pulse' :''}`}>{order.orderStatus == 'Processing' ? <TfiPackage  className='ss:scale-[1.2] scale-[1] text-white' /> :''} </div>
                                                     <div className='relative w-[70px] ss:w-[100px] h-[3px] bg-gradient-to-r  from-green-400 to-green-600'></div>
-                                                    <div  style={{backgroundColor : order.orderStatus == 'Shipped'  ?  order.orderStatus == 'Delivered' ? 'darkgreen':'green' :'white'}} className={`ss:w-10 ss:h-10 w-7 h-7 rounded-full border border-green-600 flex justify-center items-center ${order.orderStatus == 'Shipped' ? 'animate-pulse' :''}`}>{order.orderStatus == 'Shipped' ? <LiaShippingFastSolid  className='ss:scale-[1.2]  scale-[1] text-white' /> :<LiaShippingFastSolid   className='scale-[1] ss:scale-[1.2] ' />}</div>
+                                                    <div  style={{backgroundColor : order.orderStatus == 'Shipped'  ? 'green':order.orderStatus == 'Delivered' ? 'darkgreen':'white' }} className={`ss:w-10 ss:h-10 w-7 h-7 rounded-full border border-green-600 flex justify-center items-center ${order.orderStatus == 'Shipped' ? 'animate-pulse' :''}`}>{order.orderStatus == 'Shipped' ? <LiaShippingFastSolid  className='ss:scale-[1.2]  scale-[1] text-white' /> :<LiaShippingFastSolid   className='scale-[1] ss:scale-[1.2] ' />}</div>
                                                     <div className='relative w-[70px] ss:w-[100px] h-1 bg-gradient-to-r from-green-300 to-green-500'></div>
                                                     <div  style={{backgroundColor : order.orderStatus == 'Delivered' ? 'green':'white'}} className={`ss:w-10 ss:h-10 w-7 h-7 rounded-full border border-green-600 flex justify-center items-center ${order.orderStatus == 'Delivered' ? 'animate-pulse' :''}`} >{order.orderStatus == 'Delivered' ? <MdOutlineDoneOutline  className='ss:scale-[1.2] scale-[1] text-white' /> :<MdOutlineDoneOutline   className='scale-[1] ss:scale-[1.2] ' />}</div>
                                                 </div>
@@ -123,9 +123,9 @@ const Orders = () => {
                                                     ?
                                                     order.Issue_Reported
                                                     ?
-                                                    <div className='w-full pl-2 '>
+                                                    <div className='mt-5 w-full px-3 py-2 rounded-lg text-[10px] ss:text-[13px] font-[600] bg-[#efefef]'>
                                                             <h1>Your Issue has been reported. Our Team will contact you soon. </h1>
-                                                            <h1>Keep Patience! :)</h1>
+                                                            <h1>Keep Patience.</h1>
                                                     </div>
                                                     :
                                                     <div className='w-full'>
@@ -164,6 +164,7 @@ const Orders = () => {
                     }
 
                 </div>
+                <div className='h-20'></div>
             </div>
 
         </>
