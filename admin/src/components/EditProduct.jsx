@@ -45,11 +45,13 @@ const EditProduct = ({ item, setPortal, openPortal, getProducts }) => {
       const data = await response.json()
       if(data.status == 200){
         toast('Stock Updated')
+      }else{
+        toast('some error occured')
       }
 
 
     } catch (error) {
-      
+        toast('server timedout')
     }
   }
 
