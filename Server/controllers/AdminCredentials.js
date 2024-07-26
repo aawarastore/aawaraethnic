@@ -13,7 +13,7 @@ exports.authenticate_admin_portal= async (req,res) => {
         if(findAdmin.password != password && findAdmin.ADMIN_ID != adminKey) return res.json({status:202,message:"error"})
         
         const adminToken = jwt.sign({adminID:adminKey,name:findAdmin.First_Name },process.env.JWT_KEY,{expiresIn:'1h'})
-    console.log('logged in')
+        console.log('logged in')
         return res.json({status:200,token:adminToken,message:"Logged In"})
 
     } catch (error) {

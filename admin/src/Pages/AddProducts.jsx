@@ -148,7 +148,7 @@ const AddProducts = () => {
                                                 className='w-full px-2 py-1  border' name='image' type="file" />
                                             </div>
                                             <div className='w-full bg-black text-white text-[19px] font-[500]'>
-                                                <input className='w-full py-2' type="submit" value='Submit' />
+                                                <input className='w-full py-2 active:bg-blue-500 active:scale-[0.99]' type="submit" value='Submit' />
                                             </div>
                                         </div>
                                     
