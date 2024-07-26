@@ -1,6 +1,6 @@
 const express = require('express')
 const { authenticate_admin_portal, register_Admin } = require('../controllers/AdminCredentials')
-const { getUsers, getProducts, addProduct, addColor, updateProducts, getusersorders, updateOrder } = require('../controllers/AdminControls')
+const { getUsers, getProducts, addProduct, addColor, updateProducts, getusersorders, updateOrder, updateStocks } = require('../controllers/AdminControls')
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer')
@@ -54,5 +54,6 @@ const upload = multer({storage})
 //add products
 AdminRouter.post('/addproduct',upload.single('image'),addProduct)
 AdminRouter.post('/addcolor',upload.single('image'),addColor)
+AdminRouter.post('/updateStock',updateStocks)
 
 module.exports = AdminRouter

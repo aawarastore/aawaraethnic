@@ -74,7 +74,8 @@ exports.addProduct = async (req, res) => {
                 Colors:[{
                     img_url:imageurl,
                     color:req.body.Product_Color,
-                    hexcode:req.body.Product_Hexcode
+                    hexcode:req.body.Product_Hexcode,
+                    stocks:req.body.stocks
                 }]
             }
         })
@@ -105,7 +106,8 @@ exports.addColor = async (req, res) => {
                 Colors: {
                   img_url: `${imageurl}`,
                   color: req.body.color,
-                  hexcode: req.body.hexcode
+                  hexcode: req.body.hexcode,
+                  stocks:req.body.stocks
                 }
               }
             }
@@ -173,6 +175,28 @@ exports.updateOrder = async (req,res)=>{
                 orderStatus:order_stat
             }
         })
+        
+        return res.json({status:200,message:'updated'})
+        
+    } catch (error) {
+        console.log(error)
+        return res.json({status:202})
+    }
+}
+
+exports.updateStocks = async (req,res)=>{
+    const { token } = req.headers
+
+    try {
+        const { adminID, name } = jwt.verify(token, process.env.JWT_KEY)
+        const findAdmin = await ADMIN_DB.findOne({ ADMIN_ID: adminID, First_Name: name })
+        if (!findAdmin) return res.json({ status: 404, message: 'Not Aurthorised' })
+        
+       await PRODUCTS_DB.updateOne({PRODUCT_id:req.body.productid},{
+        $set:{
+            outofstock:req.body.outofstock
+        }
+       })
         
         return res.json({status:200,message:'updated'})
         

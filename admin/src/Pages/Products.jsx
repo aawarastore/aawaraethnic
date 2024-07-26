@@ -72,7 +72,7 @@ const Products = () => {
                                                     <div>Available Colors:</div>
                                                     {item.Colors.map(col => (
                                                         <div key={col.hexcode}>
-                                                            <h1 style={{ backgroundColor: col.hexcode }} className='text-white my-1 rounded-sm px-2 text-[13px] py-1'>{col.color}</h1>
+                                                            <h1 style={{ backgroundColor: col.hexcode }} className='text-white border my-1 rounded-sm px-2 text-[13px] py-1'>{col.color}</h1>
                                                         </div>
                                                     ))}
                                                 </div>

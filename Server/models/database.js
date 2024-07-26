@@ -52,6 +52,8 @@ const PRODUCT_DB = new mongoose.Schema({
             img_url: String,
             color: String,
             hexcode: String,
+            stocks:Number,
+            outofStockSize:String,
         }
     ],
     uploaded_at:{

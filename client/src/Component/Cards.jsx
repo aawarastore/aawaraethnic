@@ -12,7 +12,7 @@ import {gsap} from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
-const Cards = ({ productsdata }) => {
+const Cards = ({ productsdata}) => {
 
 
 
@@ -24,13 +24,20 @@ const Cards = ({ productsdata }) => {
 
   const cols = useRef(null)
 
+  const checkAvailabiltiy = (img)=>{
+    const pro = productsdata.Colors.filter(p=>p.img_url == img)
+    if(pro.stocks == 0 ) return true
+    else false
+  }
 
   
-
-
-
   const addtoCart = async (productid, size, productimg) => {
-    console.log(productimg,size,productid)
+    // console.log(productimg,size,productid)
+    const avail = checkAvailabiltiy(productimg)
+    if(avail) {
+      toast('Out of stock!')
+      return 
+    }
     setIsPortalOpen(true)
     try {
       const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/user/addtoCart`, {
@@ -64,13 +71,7 @@ const Cards = ({ productsdata }) => {
       duration: 1,
       opacity: 0,
       width: 0,
-      scrollTrigger: {
-        trigger: cols.current,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none none',
-      },
-    });
+    })
 
   },[])
 

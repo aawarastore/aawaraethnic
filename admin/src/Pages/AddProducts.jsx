@@ -17,6 +17,7 @@ const AddProducts = () => {
         formData.append('Discounted_Price', values.Discounted_Price);
         formData.append('Product_Hexcode', values.Product_Hexcode);
         formData.append('Product_Color',values.product_color);
+        formData.append('stocks',values.stocks)
         formData.append('image', values.image);
         // console.log(formData)
         try {
@@ -45,6 +46,7 @@ const AddProducts = () => {
         formData.append('color',values.color)
         formData.append('hexcode',values.hexcode)
         formData.append('PRODUCT_id',values.productid)
+        formData.append('stocks',values.stocks)
         formData.append('image',values.image)
 
         console.log(formData)
@@ -74,7 +76,7 @@ const AddProducts = () => {
                         <div className="px-[10vw]" >
 
                         <Formik
-                            initialValues={{ PRODUCT_id: '', Product_name: '', Description: '', Price: '', Discounted_Price: '',product_color:'',Product_Hexcode:'',image:null }}
+                            initialValues={{ PRODUCT_id: '', Product_name: '', Description: '',stocks:'', Price: '', Discounted_Price: '',product_color:'',Product_Hexcode:'',image:null }}
                             onSubmit={handleSendData}
                         >
                             {({ setFieldValue }) => (
@@ -88,6 +90,9 @@ const AddProducts = () => {
                                         </div>
                                         <div className="inputField w-full my-2">
                                             <Field className="w-full px-2 py-2 border-[#666666b5] border" name="product_color" type="text" placeholder="Product Color" />
+                                        </div>
+                                        <div className="inputField w-full my-2">
+                                            <Field className="w-full px-2 py-2 border-[#666666b5] border" name="stocks" type="number" placeholder="Stocks (total quantity):" />
                                         </div>
                                         <div className="inputField w-full my-2">
                                             <Field className="w-full px-2 py-2 border-[#666666b5] border" name="Product_Hexcode" type="text" placeholder="Product Hexcode" />
@@ -106,7 +111,7 @@ const AddProducts = () => {
                                                 }} className="w-full px-2 py-2 border-[#666666b5] border" name="image" type="file" />
                                         </div>
                                         <div className="w-full">
-                                            <input type="submit" className="w-full bg-black text-center py-2 text-white text-[18px] font-[500]" value="Submit" />
+                                            <input type="submit" className="w-full active:scale-[0.99] active:bg-blue-400 bg-black text-center py-2 text-white text-[18px] font-[500]" value="Submit" />
                                         </div>
                                     </div>
                                 </Form>
@@ -118,7 +123,7 @@ const AddProducts = () => {
                         <div className="px-[10vw]">
 
                         <Formik
-                            initialValues={{ productid:'',color: '', hexcode: '',image:null }}
+                            initialValues={{ productid:'',color: '', hexcode: '',stocks:'',image:null }}
                             onSubmit={addcolor}
                         >
                             {({ setFieldValue }) => (
@@ -133,6 +138,9 @@ const AddProducts = () => {
                                             </div>
                                             <div className='inputField w-full my-2'>
                                                 <Field className='w-full px-2 py-2  border' name='hexcode' type="text" placeholder={`Product HEXCODE:`} />
+                                            </div>
+                                            <div className='inputField w-full my-2'>
+                                                <Field className='w-full px-2 py-2  border' name='stocks' type="text" placeholder={`Stocks:`} />
                                             </div>
                                             <div className='inputField w-full my-2'>
                                                 <input onChange={(event) => {
