@@ -193,32 +193,12 @@ const Checkout = () => {
       <div className='bg-[#f3f3f3] relative overflow-x-hidden'>
         <div className='w-screen fixed z-[99]' ><Header /></div>
         <div className='ss:h-[200px] h-[120px] '></div>
-        <div className='bg-[#1D0100] rounded-full h-[40vw] w-[40vw] absolute -right-[20%] -top-[20%]'></div>
+        <div className='bg-[#1D0100] rounded-full h-[40vw] w-[40vw] absolute -right-[20%] -top-[10%]'></div>
         <div className='w-screen justify-center flex lg:flex-row flex-col bodytext'>
           <div className='lg:w-[50%] w-full z-[88]'>
 
 
             <div className='ss:px-16 px-5 pb-10'>
-              {otpPortal && (
-                <div className='absolute left-1/2 ss:top-1/2 md:w-[90vw] w-[95vw] h-[90vh] flex justify-center items-center top-[25%]  -translate-x-1/2 -translate-y-1/2 px-3 py-10 border bg-white z-[99]'>
-                  <div className='ss:w-1/2 w-[95%] '>
-                    <div className='w-full text-center'>OTP VERIFICATION</div>
-                    <Formik initialValues={{ otp: '' }} onSubmit={checkOtp}>
-                      <Form>
-                        <div className='w-full text-center flex justify-center mt-3'>
-                          <Field name='otp' type='text' placeholder='Enter OTP' className='outline-none w-[100px] border-b-2 text-center py-1 px-2 border-black' />
-                        </div>
-                        <div className='w-full text-center my-4'>
-                          <button type='submit' className='w-full bg-red-900 py-3 text-white text-center overflow-hidden'>
-                            Submit & verify
-                          </button>
-                        </div>
-                      </Form>
-                    </Formik>
-                  </div>
-                </div>
-
-              )}
               <div className='border-b py-3 bodytext text-[18px] font-[600] border-black'>Step 1 : <span className='text-[14px] font-[300] '>add your contact no. and email</span></div>
               <div className='mb-5'>
                 <Formik
@@ -247,6 +227,30 @@ const Checkout = () => {
                 </Formik>
               </div>
 
+              {/* otp =========================================== */}
+              {/* <div className=' left-1/2 ss:top-1/2 md:w-[90vw] w-[95vw] h-[90vh] flex justify-center items-center top-[25%]  -translate-x-1/2 -translate-y-1/2 px-3 py-10 border bg-white z-[99]'> */}
+              {
+               otpPortal && <div className='  z-[99]'>
+                  <div className='  '>
+                      <div className='w-full  font-[500] '>E-mail verification</div>
+                      <div className='w-full text-[13px] mb-3 '>We've mailed you a 6 digit code. Please check your email and enter the Code here to complete the verification.</div>
+                    <Formik initialValues={{ otp: '' }} onSubmit={checkOtp}>
+                      <Form>
+                        <div className='w-full ss:w-3/4 flex  justify-between'>
+                        <div className='w-[69%] ss:w-[73%] '>
+                          <Field name='otp' type='text' placeholder='Enter Code' className='rounded-sm text-[14px] outline-none py-2 px-2 bg-transparent w-full border-2' />
+                        </div>
+                        <div className='w-[25%] text-center'>
+                          <button type='submit' className='w-full text-[13px] bg-blue-500 rounded-sm  py-[10px] uppercase text-white text-center overflow-hidden'>verify</button>
+                        </div>
+                        </div>
+
+                      </Form>
+                    </Formik>
+                  </div>
+                </div>
+}
+                {/* ================================================= */}
 
               <div>
                 <div className='border-b pb-3 my-2 bodytext text-[18px] font-[600]  border-black'>Step 2 : <span className='text-[14px] font-[300] '>add your delivery address </span></div>

@@ -20,7 +20,7 @@ const Cart = () => {
   }
 
   useEffect(() => {
-    getCartProduct();
+    // getCartProduct();
   }, [totalCartItems]);
 
   return (

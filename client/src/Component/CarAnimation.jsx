@@ -23,7 +23,7 @@ const CartAnimation = (blur) => {
 
   return createPortal(
     <>
-    <div className='w-screen h-screen z-[9999] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-xl bg-[#dbd4d472] flex justify-center items-center'>
+    <div className='w-screen h-screen z-[9999] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-xl bg-[#dbd4d472] flex justify-center items-center'>
     {
       blur.blur == 'blur' ? <div><BsBag className='scale-[2]' /></div>: <div id='cart-animation' className=''></div>
     }

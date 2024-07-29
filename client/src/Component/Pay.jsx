@@ -87,7 +87,7 @@ const Pay = ({cartItems,cartTotalPrice,CARTID ,off}) => {
   return (
     <>
     <div className='w-full  flex justify-center  '>
-    <ToastContainer newestOnTop={true} autoClose={1000}
+    <ToastContainer className='z-[999999999]' newestOnTop={true} autoClose={1000}
           toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true} />
 
             <div className='w-full cursor-pointer bg-[#1D0100] hover:bg-white  hover:text-black text-white border  hover:border-black py-3'>
