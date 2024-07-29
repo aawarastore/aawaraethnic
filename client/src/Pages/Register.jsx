@@ -129,7 +129,7 @@ const Register = () => {
             </Form>
           </Formik>
 
-          <div className=' px-4 text-[15px] text-yellow-800 -translate-y-2 hover:text-blue-700'> <Link to={'/login'}>Already have an account?</Link></div>
+          <div className=' px-4 text-[15px] text-stone-800 mt-2 -translate-y-2 hover:text-blue-700'> <Link to={'/login'}>Already have an account?</Link></div>
 
         </div>
       </div >

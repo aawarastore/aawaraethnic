@@ -20,7 +20,7 @@ const Footer = () => {
       </div>
       </div>
 
-      <div className='w-screen flex justify-center py-3 text-center tracking-[1px]  text-black text-[11px] ss:text-[14px]'>Copyright 2024 © AAWARA ETHNIC | All Rights Reserved </div>
+      <div className='w-screen flex justify-center py-3 text-center tracking-[1px] bg-white text-black text-[11px] ss:text-[14px]'>Copyright 2024 © AAWARA ETHNIC | All Rights Reserved </div>
     </>
   )
 }

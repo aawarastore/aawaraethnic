@@ -47,7 +47,7 @@ const Login = () => {
   })
   return (
     <>
-      <div className='w-screen h-screen  flex justify-center items-center relative bg-gradient-to-br '>
+      <div className='w-screen h-screen  flex justify-center items-center relative bg-gradient-to-br overflow-hidden '>
       <div className='bg-[#140403] w-[125vw] -rotate-[60deg] ss:w-full absolute top-[-10px] ss:-top-[30%] h-full ss:-rotate-[40deg] ss:-left-[23%] z-[-1]'></div>
 
       <div className='absolute top-10 left-10 md:top-[20%] md:left-[20%] bg-white  px-6 py-2 rounded-full'><Link to={'/home'}>Back</Link></div>
@@ -88,7 +88,7 @@ const Login = () => {
             </div>
           </Form>
         </Formik>
-        <div className='w-full text-[13px] pb-3 text-stone-800  px-4 text-end'><Link to={'/login/forget-password'} className='hover:underline hover:text-stone-200'>Forgot Password?</Link></div>
+        <div className='w-full text-[13px] pb-3 text-stone-800  px-4 text-end'><Link to={'/login/forget-password'} className='hover:underline opacity-[0.9] hover:text-stone-200'>Forgot Password?</Link></div>
         <div className=' px-4 text-[15px] text-stone-700 -translate-y-2 hover:text-blue-700'> <Link to={'/register'}>Don't have an account?</Link></div>
         </div>
       </div >
