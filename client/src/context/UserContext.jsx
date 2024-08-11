@@ -100,7 +100,7 @@ export const UserContextProvider = ({ children }) => {
 
 
     return (
-        <UserContextApi.Provider value={{ isAllowedToCheckout, setIsAllowedToCheckout,setLoggedIn, isLoggedIn, checkUser, setItemsData,itemsData, totalCartItems ,isOpen,onOpen,onClose,cartItems,getCartProduct,cartTotalPrice}}>
+        <UserContextApi.Provider value={{ isAllowedToCheckout,homeani, setIsAllowedToCheckout,setLoggedIn, isLoggedIn, checkUser, setItemsData,itemsData, totalCartItems ,isOpen,onOpen,onClose,cartItems,getCartProduct,cartTotalPrice}}>
             {children}
         </UserContextApi.Provider>
     )
