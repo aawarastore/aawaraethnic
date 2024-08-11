@@ -22,6 +22,7 @@ import SuccessfulOrder from './Pages/SuccessfulOrder';
 import Orders from './Pages/Orders';
 import ForgetPassword from './Component/ForgetPassword';
 import ErrorPage from './Pages/Error';
+import Contactus from './Pages/Contactus';
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
   {
     path:'/login/forget-password',
     element:<ForgetPassword />
+  },
+  {
+    path:'/contactus',
+    element:<Contactus />
   }
 ])
 
