@@ -9,6 +9,7 @@ import Cards from '../Component/Cards'
 import Footer from '../Component/Footer'
 import CardsContainer from '../Component/CardsContainer'
 import { GoLink } from "react-icons/go";
+import WhatsappChat from '../Component/WhatsappChat'
 
 const BuyProduct = () => {
   const { onOpen, isOpen } = useContext(UserContextApi)
@@ -102,6 +103,7 @@ const BuyProduct = () => {
       <ToastContainer newestOnTop={true} autoClose={800}
           toastStyle={{ backgroundColor: "white", color: "black" }} hideProgressBar={true}/>
       <div className='w-screen relative min-h-screen  overflow-hidden'>
+      <WhatsappChat />
         {
           isOpen && <SizeChart />
         }

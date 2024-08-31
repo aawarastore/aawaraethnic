@@ -5,6 +5,7 @@ import Cards from '../Component/Cards'
 import { UserContextApi } from '../context/UserContext'
 import Footer from '../Component/Footer'
 import { CiSearch } from "react-icons/ci";
+import WhatsappChat from '../Component/WhatsappChat'
 
 
 const Shop = () => {
@@ -51,7 +52,8 @@ const Shop = () => {
         <>
             <div className='fixed w-screen z-[9999] border-b border-b-stone-300'><Header /></div>
 
-            <div className=' w-screen bg-[#efefef]'>
+            <div className=' w-screen relative bg-[#efefef]'>
+            <WhatsappChat />
                 <div className='h-[74px] w-screen'></div>
                 <div className='w-full justify-center flex'>
                     <div className='w-full ss:w-[90vw] lg:w-[70vw] gap-2 mt-10 flex flex-wrap ss:flex-nowrap justify-between gap-y-4 px-4 ss:px-10'>

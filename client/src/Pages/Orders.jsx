@@ -10,6 +10,7 @@ import {Formik,Form,Field} from 'formik'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import WhatsappChat from '../Component/WhatsappChat';
 
 
 const Orders = () => {
@@ -68,7 +69,8 @@ const Orders = () => {
                 <ToastContainer newestOnTop={true} autoClose={1000}
           toastStyle={{ backgroundColor: "white", color: "black" }} pauseOnFocusLoss={true} pauseOnHover={false} hideProgressBar={true}  />
                 <div className='w-full fixed z-[99]'><Header /></div>
-                <div className='w-full bodytext '>
+                <div className='w-full relative bodytext '>
+                <WhatsappChat />
                     <div className='w-screen bg-red-400 h-[50px] ss:h-[60px] sl:h-[65px] f:h-[79px]'></div>
                     {
                         isLoggedIn

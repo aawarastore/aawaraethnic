@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import {UserContextApi} from '../context/UserContext'
 import Cards from '../Component/Cards'
 import CartAnimation from '../Component/CarAnimation'
+import WhatsappChat from '../Component/WhatsappChat'
 
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
 
             <div className='fixed w-screen z-[9999] shadow-md'><Header /></div>
             <div className=' bg-[#EFEFEF] h-screen w-screen relative  overflow-x-hidden'>
+                <WhatsappChat />
             { homeani
                 ?
                 <CartAnimation />
