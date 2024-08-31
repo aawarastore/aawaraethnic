@@ -9,7 +9,7 @@ const WhatsappChat = () => {
             <div className='relative'>
                 {show && <div className='absolute bg-white right-14 py-1 text-green-500 text-center top-1/2 -translate-y-1/2 border block w-[160px]'>Chat On Whatsapp!</div>
                 }
-                <a href="https://wa.me/7620985308" target='_blank'>
+                <a href="https://wa.me/7499219587" target='_blank'>
                     <div className='px-3 py-3 bg-white border rounded-full animate-pulse  delay-500'>
                         <IoLogoWhatsapp className='scale-[2] text-green-500' />
                     </div>
